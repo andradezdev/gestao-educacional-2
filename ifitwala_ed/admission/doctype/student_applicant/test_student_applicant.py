@@ -27,7 +27,11 @@ class TestStudentApplicant(FrappeTestCase):
         self._auto_hydrate_setting_before = frappe.db.get_single_value(
             "Admission Settings", "auto_hydrate_enrollment_request_after_promotion"
         )
+        self._approval_exception_setting_before = frappe.db.get_single_value(
+            "Admission Settings", "allow_applicant_approval_exceptions"
+        )
         frappe.db.set_single_value("Admission Settings", "auto_hydrate_enrollment_request_after_promotion", 1)
+        frappe.db.set_single_value("Admission Settings", "allow_applicant_approval_exceptions", 0)
         self._ensure_role("Admissions Applicant")
         self._ensure_role("Student")
         self._ensure_role("Guardian")
@@ -59,6 +63,11 @@ class TestStudentApplicant(FrappeTestCase):
             "Admission Settings",
             "auto_hydrate_enrollment_request_after_promotion",
             0 if self._auto_hydrate_setting_before in (None, "") else self._auto_hydrate_setting_before,
+        )
+        frappe.db.set_single_value(
+            "Admission Settings",
+            "allow_applicant_approval_exceptions",
+            0 if self._approval_exception_setting_before in (None, "") else self._approval_exception_setting_before,
         )
         for doctype, name in reversed(self._created):
             if frappe.db.exists(doctype, name):
@@ -271,6 +280,82 @@ class TestStudentApplicant(FrappeTestCase):
 
         user.reload()
         self.assertEqual(user.enabled, 0)
+
+    def test_approval_exception_setting_disabled_blocks_exception_approval(self):
+        applicant = self._move_to_under_review(self._create_student_applicant())
+
+        with self.assertRaises(frappe.ValidationError):
+            applicant.approve_application_with_exception("Sibling placement approved by leadership.")
+
+        applicant.reload()
+        self.assertEqual(applicant.application_status, "Under Review")
+
+    def test_approval_exception_approves_with_audit_comment(self):
+        frappe.db.set_single_value("Admission Settings", "allow_applicant_approval_exceptions", 1)
+        applicant = self._move_to_under_review(self._create_student_applicant())
+        snapshot = applicant.get_readiness_snapshot()
+        self.assertFalse(snapshot.get("ready"))
+
+        applicant.approve_application_with_exception("Sibling placement approved by leadership.")
+        applicant.reload()
+
+        self.assertEqual(applicant.application_status, "Approved")
+        self.assertEqual(int(applicant.approved_with_exception or 0), 1)
+        self.assertEqual(applicant.approval_exception_reason, "Sibling placement approved by leadership.")
+        self.assertEqual(applicant.approval_exception_by, self.staff_user.name)
+        self.assertTrue(bool(applicant.approval_exception_on))
+        exception_summary = applicant.get_readiness_snapshot().get("approval_exception") or {}
+        self.assertTrue(bool(exception_summary.get("approved")))
+        self.assertEqual(exception_summary.get("reason"), "Sibling placement approved by leadership.")
+        comments = frappe.get_all(
+            "Comment",
+            filters={
+                "reference_doctype": "Student Applicant",
+                "reference_name": applicant.name,
+            },
+            fields=["content"],
+            order_by="creation desc",
+            limit=3,
+        )
+        content = "\n".join((row.get("content") or "") for row in comments)
+        self.assertIn("Application approved with exception", content)
+        self.assertIn("Sibling placement approved by leadership.", content)
+        self.assertIn("Bypassed readiness blockers", content)
+
+    def test_approval_exception_fields_are_lifecycle_owned(self):
+        applicant = self._move_to_under_review(self._create_student_applicant())
+        applicant.approved_with_exception = 1
+        applicant.approval_exception_reason = "Manual marker"
+        applicant.approval_exception_by = self.staff_user.name
+        applicant.approval_exception_on = frappe.utils.now_datetime()
+
+        with self.assertRaises(frappe.ValidationError):
+            applicant.save(ignore_permissions=True)
+
+        applicant.reload()
+        self.assertEqual(int(applicant.approved_with_exception or 0), 0)
+        self.assertFalse(applicant.approval_exception_reason)
+
+    def test_admission_officer_cannot_approve_with_exception(self):
+        frappe.db.set_single_value("Admission Settings", "allow_applicant_approval_exceptions", 1)
+        applicant = self._move_to_under_review(self._create_student_applicant())
+        officer = self._create_user("Admissions", "Officer", add_role="Admission Officer")
+        self._create_employee_for_user(
+            officer.name,
+            first_name="Admissions",
+            last_name="Officer",
+            organization=self.org,
+            school=self.leaf_school,
+        )
+
+        frappe.set_user(officer.name)
+        applicant.reload()
+        with self.assertRaises(frappe.PermissionError):
+            applicant.approve_application_with_exception("Officer fast-track attempt.")
+
+        frappe.set_user(self.staff_user.name)
+        applicant.reload()
+        self.assertEqual(applicant.application_status, "Under Review")
 
     def test_has_required_interviews_returns_recent_items(self):
         applicant = self._create_student_applicant()
@@ -2000,6 +2085,14 @@ class TestStudentApplicant(FrappeTestCase):
         ).insert(ignore_permissions=True)
         self._created.append(("Student Applicant", doc.name))
         return doc
+
+    def _move_to_under_review(self, applicant):
+        applicant.db_set("application_status", "Invited", update_modified=False)
+        applicant.reload()
+        applicant.submit_application()
+        applicant.mark_under_review()
+        applicant.reload()
+        return applicant
 
     def _create_user(self, first_name, last_name, add_role=None):
         user = frappe.get_doc(

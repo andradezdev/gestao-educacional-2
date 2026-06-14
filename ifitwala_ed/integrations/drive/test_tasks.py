@@ -16,8 +16,9 @@ from ifitwala_ed.tests.frappe_stubs import (
 def _drive_task_submission_module(task_submission_doc=None, *, session_student=None):
     extra_modules = {}
     if session_student is not None:
-        courses = ModuleType("ifitwala_ed.api.courses")
+        courses = ModuleType("ifitwala_ed.curriculum.api.courses")
         courses._require_student_name_for_session_user = lambda: session_student
+        extra_modules["ifitwala_ed.curriculum.api.courses"] = courses
         extra_modules["ifitwala_ed.api.courses"] = courses
 
     with stubbed_frappe(extra_modules=extra_modules) as frappe:

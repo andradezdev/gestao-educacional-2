@@ -13,7 +13,7 @@ from ifitwala_ed.admission.applicant_review_workflow import (
     TARGET_DOCUMENT_ITEM,
     TARGET_HEALTH,
 )
-from ifitwala_ed.api.focus_actions_applicant_review import (
+from ifitwala_ed.admission.api.focus.applicant_review_actions import (
     build_applicant_review_file_open_url,
 )
 from ifitwala_ed.api.focus_shared import (

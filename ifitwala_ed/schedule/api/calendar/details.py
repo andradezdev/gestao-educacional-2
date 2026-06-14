@@ -14,7 +14,6 @@ from ifitwala_ed.api.guardian_communications import (
     _resolve_guardian_communication_context,
 )
 from ifitwala_ed.api.org_comm_utils import STAFF_ROLES
-from ifitwala_ed.api.student_calendar import _is_student_audience
 from ifitwala_ed.curriculum import planning
 from ifitwala_ed.schedule.api.calendar.core import (
     CAL_MIN_DURATION,
@@ -29,6 +28,7 @@ from ifitwala_ed.schedule.api.calendar.core import (
     _to_system_datetime,
 )
 from ifitwala_ed.school_settings.doctype.school_event.school_event import get_user_membership
+from ifitwala_ed.students.api.student_calendar import _is_student_audience
 from ifitwala_ed.utilities.school_tree import get_ancestor_schools
 
 PARTICIPANT_ONLY_SCHOOL_EVENT_REFERENCE_TYPES = {"Applicant Interview", "Admission Visit"}

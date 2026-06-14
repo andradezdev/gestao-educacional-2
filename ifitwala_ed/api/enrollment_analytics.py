@@ -14,7 +14,7 @@ import frappe
 from frappe import _
 from frappe.utils import getdate, nowdate
 
-from ifitwala_ed.api.student_log_dashboard import get_authorized_schools
+from ifitwala_ed.students.api.student_log_dashboard import get_authorized_schools
 from ifitwala_ed.utilities.employee_utils import (
     get_descendant_organizations,
     get_schools_for_organization_scope,

@@ -1743,7 +1743,7 @@ def get_activity_communications(
 ):
     user_roles = set(frappe.get_roles(frappe.session.user))
     if "Student" in user_roles:
-        from ifitwala_ed.api import student_communications as student_communications_api
+        from ifitwala_ed.students.api import student_communications as student_communications_api
 
         student_name = frappe.db.get_value("Student", {"student_email": frappe.session.user}, "name")
         if not student_name:

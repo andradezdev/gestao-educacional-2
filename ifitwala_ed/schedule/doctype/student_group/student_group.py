@@ -1902,7 +1902,7 @@ def offering_course_query(doctype, txt, searchfield, start, page_len, filters):
 
 
 def _assert_class_delivery_setup_access(student_group: str) -> None:
-    from ifitwala_ed.api import student_groups as student_groups_api
+    from ifitwala_ed.students.api import student_groups as student_groups_api
 
     user = frappe.session.user
     if not user or user == "Guest":

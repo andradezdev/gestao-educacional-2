@@ -60,6 +60,12 @@ export interface InterviewWorkspaceApplicant {
 	name: string
 	display_name?: string | null
 	application_status?: string | null
+	approval_exception?: {
+		approved: boolean
+		reason?: string | null
+		by?: string | null
+		on?: string | null
+	}
 	organization?: string | null
 	school?: string | null
 	program?: string | null

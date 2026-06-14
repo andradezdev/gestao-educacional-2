@@ -204,6 +204,13 @@
 												: item.aep.deposit.blocker_label || __('Deposit required')
 										}}
 									</span>
+									<span
+										v-if="item.approval_exception?.approved"
+										class="rounded-full border border-amber-300 bg-amber-50 px-2 py-0.5 text-xs font-semibold text-amber-800"
+										:title="approvalExceptionTitle(item)"
+									>
+										{{ __('Approved with exception') }}
+									</span>
 									<span :class="pillClass(item.readiness.profile_ok)">{{ __('Profile') }}</span>
 									<span :class="pillClass(item.readiness.documents_ok)">{{ __('Docs') }}</span>
 									<span :class="pillClass(item.readiness.recommendations_ok)">{{
@@ -864,6 +871,12 @@ type CockpitCard = {
 	name: string;
 	display_name: string;
 	application_status: string;
+	approval_exception?: {
+		approved: boolean;
+		reason?: string | null;
+		by?: string | null;
+		on?: string | null;
+	};
 	ready: boolean;
 	school: string;
 	program_offering?: string;
@@ -1144,6 +1157,28 @@ function formatDateOnly(value?: string | null) {
 		return value;
 	}
 	return date.toLocaleDateString();
+}
+
+function approvalExceptionTitle(item: CockpitCard) {
+	const exception = item.approval_exception;
+	if (!exception?.approved) {
+		return '';
+	}
+	const bits = [__('Approved with exception')];
+	if (exception.reason) {
+		bits.push(exception.reason);
+	}
+	const meta: string[] = [];
+	if (exception.by) {
+		meta.push(exception.by);
+	}
+	if (exception.on) {
+		meta.push(formatDate(exception.on));
+	}
+	if (meta.length) {
+		bits.push(meta.join(' · '));
+	}
+	return bits.filter(Boolean).join('\n');
 }
 
 function blankToNull(value?: string | null) {

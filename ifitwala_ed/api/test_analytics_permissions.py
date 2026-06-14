@@ -9,7 +9,7 @@ import frappe
 from frappe.tests.utils import FrappeTestCase
 
 from ifitwala_ed.api.portal import _build_staff_home_capabilities
-from ifitwala_ed.api.student_demographics_dashboard import _get_demographics_access_context
+from ifitwala_ed.students.api.student_demographics_dashboard import _get_demographics_access_context
 from ifitwala_ed.api.student_overview_roles import ALLOWED_STAFF_ROLES as STUDENT_OVERVIEW_STAFF_ROLES
 
 
@@ -22,7 +22,7 @@ class TestAnalyticsPermissions(FrappeTestCase):
 
     def test_demographics_access_allows_admission_officer_full_mode(self):
         with patch(
-            "ifitwala_ed.api.student_demographics_dashboard.frappe.get_roles",
+            "ifitwala_ed.students.api.student_demographics_dashboard.frappe.get_roles",
             return_value=["Admission Officer"],
         ):
             ctx = _get_demographics_access_context(user="admission-officer@example.com")
@@ -30,7 +30,7 @@ class TestAnalyticsPermissions(FrappeTestCase):
 
     def test_demographics_access_allows_academic_assistant_full_mode(self):
         with patch(
-            "ifitwala_ed.api.student_demographics_dashboard.frappe.get_roles",
+            "ifitwala_ed.students.api.student_demographics_dashboard.frappe.get_roles",
             return_value=["Academic Assistant"],
         ):
             ctx = _get_demographics_access_context(user="academic-assistant@example.com")
@@ -38,7 +38,7 @@ class TestAnalyticsPermissions(FrappeTestCase):
 
     def test_demographics_access_allows_marketing_user_full_mode(self):
         with patch(
-            "ifitwala_ed.api.student_demographics_dashboard.frappe.get_roles",
+            "ifitwala_ed.students.api.student_demographics_dashboard.frappe.get_roles",
             return_value=["Marketing User"],
         ):
             ctx = _get_demographics_access_context(user="marketing@example.com")
@@ -46,7 +46,7 @@ class TestAnalyticsPermissions(FrappeTestCase):
 
     def test_demographics_access_allows_accreditation_visitor_full_mode(self):
         with patch(
-            "ifitwala_ed.api.student_demographics_dashboard.frappe.get_roles",
+            "ifitwala_ed.students.api.student_demographics_dashboard.frappe.get_roles",
             return_value=["Accreditation Visitor"],
         ):
             ctx = _get_demographics_access_context(user="visitor@example.com")
@@ -55,11 +55,11 @@ class TestAnalyticsPermissions(FrappeTestCase):
     def test_demographics_access_keeps_instructor_scoped_mode(self):
         with (
             patch(
-                "ifitwala_ed.api.student_demographics_dashboard.frappe.get_roles",
+                "ifitwala_ed.students.api.student_demographics_dashboard.frappe.get_roles",
                 return_value=["Instructor"],
             ),
             patch(
-                "ifitwala_ed.api.student_demographics_dashboard.frappe.db.sql",
+                "ifitwala_ed.students.api.student_demographics_dashboard.frappe.db.sql",
                 return_value=[[1]],
             ),
         ):
@@ -72,7 +72,7 @@ class TestAnalyticsPermissions(FrappeTestCase):
 
     def test_demographics_access_rejects_user_without_eligible_roles(self):
         with patch(
-            "ifitwala_ed.api.student_demographics_dashboard.frappe.get_roles",
+            "ifitwala_ed.students.api.student_demographics_dashboard.frappe.get_roles",
             return_value=["Employee"],
         ):
             with self.assertRaises(frappe.PermissionError):

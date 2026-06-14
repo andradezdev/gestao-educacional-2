@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from unittest import TestCase
 
-from ifitwala_ed.assessment.api.test_gradebook import _gradebook_stub_modules
+from ifitwala_ed.assessment.api.gradebook_test_utils import _gradebook_stub_modules
 from ifitwala_ed.tests.frappe_stubs import import_fresh, stubbed_frappe
 
 

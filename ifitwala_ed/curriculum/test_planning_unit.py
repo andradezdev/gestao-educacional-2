@@ -19,7 +19,7 @@ class FakeUnitDoc:
 
 class TestPlanningUnit(TestCase):
     def test_ensure_linked_unit_plan_standards_rewrites_snapshot_from_linked_catalog_row(self):
-        student_groups = types.ModuleType("ifitwala_ed.api.student_groups")
+        student_groups = types.ModuleType("ifitwala_ed.students.api.student_groups")
         student_groups._instructor_group_names = lambda user: []
 
         html_sanitizer = types.ModuleType("ifitwala_ed.utilities.html_sanitizer")
@@ -46,7 +46,7 @@ class TestPlanningUnit(TestCase):
 
         with stubbed_frappe(
             extra_modules={
-                "ifitwala_ed.api.student_groups": student_groups,
+                "ifitwala_ed.students.api.student_groups": student_groups,
                 "ifitwala_ed.utilities.html_sanitizer": html_sanitizer,
             }
         ) as frappe:
@@ -92,7 +92,7 @@ class TestPlanningUnit(TestCase):
         )
 
     def test_ensure_linked_unit_plan_standards_rejects_broken_link_without_self_heal(self):
-        student_groups = types.ModuleType("ifitwala_ed.api.student_groups")
+        student_groups = types.ModuleType("ifitwala_ed.students.api.student_groups")
         student_groups._instructor_group_names = lambda user: []
 
         html_sanitizer = types.ModuleType("ifitwala_ed.utilities.html_sanitizer")
@@ -100,7 +100,7 @@ class TestPlanningUnit(TestCase):
 
         with stubbed_frappe(
             extra_modules={
-                "ifitwala_ed.api.student_groups": student_groups,
+                "ifitwala_ed.students.api.student_groups": student_groups,
                 "ifitwala_ed.utilities.html_sanitizer": html_sanitizer,
             }
         ) as frappe:

@@ -6,7 +6,7 @@ from collections.abc import Iterable
 import frappe
 from frappe import _
 
-from ifitwala_ed.api import student_groups as student_groups_api
+from ifitwala_ed.students.api import student_groups as student_groups_api
 from ifitwala_ed.utilities.html_sanitizer import sanitize_html
 
 ORDER_STEP = 10

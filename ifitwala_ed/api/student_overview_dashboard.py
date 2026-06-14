@@ -11,9 +11,9 @@ import frappe
 from frappe import _
 from frappe.utils import getdate, nowdate, strip_html
 
-from ifitwala_ed.api.student_log_dashboard import get_authorized_schools
+from ifitwala_ed.students.api.student_log_dashboard import get_authorized_schools
 from ifitwala_ed.api.student_overview_roles import ALLOWED_STAFF_ROLES
-from ifitwala_ed.api.student_task_status import (
+from ifitwala_ed.assessment.api.student_task_status import (
     DONE_GRADING_STATUSES,
     DONE_SUBMISSION_STATUSES,
     is_student_work_done,

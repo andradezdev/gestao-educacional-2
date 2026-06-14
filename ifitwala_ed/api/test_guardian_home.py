@@ -229,7 +229,7 @@ class TestGuardianHome(FrappeTestCase):
             ),
             patch("ifitwala_ed.api.guardian_home._resolve_guardian_scope", return_value=("GRD-0001", children)),
             patch(
-                "ifitwala_ed.api.guardian_policy.get_guardian_policy_home_summary",
+                "ifitwala_ed.governance.api.guardian_policy.get_guardian_policy_home_summary",
                 return_value={"pending_count": 2, "items": [{"policy_version": "VER-1"}]},
             ),
             patch("ifitwala_ed.api.guardian_home._get_student_group_membership", return_value=membership),

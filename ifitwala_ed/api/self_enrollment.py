@@ -10,7 +10,7 @@ from frappe import _
 from frappe.utils import cint, get_datetime, now_datetime
 
 from ifitwala_ed.api.activity_booking import _guardian_student_names, _parse_name_list, _student_rows
-from ifitwala_ed.api.courses import _require_student_name_for_session_user
+from ifitwala_ed.curriculum.api.courses import _require_student_name_for_session_user
 from ifitwala_ed.schedule.enrollment_intent import (
     INTENT_DOES_NOT_INTEND,
     INTENT_INTENDS_TO_ENROLL,

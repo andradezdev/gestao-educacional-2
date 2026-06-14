@@ -10,9 +10,9 @@ from ifitwala_ed.tests.frappe_stubs import StubValidationError, import_fresh, st
 
 @contextmanager
 def _drive_materials_module():
-    student_groups_api = ModuleType("ifitwala_ed.api.student_groups")
+    student_groups_api = ModuleType("ifitwala_ed.students.api.student_groups")
 
-    with stubbed_frappe(extra_modules={"ifitwala_ed.api.student_groups": student_groups_api}) as frappe:
+    with stubbed_frappe(extra_modules={"ifitwala_ed.students.api.student_groups": student_groups_api}) as frappe:
 
         def fake_get_value(doctype, name, fieldname=None, as_dict=False):
             if doctype == "Course" and fieldname == "school":

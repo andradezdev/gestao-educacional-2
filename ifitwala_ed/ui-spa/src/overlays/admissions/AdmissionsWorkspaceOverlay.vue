@@ -235,6 +235,25 @@
 										</div>
 									</article>
 
+									<article
+										v-if="workspaceApplicant?.approval_exception?.approved"
+										class="interview-card border-amber-200 bg-amber-50/70"
+									>
+										<h3 class="type-h3 text-amber-900">{{ __('Approved with exception') }}</h3>
+										<p
+											v-if="workspaceApplicant.approval_exception.reason"
+											class="mt-2 type-body text-amber-950 whitespace-pre-wrap"
+										>
+											{{ workspaceApplicant.approval_exception.reason }}
+										</p>
+										<p
+											v-if="formatApprovalExceptionMeta(workspaceApplicant.approval_exception)"
+											class="mt-2 type-caption text-amber-900"
+										>
+											{{ formatApprovalExceptionMeta(workspaceApplicant.approval_exception) }}
+										</p>
+									</article>
+
 									<article class="interview-card">
 										<h3 class="type-h3 text-ink">{{ __('Address') }}</h3>
 										<div v-if="applicantAddressLines.length" class="mt-3 space-y-1">
@@ -1625,6 +1644,7 @@ import type {
 	ApplicantWorkspaceUploadedRow,
 	ApplicantWorkspaceResponse,
 	InterviewWorkspaceFeedbackPanelRow,
+	InterviewWorkspaceApplicant,
 	InterviewWorkspaceInterview,
 	InterviewWorkspaceGuardian,
 	InterviewWorkspaceResponse,
@@ -2978,6 +2998,20 @@ function formatHumanMoment(value?: string | null, options: HumanDateOptions = {}
 	if (!value) return absolute;
 	const relative = formatRelativeTime(value);
 	return relative && relative !== absolute ? `${absolute} (${relative})` : absolute;
+}
+
+function formatApprovalExceptionMeta(
+	exception?: InterviewWorkspaceApplicant['approval_exception'] | null
+) {
+	if (!exception?.approved) return '';
+	const bits: string[] = [];
+	if (exception.by) {
+		bits.push(exception.by);
+	}
+	if (exception.on) {
+		bits.push(formatHumanDateTime(exception.on));
+	}
+	return bits.join(' · ');
 }
 
 function formatTimelineContent(content?: string | null) {

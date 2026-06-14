@@ -79,7 +79,7 @@ def get_guardian_home_snapshot(anchor_date=None, school_days=7, debug=0):
         return _finalize_payload(payload, debug_mode, debug_warnings)
 
     from ifitwala_ed.api.family_consent import get_guardian_consent_home_summary
-    from ifitwala_ed.api.guardian_policy import get_guardian_policy_home_summary
+    from ifitwala_ed.governance.api.guardian_policy import get_guardian_policy_home_summary
 
     payload["consents"] = get_guardian_consent_home_summary(
         guardian_name=guardian_name,

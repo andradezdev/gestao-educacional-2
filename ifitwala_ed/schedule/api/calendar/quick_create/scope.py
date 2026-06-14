@@ -5,7 +5,7 @@ from __future__ import annotations
 import frappe
 from frappe import _
 
-from ifitwala_ed.api.student_log_dashboard import get_authorized_schools
+from ifitwala_ed.students.api.student_log_dashboard import get_authorized_schools
 from ifitwala_ed.schedule.api.calendar.core import _resolve_employee_for_user
 from ifitwala_ed.schedule.api.calendar.quick_create.constants import (
     QUICK_CREATE_OPTIONS_CACHE_TTL_SECONDS,

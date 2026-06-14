@@ -24,10 +24,10 @@ from ifitwala_ed.api.file_access import (
     resolve_academic_file_preview_url,
     resolve_academic_file_thumbnail_url,
 )
-from ifitwala_ed.api.student_groups import TRIAGE_ROLES, _instructor_group_names
 from ifitwala_ed.assessment import quiz_service
 from ifitwala_ed.curriculum import materials as materials_domain
 from ifitwala_ed.curriculum import planning
+from ifitwala_ed.students.api.student_groups import TRIAGE_ROLES, _instructor_group_names
 from ifitwala_ed.utilities import governed_uploads
 
 PLANNING_RESOURCE_ANCHORS = {

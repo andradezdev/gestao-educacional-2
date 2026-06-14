@@ -118,7 +118,7 @@ def _invalidate_student_calendar_caches_for_participants(doc, *, include_previou
     if not participant_users:
         return
 
-    from ifitwala_ed.api.student_calendar import refresh_student_calendar_views
+    from ifitwala_ed.students.api.student_calendar import refresh_student_calendar_views
 
     refresh_student_calendar_views(
         users=participant_users,

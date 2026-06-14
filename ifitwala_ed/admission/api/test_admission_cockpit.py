@@ -21,6 +21,7 @@ from ifitwala_ed.admission.api.cockpit.actions import (
 from ifitwala_ed.admission.api.cockpit.actions import (
     send_admissions_cockpit_offer_impl as send_admissions_cockpit_offer,
 )
+from ifitwala_ed.admission.api.cockpit.cache import invalidate_admissions_cockpit_cache
 from ifitwala_ed.admission.api.cockpit.data import get_admissions_cockpit_data_impl as get_admissions_cockpit_data
 from ifitwala_ed.admission.api.portal.documents import upload_applicant_document_impl as upload_applicant_document
 from ifitwala_ed.admission.api.review import (
@@ -144,6 +145,27 @@ class TestAdmissionCockpit(FrappeTestCase):
         self.assertFalse(blocker.get("workspace_document_item"))
         self.assertIn("/desk/student-applicant/", blocker.get("target_url") or "")
         self.assertNotIn("/desk/applicant-document/", blocker.get("target_url") or "")
+
+    def test_cockpit_card_includes_approval_exception_summary(self):
+        frappe.db.set_value(
+            "Student Applicant",
+            self.applicant.name,
+            {
+                "approved_with_exception": 1,
+                "approval_exception_reason": "Sibling placement approved by leadership.",
+                "approval_exception_by": self.staff_user.name,
+                "approval_exception_on": "2026-06-04 09:15:00",
+            },
+        )
+        invalidate_admissions_cockpit_cache()
+
+        card = self._get_cockpit_card(self.applicant.name)
+        exception = card.get("approval_exception") or {}
+
+        self.assertTrue(bool(exception.get("approved")))
+        self.assertEqual(exception.get("reason"), "Sibling placement approved by leadership.")
+        self.assertEqual(exception.get("by"), self.staff_user.name)
+        self.assertTrue(exception.get("on"))
 
     def test_pending_submission_blocker_targets_submission_review_anchor(self):
         document_type = self._create_document_type(

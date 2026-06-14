@@ -156,7 +156,7 @@ def _get_session_student_name() -> str | None:
         return None
 
     try:
-        from ifitwala_ed.api import courses as courses_api
+        from ifitwala_ed.curriculum.api import courses as courses_api
 
         return str(courses_api._require_student_name_for_session_user() or "").strip() or None
     except Exception as exc:

@@ -29,3 +29,13 @@ class TestAdmissionSettings(FrappeTestCase):
             "show_guardians_in_admissions_profile",
             original_value or 0,
         )
+
+    def test_applicant_approval_exception_setting_roundtrip(self):
+        original_value = frappe.db.get_single_value("Admission Settings", "allow_applicant_approval_exceptions")
+        frappe.db.set_single_value("Admission Settings", "allow_applicant_approval_exceptions", 1)
+        self.assertEqual(frappe.db.get_single_value("Admission Settings", "allow_applicant_approval_exceptions"), 1)
+        frappe.db.set_single_value(
+            "Admission Settings",
+            "allow_applicant_approval_exceptions",
+            original_value or 0,
+        )

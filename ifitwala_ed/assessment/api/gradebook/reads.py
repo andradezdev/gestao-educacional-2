@@ -178,7 +178,7 @@ def get_grid(api, filters=None, **kwargs):
 
 
 def get_drawer(api, outcome_id: str, submission_id: str | None = None, version: int | str | None = None):
-    from ifitwala_ed.api import task_submission as task_submission_api
+    from ifitwala_ed.assessment.api import task_submission as task_submission_api
     from ifitwala_ed.assessment import (
         task_feedback_artifact_service,
         task_feedback_comment_bank_service,

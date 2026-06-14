@@ -1508,7 +1508,7 @@ function set_html(frm, fieldname, html) {
 function render_snapshot(data) {
 	const ready = data.ready ? "Yes" : "No";
 	const issues = data.issues || [];
-	return [
+	const rows = [
 		render_line(__("Ready for approval"), escape_html(ready)),
 		render_line(__("Readiness issues"), render_list(issues)),
 		render_line(__("Profile"), render_ok_label(data.profile)),
@@ -1517,7 +1517,23 @@ function render_snapshot(data) {
 		render_line(__("Recommendations"), render_ok_label(data.recommendations)),
 		render_line(__("Health"), render_ok_label(data.health)),
 		render_line(__("Interviews"), render_ok_label(data.interviews)),
-	].join("");
+	];
+	if (data.approval_exception?.approved) {
+		rows.splice(1, 0, render_line(__("Approval exception"), render_approval_exception(data.approval_exception)));
+	}
+	return rows.join("");
+}
+
+function render_approval_exception(exception) {
+	const bits = [render_pill(__("Approved with exception"), "amber")];
+	if (exception?.reason) {
+		bits.push(escape_html(String(exception.reason)));
+	}
+	const meta = [exception?.by, format_datetime(exception?.on)].filter((value) => value && value !== __("—"));
+	if (meta.length) {
+		bits.push(`<span class="text-muted">${escape_html(meta.join(" · "))}</span>`);
+	}
+	return bits.join(" ");
 }
 
 function render_review_assignments(summary) {
@@ -2611,9 +2627,56 @@ function map_health_status(status) {
 	return __("Pending");
 }
 
+function can_approve_with_exception() {
+	return ["Admission Manager", "Academic Admin", "System Manager"].some((role) => frappe.user.has_role(role));
+}
+
+function setting_enabled(value) {
+	return value === 1 || value === true || String(value || "").trim() === "1";
+}
+
+function add_approve_with_exception_action(frm) {
+	if (!can_approve_with_exception()) {
+		return;
+	}
+	frappe.db
+		.get_single_value("Admission Settings", "allow_applicant_approval_exceptions")
+		.then((enabled) => {
+			if (!setting_enabled(enabled) || frm.doc.application_status !== "Under Review") {
+				return;
+			}
+			if (frm.__approval_exception_button_added) {
+				return;
+			}
+			frm.__approval_exception_button_added = true;
+			frm.add_custom_button(__("Approve With Exception"), () => {
+				frappe.prompt(
+					{
+						label: __("Exception Reason"),
+						fieldname: "reason",
+						fieldtype: "Small Text",
+						reqd: 1,
+					},
+					(values) => {
+						blurActiveModalFocus();
+						frm.call("approve_application_with_exception", { reason: values.reason })
+							.then(() => frm.reload_doc())
+							.catch((err) => {
+								frappe.msgprint(err.message || __("Unable to approve applicant with exception."));
+							});
+					},
+					__("Approve With Exception"),
+					__("Approve")
+				);
+			});
+		})
+		.catch(() => {});
+}
+
 function add_decision_actions(frm) {
 	const status = frm.doc.application_status;
-	[__("Start Review"), __("Approve"), __("Reject"), __("Promote"), __("Upgrade Identity")].forEach((label) => {
+	frm.__approval_exception_button_added = false;
+	[__("Start Review"), __("Approve"), __("Approve With Exception"), __("Reject"), __("Promote"), __("Upgrade Identity")].forEach((label) => {
 		frm.remove_custom_button(label, __("Admissions"));
 		frm.remove_custom_button(label);
 	});
@@ -2663,6 +2726,8 @@ function add_decision_actions(frm) {
 				__("Reject")
 			);
 		});
+
+		add_approve_with_exception_action(frm);
 	}
 
 	if (status === "Approved") {

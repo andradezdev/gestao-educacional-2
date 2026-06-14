@@ -3,7 +3,11 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Any
 
-from ifitwala_ed.api.student_task_status import coerce_bool_flag, is_student_work_actionable, is_student_work_done
+from ifitwala_ed.assessment.api.student_task_status import (
+    coerce_bool_flag,
+    is_student_work_actionable,
+    is_student_work_done,
+)
 
 
 def coerce_learning_datetime(api, value: Any) -> datetime | None:
@@ -662,7 +666,7 @@ def build_student_learning_space_payload(
         academic_year=reflections_academic_year or None,
     )
     try:
-        from ifitwala_ed.api import student_communications as student_communications_api
+        from ifitwala_ed.students.api import student_communications as student_communications_api
 
         course_communication_summary = student_communications_api.get_student_course_communication_summary(
             student_name,

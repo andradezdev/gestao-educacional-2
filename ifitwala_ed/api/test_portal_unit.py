@@ -17,7 +17,7 @@ def _portal_module():
     guardian_communications = ModuleType("ifitwala_ed.api.guardian_communications")
     guardian_communications.get_guardian_portal_communication_unread_count = lambda: 0
 
-    student_communications = ModuleType("ifitwala_ed.api.student_communications")
+    student_communications = ModuleType("ifitwala_ed.students.api.student_communications")
     student_communications.get_student_portal_communication_unread_count = lambda: 0
 
     attendance = ModuleType("ifitwala_ed.api.attendance")
@@ -34,8 +34,8 @@ def _portal_module():
     inquiry = _analytics_module("ifitwala_ed.api.inquiry")
     room_utilization = ModuleType("ifitwala_ed.api.room_utilization")
     room_utilization.ANALYTICS_ROLES = set()
-    student_demographics = _analytics_module("ifitwala_ed.api.student_demographics_dashboard")
-    student_log_dashboard = _analytics_module("ifitwala_ed.api.student_log_dashboard")
+    student_demographics = _analytics_module("ifitwala_ed.students.api.student_demographics_dashboard")
+    student_log_dashboard = _analytics_module("ifitwala_ed.students.api.student_log_dashboard")
     student_overview_roles = ModuleType("ifitwala_ed.api.student_overview_roles")
     student_overview_roles.ALLOWED_STAFF_ROLES = set()
     users = ModuleType("ifitwala_ed.api.users")
@@ -84,15 +84,16 @@ def _portal_module():
         extra_modules={
             "ifitwala_ed.admission.admission_utils": admission_utils,
             "ifitwala_ed.api.guardian_communications": guardian_communications,
-            "ifitwala_ed.api.student_communications": student_communications,
+            "ifitwala_ed.students.api.student_communications": student_communications,
             "ifitwala_ed.api.attendance": attendance,
             "ifitwala_ed.api.enrollment_analytics": enrollment_analytics,
             "ifitwala_ed.api.inquiry": inquiry,
             "ifitwala_ed.api.org_communication_quick_create": org_communication_quick_create,
             "ifitwala_ed.api.policy_signature": policy_signature,
             "ifitwala_ed.api.room_utilization": room_utilization,
+            "ifitwala_ed.students.api.student_demographics_dashboard": student_demographics,
             "ifitwala_ed.api.student_demographics_dashboard": student_demographics,
-            "ifitwala_ed.api.student_log_dashboard": student_log_dashboard,
+            "ifitwala_ed.students.api.student_log_dashboard": student_log_dashboard,
             "ifitwala_ed.api.student_overview_roles": student_overview_roles,
             "ifitwala_ed.api.users": users,
             "ifitwala_ed.utilities.image_utils": image_utils,

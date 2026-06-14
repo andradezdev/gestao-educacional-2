@@ -73,13 +73,17 @@ import type {
 
 const cleanupFns: Array<() => void> = [];
 
-function buildWorkspace(reviewStatus: string): ApplicantWorkspaceResponse {
+function buildWorkspace(
+	reviewStatus: string,
+	approvalException?: ApplicantWorkspaceResponse['applicant']['approval_exception']
+): ApplicantWorkspaceResponse {
 	return {
 		ok: true,
 		applicant: {
 			name: 'APP-0001',
 			display_name: 'Ada Applicant',
 			application_status: 'Under Review',
+			approval_exception: approvalException,
 			guardians: [],
 		},
 		timeline: [],
@@ -273,6 +277,25 @@ describe('AdmissionsWorkspaceOverlay', () => {
 		expect(buttonLabels()).toContain('Approve');
 		expect(buttonLabels()).toContain('Request Changes');
 		expect(buttonLabels()).toContain('Reject');
+	});
+
+	it('shows applicant approval exception context', async () => {
+		getApplicantWorkspaceMock.mockResolvedValue(
+			buildWorkspace('Pending', {
+				approved: true,
+				reason: 'Sibling placement approved by leadership.',
+				by: 'manager@example.com',
+				on: '2026-06-04 09:15:00',
+			})
+		);
+
+		mountOverlay();
+		await flushUi();
+
+		const text = document.body.textContent || '';
+		expect(text).toContain('Approved with exception');
+		expect(text).toContain('Sibling placement approved by leadership.');
+		expect(text).toContain('manager@example.com');
 	});
 
 	it('shows read-only interview notes instead of submit controls for non-editing readers', async () => {

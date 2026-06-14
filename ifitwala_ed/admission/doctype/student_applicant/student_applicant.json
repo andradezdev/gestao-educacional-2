@@ -32,6 +32,10 @@
   "applicant_email",
   "applicant_contact",
   "decision_at",
+  "approved_with_exception",
+  "approval_exception_reason",
+  "approval_exception_by",
+  "approval_exception_on",
   "column_break_n1e1",
   "submitted_at",
   "portal_account_email",
@@ -234,6 +238,32 @@
    "fieldname": "decision_at",
    "fieldtype": "Datetime",
    "label": "Decision At",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "approved_with_exception",
+   "fieldtype": "Check",
+   "label": "Approved With Exception",
+   "read_only": 1
+  },
+  {
+   "fieldname": "approval_exception_reason",
+   "fieldtype": "Small Text",
+   "label": "Approval Exception Reason",
+   "read_only": 1
+  },
+  {
+   "fieldname": "approval_exception_by",
+   "fieldtype": "Link",
+   "label": "Approval Exception By",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "approval_exception_on",
+   "fieldtype": "Datetime",
+   "label": "Approval Exception On",
    "read_only": 1
   },
   {
@@ -612,7 +642,7 @@
  "image_field": "applicant_image",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-05-28 19:10:14.000000",
+ "modified": "2026-06-04 10:39:18.000000",
  "modified_by": "Administrator",
  "module": "Admission",
  "name": "Student Applicant",

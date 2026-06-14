@@ -9,7 +9,6 @@ import frappe
 from frappe import _
 from frappe.utils import cint
 
-from ifitwala_ed.api.student_groups import _instructor_group_names
 from ifitwala_ed.setup.doctype.org_communication.org_communication import (
     AUDIENCE_TARGET_MODES,
     RECIPIENT_TOGGLE_FIELDS,
@@ -20,6 +19,7 @@ from ifitwala_ed.setup.doctype.org_communication.org_communication import (
     get_org_communication_context,
     get_org_communication_delivery_rules,
 )
+from ifitwala_ed.students.api.student_groups import _instructor_group_names
 from ifitwala_ed.utilities.employee_utils import get_schools_for_organization_scope
 
 IDEMPOTENCY_TTL_SECONDS = 900

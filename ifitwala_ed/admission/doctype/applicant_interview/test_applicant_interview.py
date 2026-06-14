@@ -924,6 +924,29 @@ class TestApplicantInterview(FrappeTestCase):
         self.assertFalse(bool((interviews[0] or {}).get("feedback_complete")))
         self.assertEqual((interviews[0] or {}).get("feedback_status_label"), "1/2 submitted")
 
+    def test_applicant_workspace_includes_approval_exception_summary(self):
+        manager = self._create_user("workspace_exception_manager", roles=["Admission Manager"])
+        self._create_employee(manager, first_name="Exception", last_name="Manager")
+        frappe.db.set_value(
+            "Student Applicant",
+            self.applicant.name,
+            {
+                "approved_with_exception": 1,
+                "approval_exception_reason": "Sibling placement approved by leadership.",
+                "approval_exception_by": manager.name,
+                "approval_exception_on": "2026-06-04 09:15:00",
+            },
+        )
+
+        frappe.set_user(manager.name)
+        payload = get_applicant_workspace(student_applicant=self.applicant.name)
+        exception = (payload.get("applicant") or {}).get("approval_exception") or {}
+
+        self.assertTrue(bool(exception.get("approved")))
+        self.assertEqual(exception.get("reason"), "Sibling placement approved by leadership.")
+        self.assertEqual(exception.get("by"), manager.name)
+        self.assertTrue(exception.get("on"))
+
     def test_transfer_school_non_privileged_staff_cannot_read_applicant_workspace(self):
         staff_user = self._create_user("transfer_file_staff", roles=["Academic Assistant"])
         self._create_employee(staff_user, first_name="Transfer", last_name="FileStaff", school=self.transfer_school)

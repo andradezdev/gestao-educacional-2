@@ -65,6 +65,16 @@ def _display_name(row: dict) -> str:
     return full_name or _to_text(row.get("name"))
 
 
+def _approval_exception_summary(row: dict) -> dict:
+    approved = bool(cint(row.get("approved_with_exception") or 0))
+    return {
+        "approved": approved,
+        "reason": _to_text(row.get("approval_exception_reason")) if approved else None,
+        "by": _to_text(row.get("approval_exception_by")) if approved else None,
+        "on": row.get("approval_exception_on") if approved else None,
+    }
+
+
 def _get_descendant_organizations(root_org: str) -> list[str]:
     root_org = _to_text(root_org)
     if not root_org:
@@ -383,6 +393,10 @@ def get_admissions_cockpit_data_impl(filters=None):
             "middle_name",
             "last_name",
             "application_status",
+            "approved_with_exception",
+            "approval_exception_reason",
+            "approval_exception_by",
+            "approval_exception_on",
             "organization",
             "school",
             "program_offering",
@@ -579,6 +593,7 @@ def get_admissions_cockpit_data_impl(filters=None):
             "name": applicant_name,
             "display_name": _display_name(row),
             "application_status": _to_text(row.get("application_status")),
+            "approval_exception": _approval_exception_summary(row),
             "organization": _to_text(row.get("organization")),
             "school": _to_text(row.get("school")),
             "program_offering": _to_text(row.get("program_offering")),

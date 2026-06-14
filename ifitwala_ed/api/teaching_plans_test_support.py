@@ -9,7 +9,7 @@ from ifitwala_ed.tests.frappe_stubs import StubValidationError, import_fresh, st
 
 @contextmanager
 def _teaching_plans_module():
-    student_groups_api = ModuleType("ifitwala_ed.api.student_groups")
+    student_groups_api = ModuleType("ifitwala_ed.students.api.student_groups")
     student_groups_api.TRIAGE_ROLES = set()
     student_groups_api._instructor_group_names = lambda user: []
 
@@ -124,7 +124,7 @@ def _teaching_plans_module():
     schedule_utils.get_calendar_holiday_set = lambda calendar_name: set()
     schedule_utils.get_weekend_days_for_calendar = lambda calendar_name: [0, 6]
 
-    student_communications_api = ModuleType("ifitwala_ed.api.student_communications")
+    student_communications_api = ModuleType("ifitwala_ed.students.api.student_communications")
     student_communications_api.get_student_course_communication_summary = lambda *args, **kwargs: {
         "total_count": 0,
         "unread_count": 0,
@@ -148,9 +148,9 @@ def _teaching_plans_module():
     with stubbed_frappe(
         extra_modules={
             "frappe.utils": frappe_utils,
-            "ifitwala_ed.api.student_groups": student_groups_api,
+            "ifitwala_ed.students.api.student_groups": student_groups_api,
             "ifitwala_ed.api.file_access": file_access_api,
-            "ifitwala_ed.api.student_communications": student_communications_api,
+            "ifitwala_ed.students.api.student_communications": student_communications_api,
             "ifitwala_ed.curriculum.materials": materials_domain,
             "ifitwala_ed.curriculum.planning": planning_domain,
             "ifitwala_ed.assessment.quiz_service": quiz_service,

@@ -18,6 +18,8 @@
   "admissions_access_mode",
   "column_break_xnws",
   "show_guardians_in_admissions_profile",
+  "approval_policy_section",
+  "allow_applicant_approval_exceptions",
   "enrollment_section",
   "auto_hydrate_enrollment_request_after_promotion",
   "deposit_defaults_section",
@@ -86,6 +88,18 @@
    "label": "Show Guardians In Admissions Profile"
   },
   {
+   "fieldname": "approval_policy_section",
+   "fieldtype": "Section Break",
+   "label": "Applicant Approval Policy"
+  },
+  {
+   "default": "0",
+   "description": "If enabled, Admission Managers, Academic Admins, and System Managers can approve under-review applicants with unresolved readiness blockers after recording an exception reason.",
+   "fieldname": "allow_applicant_approval_exceptions",
+   "fieldtype": "Check",
+   "label": "Allow Applicant Approval With Exceptions"
+  },
+  {
    "fieldname": "enrollment_section",
    "fieldtype": "Section Break",
    "label": "Admissions Enrollment Bridge"
@@ -124,7 +138,7 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2026-04-27 13:14:58.080619",
+ "modified": "2026-06-03 21:00:00.000000",
  "modified_by": "Administrator",
  "module": "Admission",
  "name": "Admission Settings",

@@ -10,7 +10,7 @@ from typing import Iterable, Sequence
 import frappe
 from frappe import _
 from frappe.model.document import Document
-from frappe.utils import format_datetime, get_datetime, get_link_to_form, getdate, now_datetime, nowdate
+from frappe.utils import cint, format_datetime, get_datetime, get_link_to_form, getdate, now_datetime, nowdate
 
 from ifitwala_ed.admission.admission_utils import (
     ADMISSIONS_ROLES,
@@ -1022,6 +1022,10 @@ def _get_applicant_workspace_context(student_applicant: str) -> dict:
             "middle_name",
             "last_name",
             "application_status",
+            "approved_with_exception",
+            "approval_exception_reason",
+            "approval_exception_by",
+            "approval_exception_on",
             "organization",
             "school",
             "program",
@@ -1078,6 +1082,7 @@ def _get_applicant_workspace_context(student_applicant: str) -> dict:
         "name": row.get("name"),
         "display_name": display_name,
         "application_status": row.get("application_status"),
+        "approval_exception": _approval_exception_summary(row),
         "organization": row.get("organization"),
         "school": row.get("school"),
         "program": row.get("program"),
@@ -1127,6 +1132,16 @@ def _get_applicant_workspace_context(student_applicant: str) -> dict:
         "created_on": row.get("creation"),
         "updated_on": row.get("modified"),
         "guardians": guardians,
+    }
+
+
+def _approval_exception_summary(row: dict) -> dict:
+    approved = bool(cint(row.get("approved_with_exception") or 0))
+    return {
+        "approved": approved,
+        "reason": (row.get("approval_exception_reason") or "").strip() if approved else None,
+        "by": (row.get("approval_exception_by") or "").strip() if approved else None,
+        "on": row.get("approval_exception_on") if approved else None,
     }
 
 

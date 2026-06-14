@@ -56,7 +56,7 @@ class TestMeeting(TestCase):
             {"student.current@example.com", "student.previous@example.com"},
         )
 
-    @patch("ifitwala_ed.api.student_calendar.refresh_student_calendar_views")
+    @patch("ifitwala_ed.students.api.student_calendar.refresh_student_calendar_views")
     def test_invalidate_student_calendar_caches_for_participants_uses_previous_and_current_users(self, mocked):
         doc = frappe._dict(
             name="MTG-0001",

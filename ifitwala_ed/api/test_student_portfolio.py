@@ -13,7 +13,7 @@ def _student_portfolio_module():
     file_access_api = ModuleType("ifitwala_ed.api.file_access")
     file_access_api.resolve_academic_file_open_url = lambda **kwargs: "/open/file"
 
-    student_log_dashboard_api = ModuleType("ifitwala_ed.api.student_log_dashboard")
+    student_log_dashboard_api = ModuleType("ifitwala_ed.students.api.student_log_dashboard")
     student_log_dashboard_api.get_authorized_schools = lambda user: ["SCH-1"]
 
     drive_authority_api = ModuleType("ifitwala_ed.integrations.drive.authority")
@@ -34,7 +34,7 @@ def _student_portfolio_module():
         extra_modules={
             "frappe.utils": frappe_utils,
             "ifitwala_ed.api.file_access": file_access_api,
-            "ifitwala_ed.api.student_log_dashboard": student_log_dashboard_api,
+            "ifitwala_ed.students.api.student_log_dashboard": student_log_dashboard_api,
             "ifitwala_ed.integrations.drive.authority": drive_authority_api,
             "ifitwala_ed.utilities.school_tree": school_tree_api,
         }

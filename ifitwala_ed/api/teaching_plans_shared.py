@@ -113,7 +113,7 @@ def require_student_name(api) -> str:
 
 
 def assert_student_course_access(api, student_name: str, course_id: str) -> None:
-    from ifitwala_ed.api import courses as courses_api
+    from ifitwala_ed.curriculum.api import courses as courses_api
 
     scope = courses_api._build_student_course_scope(student_name)
     if course_id not in scope:

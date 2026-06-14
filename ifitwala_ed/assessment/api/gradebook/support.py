@@ -333,7 +333,7 @@ def _resolve_gradebook_scope(school, academic_year, course):
 
 
 def _instructor_group_names(user):
-    from ifitwala_ed.api.student_groups import _instructor_group_names as _canonical_instructor_group_names
+    from ifitwala_ed.students.api.student_groups import _instructor_group_names as _canonical_instructor_group_names
 
     return _canonical_instructor_group_names(user)
 

@@ -9,10 +9,10 @@ from ifitwala_ed.tests.frappe_stubs import import_fresh, stubbed_frappe
 
 @contextmanager
 def _materials_module(*, roles: list[str], instructor_groups: list[str], coordinator_courses: list[str] | None = None):
-    student_groups_api = ModuleType("ifitwala_ed.api.student_groups")
+    student_groups_api = ModuleType("ifitwala_ed.students.api.student_groups")
     student_groups_api._instructor_group_names = lambda user: instructor_groups
 
-    with stubbed_frappe(extra_modules={"ifitwala_ed.api.student_groups": student_groups_api}) as frappe:
+    with stubbed_frappe(extra_modules={"ifitwala_ed.students.api.student_groups": student_groups_api}) as frappe:
         frappe.session.user = "teacher@example.com"
         frappe.get_roles = lambda user: roles
         frappe.db.escape = lambda value: f"'{value}'"

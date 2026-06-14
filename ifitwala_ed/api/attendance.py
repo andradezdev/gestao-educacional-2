@@ -12,8 +12,8 @@ from frappe import _
 from frappe.utils import cint, getdate, nowdate
 from frappe.utils.nestedset import get_descendants_of
 
-from ifitwala_ed.api.student_groups import _instructor_group_names
 from ifitwala_ed.schedule.schedule_utils import get_weekend_days_for_calendar
+from ifitwala_ed.students.api.student_groups import _instructor_group_names
 from ifitwala_ed.students.doctype.student_log.student_log import get_student_log_visibility_predicate
 from ifitwala_ed.utilities.school_tree import _is_adminish, get_descendant_schools, get_user_default_school
 

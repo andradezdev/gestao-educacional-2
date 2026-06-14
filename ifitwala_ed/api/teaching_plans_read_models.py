@@ -4,7 +4,7 @@ from typing import Any
 
 from ifitwala_ed.api.attachment_previews import build_attachment_preview_item, extract_file_extension
 from ifitwala_ed.api.attachment_rows import build_governed_attachment_row
-from ifitwala_ed.api.student_task_status import (
+from ifitwala_ed.assessment.api.student_task_status import (
     DONE_SUBMISSION_STATUSES,
     build_student_task_status_label,
     is_student_work_actionable,

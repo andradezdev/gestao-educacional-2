@@ -57,7 +57,14 @@ GUARDIAN_ROLE = "Guardian"
 STUDENT_ROLE = "Student"
 SYSTEM_MANAGER_ROLE = "System Manager"
 DECISION_ROLES = ADMISSIONS_ROLES | {"Academic Admin", "System Manager"}
+APPROVAL_EXCEPTION_ROLES = {"Admission Manager", "Academic Admin", SYSTEM_MANAGER_ROLE}
 TERMINAL_STATUSES = {"Rejected", "Withdrawn", "Promoted"}
+APPROVAL_EXCEPTION_FIELDS = (
+    "approved_with_exception",
+    "approval_exception_reason",
+    "approval_exception_by",
+    "approval_exception_on",
+)
 
 STATUS_SET = {
     "Draft",
@@ -212,6 +219,7 @@ class StudentApplicant(Document):
         self._validate_applicant_contact_link(before)
         self._validate_applicant_email_fields(before)
         self._validate_application_status(before)
+        self._validate_approval_exception_fields(before)
         self._validate_edit_permissions(before)
         self._validate_attachment_guard()
         self._validate_academic_year_intent()
@@ -372,6 +380,31 @@ class StudentApplicant(Document):
                     to_status=to_status,
                 )
             )
+
+    def _validate_approval_exception_fields(self, before):
+        if not before:
+            has_exception_marker = bool(cint(self.get("approved_with_exception") or 0))
+            has_exception_detail = any(
+                self.get(fieldname)
+                for fieldname in APPROVAL_EXCEPTION_FIELDS
+                if fieldname != "approved_with_exception"
+            )
+            if has_exception_marker or has_exception_detail:
+                frappe.throw(_("Approval exception fields are managed by approval lifecycle methods."))
+            return
+
+        changed = any(self.get(fieldname) != before.get(fieldname) for fieldname in APPROVAL_EXCEPTION_FIELDS)
+        if not changed:
+            return
+
+        if not getattr(self.flags, "allow_approval_exception_change", False):
+            frappe.throw(_("Approval exception fields are managed by approval lifecycle methods."))
+
+        if not getattr(self.flags, "allow_status_change", False):
+            frappe.throw(_("Approval exception fields are managed by approval lifecycle methods."))
+
+        if getattr(self.flags, "status_change_source", None) != "lifecycle_method":
+            frappe.throw(_("Approval exception fields are managed by approval lifecycle methods."))
 
     # ---------------------------------------------------------------------
     # Edit permissions
@@ -562,6 +595,29 @@ class StudentApplicant(Document):
             return user
         frappe.throw(_("You do not have permission to perform this action."), frappe.PermissionError)
 
+    def _ensure_approval_exception_permission(self):
+        user = frappe.session.user
+        roles = set(frappe.get_roles(user))
+        if not roles & APPROVAL_EXCEPTION_ROLES:
+            frappe.throw(
+                _("Only Admission Manager, Academic Admin, or System Manager can approve with exception."),
+                frappe.PermissionError,
+            )
+        if not has_scoped_staff_access_to_student_applicant(user=user, student_applicant=self.name):
+            frappe.throw(_("You do not have permission to perform this action."), frappe.PermissionError)
+        return user
+
+    def _approval_exceptions_enabled(self) -> bool:
+        return bool(
+            cint(
+                frappe.db.get_single_value(
+                    "Admission Settings",
+                    "allow_applicant_approval_exceptions",
+                )
+                or 0
+            )
+        )
+
     def _set_status(
         self, new_status, action_label, permission_checker=ensure_admissions_permission, comment_suffix=None
     ):
@@ -722,10 +778,51 @@ class StudentApplicant(Document):
     def approve_application(self):
         self._ensure_decision_permission()
         self._validate_ready_for_approval()
+        self.approved_with_exception = 0
+        self.approval_exception_reason = None
+        self.approval_exception_by = None
+        self.approval_exception_on = None
+        self.flags.allow_approval_exception_change = True
         return self._set_status(
             "Approved",
             "Application approved",
             permission_checker=self._ensure_decision_permission,
+        )
+
+    @frappe.whitelist()
+    def approve_application_with_exception(self, reason=None):
+        self._ensure_approval_exception_permission()
+        if not self._approval_exceptions_enabled():
+            frappe.throw(_("Applicant approval exceptions are disabled in Admission Settings."))
+
+        clean_reason = (reason or "").strip()
+        if not clean_reason:
+            frappe.throw(_("Exception reason is required."))
+
+        snapshot = self.get_readiness_snapshot()
+        if snapshot.get("ready"):
+            frappe.throw(_("Applicant readiness is complete. Use normal approval."))
+
+        issues = [str(issue).strip() for issue in snapshot.get("issues") or [] if str(issue).strip()]
+        if not issues:
+            issues = [_("Applicant readiness requirements are not met.")]
+
+        exception_on = now_datetime()
+        self.approved_with_exception = 1
+        self.approval_exception_reason = clean_reason
+        self.approval_exception_by = frappe.session.user
+        self.approval_exception_on = exception_on
+        self.flags.allow_approval_exception_change = True
+
+        comment_suffix = _("Exception reason: {reason}. Bypassed readiness blockers: {blockers}.").format(
+            reason=clean_reason,
+            blockers=" | ".join(issues),
+        )
+        return self._set_status(
+            "Approved",
+            "Application approved with exception",
+            permission_checker=self._ensure_approval_exception_permission,
+            comment_suffix=comment_suffix,
         )
 
     @frappe.whitelist()
@@ -2258,6 +2355,15 @@ class StudentApplicant(Document):
 
         return get_review_assignments_summary(student_applicant=self.name)
 
+    def get_approval_exception_summary(self):
+        approved = bool(cint(self.get("approved_with_exception") or 0))
+        return {
+            "approved": approved,
+            "reason": self.get("approval_exception_reason") if approved else None,
+            "by": self.get("approval_exception_by") if approved else None,
+            "on": self.get("approval_exception_on") if approved else None,
+        }
+
     @frappe.whitelist()
     def get_readiness_snapshot(self):
         policies = self.has_required_policies()
@@ -2343,6 +2449,7 @@ class StudentApplicant(Document):
             "profile": profile,
             "recommendations": recommendations,
             "review_assignments": review_assignments,
+            "approval_exception": self.get_approval_exception_summary(),
             "ready": bool(ready),
             "issues": issues,
         }
