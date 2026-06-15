@@ -385,9 +385,7 @@ class StudentApplicant(Document):
         if not before:
             has_exception_marker = bool(cint(self.get("approved_with_exception") or 0))
             has_exception_detail = any(
-                self.get(fieldname)
-                for fieldname in APPROVAL_EXCEPTION_FIELDS
-                if fieldname != "approved_with_exception"
+                self.get(fieldname) for fieldname in APPROVAL_EXCEPTION_FIELDS if fieldname != "approved_with_exception"
             )
             if has_exception_marker or has_exception_detail:
                 frappe.throw(_("Approval exception fields are managed by approval lifecycle methods."))

@@ -95,7 +95,9 @@ class TestStudentDemographicsDashboard(FrappeTestCase):
                 "ifitwala_ed.students.api.student_demographics_dashboard._get_demographics_access_context",
                 return_value={"user": "analytics@example.com", "mode": "full"},
             ),
-            patch("ifitwala_ed.students.api.student_demographics_dashboard._get_active_students", return_value=students),
+            patch(
+                "ifitwala_ed.students.api.student_demographics_dashboard._get_active_students", return_value=students
+            ),
             patch("ifitwala_ed.students.api.student_demographics_dashboard._get_guardian_links", return_value=[]),
         ):
             payload = get_dashboard(filters={"school": "School A"})
@@ -139,7 +141,9 @@ class TestStudentDemographicsDashboard(FrappeTestCase):
                 "ifitwala_ed.students.api.student_demographics_dashboard._get_demographics_access_context",
                 return_value={"user": "analytics@example.com", "mode": "full"},
             ),
-            patch("ifitwala_ed.students.api.student_demographics_dashboard._get_active_students", return_value=students),
+            patch(
+                "ifitwala_ed.students.api.student_demographics_dashboard._get_active_students", return_value=students
+            ),
             patch("ifitwala_ed.students.api.student_demographics_dashboard._get_guardian_links", return_value=[]),
         ):
             payload = get_dashboard(filters={"school": "School A"})

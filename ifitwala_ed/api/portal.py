@@ -10,7 +10,6 @@ from frappe import _
 
 from ifitwala_ed.admission.admission_utils import ADMISSIONS_ROLES
 from ifitwala_ed.admission.api.inquiry.access import ALLOWED_ANALYTICS_ROLES as INQUIRY_ANALYTICS_ROLES
-from ifitwala_ed.api import guardian_communications as guardian_communications_api
 from ifitwala_ed.api.attendance import ADMIN_ROLES, COUNSELOR_ROLES, INSTRUCTOR_ROLES
 from ifitwala_ed.api.enrollment_analytics import ALLOWED_ANALYTICS_ROLES as ENROLLMENT_ANALYTICS_ROLES
 from ifitwala_ed.api.org_communication_quick_create import (
@@ -22,14 +21,15 @@ from ifitwala_ed.api.policy_signature import (
     POLICY_SIGNATURE_MANAGER_ROLES,
 )
 from ifitwala_ed.api.room_utilization import ANALYTICS_ROLES as SCHEDULING_ROLES
+from ifitwala_ed.api.student_overview_roles import ALLOWED_STAFF_ROLES as STUDENT_OVERVIEW_STAFF_ROLES
+from ifitwala_ed.api.term_reporting import TERM_REPORTING_REVIEW_ROLES
+from ifitwala_ed.api.users import STAFF_ROLES
+from ifitwala_ed.students.api import guardian_communications as guardian_communications_api
+from ifitwala_ed.students.api import student_communications as student_communications_api
 from ifitwala_ed.students.api.student_demographics_dashboard import (
     ALLOWED_ANALYTICS_ROLES as STUDENT_DEMOGRAPHICS_ANALYTICS_ROLES,
 )
 from ifitwala_ed.students.api.student_log_dashboard import ALLOWED_ANALYTICS_ROLES as WELLBEING_ANALYTICS_ROLES
-from ifitwala_ed.api.student_overview_roles import ALLOWED_STAFF_ROLES as STUDENT_OVERVIEW_STAFF_ROLES
-from ifitwala_ed.students.api import student_communications as student_communications_api
-from ifitwala_ed.api.term_reporting import TERM_REPORTING_REVIEW_ROLES
-from ifitwala_ed.api.users import STAFF_ROLES
 from ifitwala_ed.utilities.image_utils import (
     get_preferred_guardian_avatar_url,
     get_preferred_student_avatar_url,

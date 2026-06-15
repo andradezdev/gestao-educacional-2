@@ -20,10 +20,6 @@ from ifitwala_ed.admission.api.focus.applicant_review_actions import (
 from ifitwala_ed.admission.api.focus.inquiry_actions import create_inquiry_contact as _create_inquiry_contact
 from ifitwala_ed.admission.api.focus.inquiry_actions import mark_inquiry_contacted as _mark_inquiry_contacted
 from ifitwala_ed.api.focus_actions_policy import acknowledge_staff_policy as _acknowledge_staff_policy
-from ifitwala_ed.students.api.focus_actions_student_log import (
-    review_student_log_outcome as _review_student_log_outcome,
-    submit_student_log_follow_up as _submit_student_log_follow_up,
-)
 from ifitwala_ed.api.focus_context import get_focus_context as _get_focus_context
 from ifitwala_ed.api.focus_listing import list_focus_items as _list_focus_items
 from ifitwala_ed.api.focus_shared import (
@@ -34,6 +30,12 @@ from ifitwala_ed.api.focus_shared import (
     ACTION_STUDENT_LOG_REVIEW,
     ACTION_STUDENT_LOG_SUBMIT,
     build_focus_item_id,
+)
+from ifitwala_ed.students.api.focus_actions_student_log import (
+    review_student_log_outcome as _review_student_log_outcome,
+)
+from ifitwala_ed.students.api.focus_actions_student_log import (
+    submit_student_log_follow_up as _submit_student_log_follow_up,
 )
 
 __all__ = [

@@ -31,11 +31,13 @@ def _dict(value=None, **kwargs):
 @contextmanager
 def _student_attendance_module():
     frappe_utils = ModuleType("frappe.utils")
-    frappe_utils.getdate = lambda value=None: value if isinstance(value, date) else datetime.fromisoformat(str(value)).date()
+    frappe_utils.getdate = lambda value=None: (
+        value if isinstance(value, date) else datetime.fromisoformat(str(value)).date()
+    )
     frappe_utils.nowdate = lambda: "2026-03-12"
 
     frappe_utils_caching = ModuleType("frappe.utils.caching")
-    frappe_utils_caching.redis_cache = lambda ttl=None: (lambda fn: fn)
+    frappe_utils_caching.redis_cache = lambda ttl=None: lambda fn: fn
 
     frappe_utils_nestedset = ModuleType("frappe.utils.nestedset")
     frappe_utils_nestedset.get_descendants_of = lambda *args, **kwargs: []
@@ -92,7 +94,9 @@ class TestStudentAttendanceApi(TestCase):
         with _student_attendance_module() as (module, _frappe):
             with (
                 patch.object(module, "get_weekend_days_for_calendar", return_value=[5, 6]) as get_weekend_days,
-                patch.object(module, "resolve_student_group_schedule_name", return_value="SCH-SCHED-FALLBACK") as resolve,
+                patch.object(
+                    module, "resolve_student_group_schedule_name", return_value="SCH-SCHED-FALLBACK"
+                ) as resolve,
                 patch.object(module.frappe.db, "get_value", return_value="CAL-001") as get_value,
             ):
                 result = module.get_weekend_days("SG-001")
@@ -111,8 +115,12 @@ class TestStudentAttendanceApi(TestCase):
                     "fetch_school_filter_context",
                     return_value={"default_school": "SCH-1", "schools": [{"name": "SCH-1", "school_name": "School 1"}]},
                 ) as school_context,
-                patch.object(module, "fetch_active_programs", return_value=[{"name": "PROG-1", "program_name": "Program 1"}]) as programs,
-                patch.object(module, "fetch_portal_student_groups", return_value=[{"name": "SG-1", "academic_year": "AY-2025"}]),
+                patch.object(
+                    module, "fetch_active_programs", return_value=[{"name": "PROG-1", "program_name": "Program 1"}]
+                ) as programs,
+                patch.object(
+                    module, "fetch_portal_student_groups", return_value=[{"name": "SG-1", "academic_year": "AY-2025"}]
+                ),
                 patch.object(module, "fetch_portal_academic_years", return_value=[]),
                 patch.object(module, "fetch_portal_terms", return_value=[{"name": "TERM-1"}]) as terms,
             ):
@@ -168,8 +176,14 @@ class TestStudentAttendanceApi(TestCase):
                     "fetch_school_filter_context",
                     return_value={"default_school": "SCH-1", "schools": [{"name": "SCH-1", "school_name": "School 1"}]},
                 ),
-                patch.object(module, "fetch_active_programs", return_value=[{"name": "PROG-1", "program_name": "Program 1"}]) as programs,
-                patch.object(module, "fetch_portal_student_groups", return_value=[{"name": "SG-ONLY", "student_group_name": "Only Group"}]),
+                patch.object(
+                    module, "fetch_active_programs", return_value=[{"name": "PROG-1", "program_name": "Program 1"}]
+                ) as programs,
+                patch.object(
+                    module,
+                    "fetch_portal_student_groups",
+                    return_value=[{"name": "SG-ONLY", "student_group_name": "Only Group"}],
+                ),
                 patch.object(
                     module,
                     "list_attendance_codes",
@@ -199,8 +213,14 @@ class TestStudentAttendanceApi(TestCase):
                     "fetch_school_filter_context",
                     return_value={"default_school": "SCH-1", "schools": [{"name": "SCH-1", "school_name": "School 1"}]},
                 ),
-                patch.object(module, "fetch_active_programs", return_value=[{"name": "PROG-1", "program_name": "Program 1"}]) as programs,
-                patch.object(module, "fetch_portal_student_groups", return_value=[{"name": "SG-1", "student_group_name": "Group 1"}]),
+                patch.object(
+                    module, "fetch_active_programs", return_value=[{"name": "PROG-1", "program_name": "Program 1"}]
+                ) as programs,
+                patch.object(
+                    module,
+                    "fetch_portal_student_groups",
+                    return_value=[{"name": "SG-1", "student_group_name": "Group 1"}],
+                ),
                 patch.object(
                     module,
                     "list_attendance_codes",
@@ -227,8 +247,14 @@ class TestStudentAttendanceApi(TestCase):
                     "fetch_school_filter_context",
                     return_value={"default_school": "SCH-1", "schools": [{"name": "SCH-1", "school_name": "School 1"}]},
                 ),
-                patch.object(module, "fetch_active_programs", return_value=[{"name": "PROG-1", "program_name": "Program 1"}]) as programs,
-                patch.object(module, "fetch_portal_student_groups", return_value=[{"name": "SG-1", "student_group_name": "Group 1"}]),
+                patch.object(
+                    module, "fetch_active_programs", return_value=[{"name": "PROG-1", "program_name": "Program 1"}]
+                ) as programs,
+                patch.object(
+                    module,
+                    "fetch_portal_student_groups",
+                    return_value=[{"name": "SG-1", "student_group_name": "Group 1"}],
+                ),
                 patch.object(
                     module,
                     "list_attendance_codes",
@@ -259,9 +285,13 @@ class TestStudentAttendanceApi(TestCase):
     def test_fetch_attendance_tool_roster_context_aggregates_day_payload(self):
         with _student_attendance_module() as (module, _frappe):
             with (
-                patch.object(module, "fetch_students", return_value={"students": [], "total": 0, "start": 0, "group_info": {}}),
+                patch.object(
+                    module, "fetch_students", return_value={"students": [], "total": 0, "start": 0, "group_info": {}}
+                ),
                 patch.object(module, "previous_status_map", return_value={"STU-1|-1": "P"}),
-                patch.object(module, "fetch_existing_attendance", return_value={"STU-1": {-1: {"code": "P", "remark": ""}}}),
+                patch.object(
+                    module, "fetch_existing_attendance", return_value={"STU-1": {-1: {"code": "P", "remark": ""}}}
+                ),
                 patch.object(module, "fetch_blocks_for_day", return_value=[-1]),
             ):
                 payload = module.fetch_attendance_tool_roster_context("SG-1", "2026-03-12")

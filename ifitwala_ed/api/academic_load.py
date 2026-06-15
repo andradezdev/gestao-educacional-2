@@ -13,12 +13,12 @@ import frappe
 from frappe import _
 from frappe.utils import cint, flt, get_datetime, getdate, nowdate
 
-from ifitwala_ed.students.api.student_log_dashboard import get_authorized_schools
 from ifitwala_ed.schedule.schedule_utils import get_rotation_dates
 from ifitwala_ed.school_settings.doctype.academic_load_policy.academic_load_policy import (
     get_academic_load_cache_version,
     get_active_policy_for_school,
 )
+from ifitwala_ed.students.api.student_log_dashboard import get_authorized_schools
 from ifitwala_ed.utilities.school_tree import get_descendant_schools, get_school_lineage
 
 ALLOWED_ANALYTICS_ROLES = {

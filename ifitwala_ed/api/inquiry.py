@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from ifitwala_ed.admission.api.inquiry.access import ALLOWED_ANALYTICS_ROLES
 from ifitwala_ed.admission.api.inquiry.endpoints import (
     academic_year_link_query,
     admission_user_link_query,

@@ -196,6 +196,7 @@ def _expand_program_scope(program: str | None) -> list[str] | None:
 # Filter metadata helpers
 # ---------------------------------------------------------------------------
 
+
 def fetch_school_filter_context():
     """
     Return the current user's default school and the schools they can filter by.

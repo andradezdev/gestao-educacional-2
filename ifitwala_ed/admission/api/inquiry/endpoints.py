@@ -14,7 +14,9 @@ def get_dashboard_data(filters=None):
 
 @frappe.whitelist()
 def get_zero_lost_lead_context(filters=None, active_view: str | None = None, start=0, limit=25):
-    from ifitwala_ed.admission.api.inquiry.zero_lost import get_zero_lost_lead_context as get_zero_lost_lead_context_impl
+    from ifitwala_ed.admission.api.inquiry.zero_lost import (
+        get_zero_lost_lead_context as get_zero_lost_lead_context_impl,
+    )
 
     return get_zero_lost_lead_context_impl(
         filters=filters,

@@ -104,7 +104,7 @@ jobs:
             "ifitwala_ed.api.test_analytics_permissions"
             "ifitwala_ed.api.test_self_enrollment"
             "ifitwala_ed.api.test_policy_signature"
-            "ifitwala_ed.api.test_focus_applicant_review"
+            "ifitwala_ed.admission.api.test_focus_applicant_review"
             "ifitwala_ed.api.test_admissions_portal_facade"
             "ifitwala_ed.hr.test_leave_permissions"
             "ifitwala_ed.website.tests.test_root_route_resolution"

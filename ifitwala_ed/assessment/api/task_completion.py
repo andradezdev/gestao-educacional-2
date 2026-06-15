@@ -6,8 +6,8 @@ from __future__ import annotations
 import frappe
 from frappe import _
 
-from ifitwala_ed.curriculum.api import courses as courses_api
 from ifitwala_ed.assessment import task_outcome_service
+from ifitwala_ed.curriculum.api import courses as courses_api
 
 
 def mark_assign_only_complete(payload=None, **kwargs):

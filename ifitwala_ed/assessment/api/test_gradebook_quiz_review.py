@@ -4,12 +4,11 @@ from __future__ import annotations
 
 from unittest import TestCase
 
-from ifitwala_ed.tests.frappe_stubs import stubbed_frappe
-
 from ifitwala_ed.assessment.api.gradebook_test_utils import (
     _gradebook_stub_modules,
     _import_fresh_gradebook,
 )
+from ifitwala_ed.tests.frappe_stubs import stubbed_frappe
 
 
 class TestGradebookQuizReview(TestCase):
@@ -217,4 +216,3 @@ class TestGradebookQuizReview(TestCase):
             ],
         )
         self.assertEqual(payload, {"updated_item_count": 2, "updated_attempt_count": 2})
-

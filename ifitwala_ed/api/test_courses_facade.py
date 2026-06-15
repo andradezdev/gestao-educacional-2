@@ -74,7 +74,9 @@ class TestCoursesFacade(TestCase):
 
         with stubbed_frappe(extra_modules={"ifitwala_ed.curriculum.api.courses": impl}):
             module = import_fresh("ifitwala_ed.api.courses")
-            self.assertEqual(module.get_courses_data(academic_year="2025-2026"), {"selected_year": "2025-2026", "courses": []})
+            self.assertEqual(
+                module.get_courses_data(academic_year="2025-2026"), {"selected_year": "2025-2026", "courses": []}
+            )
             self.assertEqual(module.get_student_hub_home(), {"learning": {"today_classes": []}})
 
         self.assertEqual(calls, {"courses": "2025-2026", "home": True})

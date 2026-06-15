@@ -5,13 +5,13 @@ from __future__ import annotations
 import frappe
 from frappe import _
 
-from ifitwala_ed.students.api.student_log_dashboard import get_authorized_schools
 from ifitwala_ed.schedule.api.calendar.core import _resolve_employee_for_user
 from ifitwala_ed.schedule.api.calendar.quick_create.constants import (
     QUICK_CREATE_OPTIONS_CACHE_TTL_SECONDS,
     VIRTUAL_ORGANIZATION_ROOT,
 )
 from ifitwala_ed.schedule.api.calendar.quick_create.dto import _safe_text
+from ifitwala_ed.students.api.student_log_dashboard import get_authorized_schools
 from ifitwala_ed.utilities.employee_utils import get_ancestor_organizations, get_descendant_organizations
 from ifitwala_ed.utilities.location_utils import get_visible_location_rows_for_school
 from ifitwala_ed.utilities.school_tree import get_ancestor_schools, get_descendant_schools

@@ -14,7 +14,7 @@ def _portal_module():
     admission_utils = ModuleType("ifitwala_ed.admission.admission_utils")
     admission_utils.ADMISSIONS_ROLES = set()
 
-    guardian_communications = ModuleType("ifitwala_ed.api.guardian_communications")
+    guardian_communications = ModuleType("ifitwala_ed.students.api.guardian_communications")
     guardian_communications.get_guardian_portal_communication_unread_count = lambda: 0
 
     student_communications = ModuleType("ifitwala_ed.students.api.student_communications")
@@ -83,7 +83,7 @@ def _portal_module():
     with stubbed_frappe(
         extra_modules={
             "ifitwala_ed.admission.admission_utils": admission_utils,
-            "ifitwala_ed.api.guardian_communications": guardian_communications,
+            "ifitwala_ed.students.api.guardian_communications": guardian_communications,
             "ifitwala_ed.students.api.student_communications": student_communications,
             "ifitwala_ed.api.attendance": attendance,
             "ifitwala_ed.api.enrollment_analytics": enrollment_analytics,

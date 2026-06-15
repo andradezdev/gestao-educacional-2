@@ -10,9 +10,9 @@ from types import SimpleNamespace
 import frappe
 from frappe import _
 
-from ifitwala_ed.curriculum.api import courses as courses_api
 from ifitwala_ed.assessment import quiz_service
 from ifitwala_ed.curriculum import planning
+from ifitwala_ed.curriculum.api import courses as courses_api
 
 
 def list_question_banks(course: str | None = None):

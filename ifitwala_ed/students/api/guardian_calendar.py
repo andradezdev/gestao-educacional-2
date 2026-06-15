@@ -11,13 +11,13 @@ import frappe
 from frappe import _
 from frappe.utils import getdate, now_datetime
 
-from ifitwala_ed.api.guardian_communications import (
+from ifitwala_ed.school_settings.school_settings_utils import resolve_school_calendars_for_window
+from ifitwala_ed.students.api.guardian_communications import (
     _fetch_guardian_school_events,
     _ordered_matched_children,
     _resolve_guardian_communication_context,
     _validate_selected_student,
 )
-from ifitwala_ed.school_settings.school_settings_utils import resolve_school_calendars_for_window
 
 DEFAULT_HOLIDAY_COLOR = "#dc2626"
 DEFAULT_SCHOOL_EVENT_COLOR = "#2563eb"

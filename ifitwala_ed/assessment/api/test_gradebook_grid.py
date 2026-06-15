@@ -5,12 +5,11 @@ from __future__ import annotations
 import types
 from unittest import TestCase
 
-from ifitwala_ed.tests.frappe_stubs import stubbed_frappe
-
 from ifitwala_ed.assessment.api.gradebook_test_utils import (
     _gradebook_stub_modules,
     _import_fresh_gradebook,
 )
+from ifitwala_ed.tests.frappe_stubs import stubbed_frappe
 
 
 class TestGradebookGrid(TestCase):
@@ -381,4 +380,3 @@ class TestGradebookGrid(TestCase):
         self.assertEqual(payload["cells"][0]["official"]["score"], 20)
         self.assertIsNone(payload["cells"][0]["official"]["grade"])
         self.assertIsNone(payload["cells"][0]["official"]["grade_value"])
-

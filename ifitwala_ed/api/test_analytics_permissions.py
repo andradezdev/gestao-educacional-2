@@ -9,8 +9,8 @@ import frappe
 from frappe.tests.utils import FrappeTestCase
 
 from ifitwala_ed.api.portal import _build_staff_home_capabilities
-from ifitwala_ed.students.api.student_demographics_dashboard import _get_demographics_access_context
 from ifitwala_ed.api.student_overview_roles import ALLOWED_STAFF_ROLES as STUDENT_OVERVIEW_STAFF_ROLES
+from ifitwala_ed.students.api.student_demographics_dashboard import _get_demographics_access_context
 
 
 class TestAnalyticsPermissions(FrappeTestCase):

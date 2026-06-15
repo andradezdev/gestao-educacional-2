@@ -12,9 +12,9 @@ import frappe
 from frappe import _
 from frappe.utils import add_days, cint, get_datetime, getdate, time_diff_in_seconds
 
-from ifitwala_ed.students.api.student_log_dashboard import get_authorized_schools
 from ifitwala_ed.schedule.schedule_utils import get_weekend_days_for_calendar
 from ifitwala_ed.school_settings.school_settings_utils import resolve_school_calendars_for_window
+from ifitwala_ed.students.api.student_log_dashboard import get_authorized_schools
 from ifitwala_ed.utilities.location_utils import (
     find_room_conflicts,
     get_location_scope,

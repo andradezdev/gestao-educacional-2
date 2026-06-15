@@ -130,7 +130,9 @@ class TestAdmissionsPortalFacade(TestCase):
         profile_images.upload_applicant_profile_image_impl = fake_upload_applicant_profile_image_impl
         profile_images.upload_applicant_guardian_image_impl = fake_upload_applicant_guardian_image_impl
 
-        with stubbed_frappe(extra_modules={"ifitwala_ed.admission.api.portal.profile_images": profile_images}) as frappe:
+        with stubbed_frappe(
+            extra_modules={"ifitwala_ed.admission.api.portal.profile_images": profile_images}
+        ) as frappe:
             _record_whitelisted_methods(frappe)
             admissions_portal = import_fresh("ifitwala_ed.api.admissions_portal")
 

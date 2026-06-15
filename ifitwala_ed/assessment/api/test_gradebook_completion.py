@@ -5,12 +5,11 @@ from __future__ import annotations
 import types
 from unittest import TestCase
 
-from ifitwala_ed.tests.frappe_stubs import StubValidationError, stubbed_frappe
-
 from ifitwala_ed.assessment.api.gradebook_test_utils import (
     _gradebook_stub_modules,
     _import_fresh_gradebook,
 )
+from ifitwala_ed.tests.frappe_stubs import StubValidationError, stubbed_frappe
 
 
 class TestGradebookCompletion(TestCase):
@@ -171,4 +170,3 @@ class TestGradebookCompletion(TestCase):
 
             with self.assertRaises(StubValidationError):
                 module.batch_mark_completion({"task_delivery": "TDL-1"})
-

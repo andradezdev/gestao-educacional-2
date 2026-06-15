@@ -75,7 +75,9 @@ class TestTaskFacade(TestCase):
             module = import_fresh("ifitwala_ed.api.task")
 
             def fake_get_task_for_delivery(task, student_group=None, course=None):
-                calls.append(("get_task_for_delivery", {"task": task, "student_group": student_group, "course": course}))
+                calls.append(
+                    ("get_task_for_delivery", {"task": task, "student_group": student_group, "course": course})
+                )
                 return {"name": task}
 
             def fake_list_course_assessment_criteria(student_group=None, course=None):

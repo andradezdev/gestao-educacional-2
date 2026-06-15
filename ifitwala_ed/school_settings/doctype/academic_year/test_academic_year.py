@@ -99,12 +99,8 @@ class TestAcademicYearPermissions(TestCase):
         return_value=["SCH-ROOT", "SCH-BRANCH", "SCH-LEAF"],
     )
     def test_admission_manager_has_permission_for_branch_years(self, _mock_scope, _mock_roles):
-        self.assertTrue(
-            academic_year.has_permission(SimpleNamespace(school="SCH-ROOT"), user="admissions@example.com")
-        )
-        self.assertTrue(
-            academic_year.has_permission(SimpleNamespace(school="SCH-LEAF"), user="admissions@example.com")
-        )
+        self.assertTrue(academic_year.has_permission(SimpleNamespace(school="SCH-ROOT"), user="admissions@example.com"))
+        self.assertTrue(academic_year.has_permission(SimpleNamespace(school="SCH-LEAF"), user="admissions@example.com"))
         self.assertFalse(
             academic_year.has_permission(SimpleNamespace(school="SCH-SIBLING"), user="admissions@example.com")
         )

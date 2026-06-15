@@ -23,7 +23,10 @@ class TestGuardianPolicyPhase2(FrappeTestCase):
         children = [{"student": "STU-1", "full_name": "Amina Example", "school": "SCHOOL-1"}]
 
         with (
-            patch("ifitwala_ed.governance.api.guardian_policy.frappe.session", frappe._dict({"user": "guardian@example.com"})),
+            patch(
+                "ifitwala_ed.governance.api.guardian_policy.frappe.session",
+                frappe._dict({"user": "guardian@example.com"}),
+            ),
             patch(
                 "ifitwala_ed.governance.api.guardian_policy.now_datetime",
                 return_value=frappe.utils.get_datetime("2026-03-13 09:00:00"),
@@ -48,7 +51,10 @@ class TestGuardianPolicyPhase2(FrappeTestCase):
 
     def test_acknowledge_guardian_policy_is_idempotent_when_already_acknowledged(self):
         with (
-            patch("ifitwala_ed.governance.api.guardian_policy.frappe.session", frappe._dict({"user": "guardian@example.com"})),
+            patch(
+                "ifitwala_ed.governance.api.guardian_policy.frappe.session",
+                frappe._dict({"user": "guardian@example.com"}),
+            ),
             patch(
                 "ifitwala_ed.governance.api.guardian_policy._resolve_guardian_scope",
                 return_value=("GRD-0001", [{"student": "STU-1"}]),
@@ -68,7 +74,10 @@ class TestGuardianPolicyPhase2(FrappeTestCase):
 
     def test_acknowledge_guardian_policy_requires_attestation(self):
         with (
-            patch("ifitwala_ed.governance.api.guardian_policy.frappe.session", frappe._dict({"user": "guardian@example.com"})),
+            patch(
+                "ifitwala_ed.governance.api.guardian_policy.frappe.session",
+                frappe._dict({"user": "guardian@example.com"}),
+            ),
             patch(
                 "ifitwala_ed.governance.api.guardian_policy._resolve_guardian_scope",
                 return_value=("GRD-0001", [{"student": "STU-1"}]),
@@ -95,7 +104,10 @@ class TestGuardianPolicyPhase2(FrappeTestCase):
         acknowledgement_doc.name = "ACK-0002"
 
         with (
-            patch("ifitwala_ed.governance.api.guardian_policy.frappe.session", frappe._dict({"user": "guardian@example.com"})),
+            patch(
+                "ifitwala_ed.governance.api.guardian_policy.frappe.session",
+                frappe._dict({"user": "guardian@example.com"}),
+            ),
             patch(
                 "ifitwala_ed.governance.api.guardian_policy._resolve_guardian_scope",
                 return_value=("GRD-0001", [{"student": "STU-1"}]),
@@ -109,8 +121,12 @@ class TestGuardianPolicyPhase2(FrappeTestCase):
                 "ifitwala_ed.governance.api.guardian_policy._expected_guardian_signature_name",
                 return_value="Amina Example Guardian",
             ),
-            patch("ifitwala_ed.governance.api.guardian_policy.populate_policy_acknowledgement_evidence") as evidence_mock,
-            patch("ifitwala_ed.governance.api.guardian_policy.frappe.get_doc", return_value=acknowledgement_doc) as get_doc_mock,
+            patch(
+                "ifitwala_ed.governance.api.guardian_policy.populate_policy_acknowledgement_evidence"
+            ) as evidence_mock,
+            patch(
+                "ifitwala_ed.governance.api.guardian_policy.frappe.get_doc", return_value=acknowledgement_doc
+            ) as get_doc_mock,
         ):
             result = acknowledge_guardian_policy(
                 "VER-1",
@@ -137,7 +153,10 @@ class TestGuardianPolicyPhase2(FrappeTestCase):
         acknowledgement_doc.name = "ACK-CHILD-1"
 
         with (
-            patch("ifitwala_ed.governance.api.guardian_policy.frappe.session", frappe._dict({"user": "guardian@example.com"})),
+            patch(
+                "ifitwala_ed.governance.api.guardian_policy.frappe.session",
+                frappe._dict({"user": "guardian@example.com"}),
+            ),
             patch(
                 "ifitwala_ed.governance.api.guardian_policy._resolve_guardian_scope",
                 return_value=("GRD-0001", [{"student": "STU-1"}]),
@@ -158,7 +177,9 @@ class TestGuardianPolicyPhase2(FrappeTestCase):
                 return_value="Amina Example Guardian",
             ),
             patch("ifitwala_ed.governance.api.guardian_policy.populate_policy_acknowledgement_evidence"),
-            patch("ifitwala_ed.governance.api.guardian_policy.frappe.get_doc", return_value=acknowledgement_doc) as get_doc_mock,
+            patch(
+                "ifitwala_ed.governance.api.guardian_policy.frappe.get_doc", return_value=acknowledgement_doc
+            ) as get_doc_mock,
         ):
             result = acknowledge_guardian_policy(
                 "VER-1",
@@ -180,7 +201,9 @@ class TestGuardianPolicyPhase2(FrappeTestCase):
         ]
 
         with (
-            patch("ifitwala_ed.governance.api.guardian_policy._guardian_has_primary_signer_authority", return_value=True),
+            patch(
+                "ifitwala_ed.governance.api.guardian_policy._guardian_has_primary_signer_authority", return_value=True
+            ),
             patch("ifitwala_ed.governance.api.guardian_policy.frappe.db.has_column", return_value=True),
             patch(
                 "ifitwala_ed.governance.api.guardian_policy.frappe.get_all",
@@ -194,7 +217,9 @@ class TestGuardianPolicyPhase2(FrappeTestCase):
     def test_children_with_signer_authority_rejects_non_primary_guardian(self):
         children = [{"student": "STU-1", "full_name": "Amina Example", "school": "SCHOOL-1"}]
 
-        with patch("ifitwala_ed.governance.api.guardian_policy._guardian_has_primary_signer_authority", return_value=False):
+        with patch(
+            "ifitwala_ed.governance.api.guardian_policy._guardian_has_primary_signer_authority", return_value=False
+        ):
             filtered = _children_with_signer_authority(guardian_name="GRD-0001", children=children)
 
         self.assertEqual(filtered, [])
@@ -244,7 +269,9 @@ class TestGuardianPolicyPhase2(FrappeTestCase):
         children = [{"student": "STU-1", "school": "SCHOOL-1"}]
 
         with (
-            patch("ifitwala_ed.governance.api.guardian_policy.ensure_policy_applies_to_storage", return_value={"ok": True}),
+            patch(
+                "ifitwala_ed.governance.api.guardian_policy.ensure_policy_applies_to_storage", return_value={"ok": True}
+            ),
             patch(
                 "ifitwala_ed.governance.api.guardian_policy._resolve_authorized_child_contexts",
                 return_value=[
@@ -281,7 +308,10 @@ class TestGuardianPolicyPhase2(FrappeTestCase):
                 ],
             ),
             patch("ifitwala_ed.governance.api.guardian_policy.frappe.get_all", return_value=[]),
-            patch("ifitwala_ed.governance.api.guardian_policy.get_policy_version_acknowledgement_clauses_map", return_value={}),
+            patch(
+                "ifitwala_ed.governance.api.guardian_policy.get_policy_version_acknowledgement_clauses_map",
+                return_value={},
+            ),
             patch(
                 "ifitwala_ed.governance.api.guardian_policy._expected_guardian_signature_name",
                 return_value="Mariam Example",
@@ -301,7 +331,9 @@ class TestGuardianPolicyPhase2(FrappeTestCase):
         ]
 
         with (
-            patch("ifitwala_ed.governance.api.guardian_policy.ensure_policy_applies_to_storage", return_value={"ok": True}),
+            patch(
+                "ifitwala_ed.governance.api.guardian_policy.ensure_policy_applies_to_storage", return_value={"ok": True}
+            ),
             patch(
                 "ifitwala_ed.governance.api.guardian_policy._resolve_authorized_child_contexts",
                 return_value=[
@@ -341,7 +373,10 @@ class TestGuardianPolicyPhase2(FrappeTestCase):
                 ],
             ),
             patch("ifitwala_ed.governance.api.guardian_policy.frappe.get_all", return_value=[]),
-            patch("ifitwala_ed.governance.api.guardian_policy.get_policy_version_acknowledgement_clauses_map", return_value={}),
+            patch(
+                "ifitwala_ed.governance.api.guardian_policy.get_policy_version_acknowledgement_clauses_map",
+                return_value={},
+            ),
             patch(
                 "ifitwala_ed.governance.api.guardian_policy._expected_guardian_signature_name",
                 return_value="Mariam Example",
@@ -353,5 +388,3 @@ class TestGuardianPolicyPhase2(FrappeTestCase):
         self.assertEqual({row["ack_context_doctype"] for row in rows}, {"Student"})
         self.assertEqual({row["ack_context_name"] for row in rows}, {"STU-1", "STU-2"})
         self.assertEqual({row["scope_label"] for row in rows}, {"Amina Example", "Noah Example"})
-
-

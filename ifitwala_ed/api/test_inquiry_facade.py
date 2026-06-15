@@ -54,7 +54,9 @@ class TestInquiryFacade(TestCase):
             calls["get_inquiry_types"] = True
             return ["Admissions"]
 
-        def fake_inquiry_school_link_query(doctype=None, txt=None, searchfield=None, start=0, page_len=20, filters=None):
+        def fake_inquiry_school_link_query(
+            doctype=None, txt=None, searchfield=None, start=0, page_len=20, filters=None
+        ):
             calls["school_query"] = {
                 "doctype": doctype,
                 "txt": txt,

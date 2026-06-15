@@ -7,14 +7,14 @@ import frappe
 from frappe import _
 
 from ifitwala_ed.admission.admission_utils import is_admissions_workspace_user
+from ifitwala_ed.admission.api.focus.applicant_review_actions import (
+    build_applicant_review_file_open_url,
+)
 from ifitwala_ed.admission.applicant_review_workflow import (
     DECISION_OPTIONS_BY_TARGET,
     TARGET_APPLICATION,
     TARGET_DOCUMENT_ITEM,
     TARGET_HEALTH,
-)
-from ifitwala_ed.admission.api.focus.applicant_review_actions import (
-    build_applicant_review_file_open_url,
 )
 from ifitwala_ed.api.focus_shared import (
     ACTION_APPLICANT_INTERVIEW_FEEDBACK_SUBMIT,

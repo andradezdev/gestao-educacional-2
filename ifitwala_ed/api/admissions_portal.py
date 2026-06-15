@@ -4,33 +4,7 @@ from __future__ import annotations
 
 from importlib import import_module
 
-from ifitwala_ed.admission.api.portal.endpoints import (
-    __all__ as _ENDPOINT_EXPORTS,
-    accept_enrollment_offer,
-    acknowledge_policy,
-    decline_enrollment_offer,
-    get_admissions_portal_invite_options,
-    get_admissions_session,
-    get_applicant_enrollment_choices,
-    get_applicant_health,
-    get_applicant_policies,
-    get_applicant_profile,
-    get_applicant_snapshot,
-    get_family_invite_options,
-    get_invite_email_options,
-    invite_applicant,
-    invite_family_collaborator,
-    list_applicant_document_types,
-    list_applicant_documents,
-    submit_application,
-    update_applicant_enrollment_choices,
-    update_applicant_health,
-    update_applicant_profile,
-    upload_applicant_document,
-    upload_applicant_guardian_image,
-    upload_applicant_profile_image,
-    withdraw_application,
-)
+from ifitwala_ed.admission.api.portal import endpoints as _portal_endpoints
 
 
 def _as_text(value) -> str:
@@ -318,4 +292,5 @@ def __getattr__(name: str):
     return getattr(import_module(module_name), attribute)
 
 
-__all__ = list(_ENDPOINT_EXPORTS)
+__all__ = list(_portal_endpoints.__all__)
+globals().update({name: getattr(_portal_endpoints, name) for name in __all__})

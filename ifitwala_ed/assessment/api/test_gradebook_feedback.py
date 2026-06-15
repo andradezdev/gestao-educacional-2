@@ -6,12 +6,11 @@ import types
 from unittest import TestCase
 from urllib.parse import urlparse
 
-from ifitwala_ed.tests.frappe_stubs import StubPermissionError, stubbed_frappe
-
 from ifitwala_ed.assessment.api.gradebook_test_utils import (
     _gradebook_stub_modules,
     _import_fresh_gradebook,
 )
+from ifitwala_ed.tests.frappe_stubs import StubPermissionError, stubbed_frappe
 
 
 class TestGradebookFeedback(TestCase):
@@ -555,4 +554,3 @@ class TestGradebookFeedback(TestCase):
         self.assertTrue(payload["ok"])
         self.assertEqual(payload["result"]["task_submission"], "SUB-MOD-1")
         self.assertEqual(payload["outcome_update"]["grading_status"], "Moderated")
-

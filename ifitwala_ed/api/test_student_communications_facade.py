@@ -26,7 +26,9 @@ class TestStudentCommunicationsFacade(TestCase):
             return _inner
 
         impl.get_student_portal_communication_unread_count = _record("unread", 3)
-        impl.get_student_home_communication_summary = _record("home", {"center_href": {"name": "student-communications"}})
+        impl.get_student_home_communication_summary = _record(
+            "home", {"center_href": {"name": "student-communications"}}
+        )
         impl.get_student_course_communication_summary = _record("course", {"total_count": 2})
         impl.get_student_activity_communications = _record("activity", {"items": []})
         impl.get_student_communication_center = _record("center", {"items": []})
