@@ -1,7 +1,7 @@
 # ifitwala_ed/hooks.py
 from ifitwala_ed.routing.policy import WEBSITE_REDIRECTS, WEBSITE_ROUTE_RULES
 
-app_name = "erpz_ed"
+app_name = "ifitwala_ed"
 app_title = "ERPZ Educacional"
 app_publisher = "François de Ryckel"
 app_description = "School management System"
@@ -11,7 +11,7 @@ app_license = "MIT"
 # Apps
 # ------------------
 
-required_apps = ["if_drive-gestao-educacional-2"]
+required_apps = ["ifitwala_drive"]
 
 # Each item in the list will be shown as an app in the apps page
 # add_to_apps_screen = [
