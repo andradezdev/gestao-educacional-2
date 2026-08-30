@@ -1,5 +1,5 @@
 # ifitwala_ed/setup/setup.py
-# Copyright (c) 2024, François de Ryckel and contributors
+# Copyright (c) 2024, Francois de Ryckel and contributors
 # For license information, please see license.txt
 
 import os
@@ -40,6 +40,21 @@ DEFAULT_ADDRESS_TEMPLATE = (
 )
 
 
+def _safe_insert_records(records):
+    """Insert only records whose DocType exists in the current site."""
+    valid_records = []
+    for record in records or []:
+        doctype = cstr((record or {}).get("doctype")).strip()
+        if not doctype:
+            continue
+        if not frappe.db.exists("DocType", doctype):
+            continue
+        valid_records.append(record)
+
+    if valid_records:
+        insert_record(valid_records)
+
+
 def setup_education():
     ensure_initial_setup_flag()
     ensure_root_organization()
@@ -71,7 +86,6 @@ def setup_education():
 def ensure_initial_setup_flag():
     """Ensure the Ifitwala Initial Setup flag exists on Org Setting."""
     doc = frappe.get_single("Org Setting")
-    # safer check – explicit field lookup
     if doc.get("ifitwala_initial_setup") is None:
         doc.ifitwala_initial_setup = 0
         doc.save(ignore_permissions=True)
@@ -79,11 +93,10 @@ def ensure_initial_setup_flag():
 
 def ensure_root_organization():
     """
-    Create “All Organizations” as the single NestedSet root if it does not
+    Create "All Organizations" as the single NestedSet root if it does not
     already exist. If more than one blank parent record exists, raise an error.
     """
 
-    # Sanity‑check: zero or one root only
     roots = frappe.get_all("Organization", fields=["name"], filters={"parent_organization": ""})
 
     if len(roots) > 1:
@@ -106,7 +119,6 @@ def ensure_root_organization():
                 }
             ).insert(ignore_permissions=True)
         except Exception as e:
-            # Bubble up any DB/validation issue
             frappe.throw(
                 _("Unable to create root Organization: {error}").format(error=str(e)),
                 title=_("Initial Setup Aborted"),
@@ -138,7 +150,7 @@ def ensure_setup_tree_roots():
             "parent_location": "",
         },
     ]
-    insert_record(records)
+    _safe_insert_records(records)
 
 
 def create_roles_with_homepage():
@@ -291,7 +303,7 @@ def create_designations():
             "default_workspace": "HR",
         },
     ]
-    insert_record(data)
+    _safe_insert_records(data)
 
 
 def _resolve_designation_seed_organization():
@@ -316,7 +328,7 @@ def create_log_type():
         {"doctype": "Student Log Type", "log_type": "Social-Emotional"},
         {"doctype": "Student Log Type", "log_type": "Positive Attitude Towards Learning"},
     ]
-    insert_record(data)
+    _safe_insert_records(data)
 
 
 def create_default_leave_types():
@@ -332,7 +344,7 @@ def create_default_leave_types():
         {"doctype": "Leave Type", "leave_type_name": "Professional Development Leave"},
         {"doctype": "Leave Type", "leave_type_name": "Unpaid Leave", "is_lwp": 1},
     ]
-    insert_record(data)
+    _safe_insert_records(data)
 
 
 def create_default_attendance_codes():
@@ -393,7 +405,7 @@ def create_default_attendance_codes():
             "display_order": 50,
         },
     ]
-    insert_record(data)
+    _safe_insert_records(data)
 
 
 def create_location_type():
@@ -409,19 +421,17 @@ def create_location_type():
         {"doctype": "Location Type", "location_type_name": "Gym"},
         {"doctype": "Location Type", "location_type_name": "Transit"},
     ]
-    insert_record(data)
+    _safe_insert_records(data)
 
 
 def add_other_records(country=None):
     records = [
-        # Employment Type
         {"doctype": "Employment Type", "employment_type_name": _("Full-time")},
         {"doctype": "Employment Type", "employment_type_name": _("Part-time")},
         {"doctype": "Employment Type", "employment_type_name": _("Probation")},
         {"doctype": "Employment Type", "employment_type_name": _("Contract")},
         {"doctype": "Employment Type", "employment_type_name": _("Intern")},
         {"doctype": "Employment Type", "employment_type_name": _("Apprentice")},
-        # Student Log Next Steps
         {
             "doctype": "Student Log Next Step",
             "next_step": "Refer to Curriculum Coordinator",
@@ -448,15 +458,7 @@ def add_other_records(country=None):
         {"doctype": "Student Log Next Step", "next_step": "IT / Device support", "associated_role": "Organization IT"},
         {"doctype": "Student Log Next Step", "next_step": "Refer to Nurse / Health", "associated_role": "Nurse"},
     ]
-    for record in records:
-        block_type = record.get("block_type")
-        if not block_type:
-            continue
-        if frappe.db.exists("Website Block Definition", {"block_type": block_type}):
-            continue
-        doc = frappe.get_doc(record)
-        doc.insert(ignore_permissions=True, ignore_if_duplicate=True)
-        frappe.db.commit()
+    _safe_insert_records(records)
 
 
 def ensure_default_address_template():
@@ -535,6 +537,9 @@ def _get_existing_address_template_to_promote() -> str | None:
 
 def _get_doctype_editor_roles(doctype: str) -> list[str]:
     """Return roles that can create or edit the given DocType at permlevel 0."""
+    if not frappe.db.exists("DocType", doctype):
+        return []
+
     meta = frappe.get_meta(doctype)
     roles: list[str] = []
 
@@ -564,8 +569,6 @@ def grant_role_read_select_to_hr():
     ]
     target_roles = list(dict.fromkeys(role for role in target_roles if cstr(role).strip()))
 
-    # Custom permissions are stored as Custom DocPerm (safe to add; survives updates).
-    # We only grant read + select at permlevel 0.
     for role in target_roles:
         existing_name = frappe.db.get_value(
             "Custom DocPerm",
@@ -581,7 +584,6 @@ def grant_role_read_select_to_hr():
                 doc.read = 1
                 changed = True
 
-            # 'select' exists on DocPerm/Custom DocPerm in Frappe v16+
             if doc.meta.has_field("select") and not int(doc.get("select") or 0):
                 doc.select = 1
                 changed = True
@@ -598,29 +600,22 @@ def grant_role_read_select_to_hr():
                 "permlevel": 0,
                 "read": 1,
             }
-            # Only set 'select' if field exists in this site/schema
             meta = frappe.get_meta("Custom DocPerm")
             if meta.has_field("select"):
                 payload["select"] = 1
 
             frappe.get_doc(payload).insert(ignore_permissions=True)
 
-    # Make sure the permission cache is refreshed
     frappe.clear_cache(doctype=target_doctype)
 
 
 def create_student_file_folder():
     records = [{"doctype": "File", "file_name": "student", "is_folder": 1, "folder": "Home"}]
-    insert_record(records)
-
-    # Ensure the physical folder also exists
+    _safe_insert_records(records)
     os.makedirs(os.path.join(get_files_path(), "student"), exist_ok=True)
 
 
 def setup_website_top_bar():
-
-    # Keep login surface nav minimal and deterministic.
-    # Public school website navigation is rendered from School Website Page records.
     top_bar_items = [
         {"label": "Home", "url": "/"},
         {"label": "Schools", "url": "/schools"},
@@ -720,14 +715,13 @@ def grant_core_crm_permissions():
         for role, perms in role_permissions.items():
             existing = frappe.get_all("Custom DocPerm", filters={"parent": doctype, "role": role, "permlevel": 0})
             if existing:
-                # Always overwrite — setup is idempotent
                 for docname in [d.name for d in existing]:
                     frappe.delete_doc("Custom DocPerm", docname, force=True)
 
             docperm = frappe.new_doc("Custom DocPerm")
             docperm.parent = doctype
             docperm.parenttype = "DocType"
-            docperm.parentfield = "permissions"  # Required field for correct behavior
+            docperm.parentfield = "permissions"
             docperm.role = role
             docperm.permlevel = 0
 
@@ -735,4 +729,5 @@ def grant_core_crm_permissions():
                 docperm.set(perm, 1 if perm in perms else 0)
 
             docperm.insert(ignore_permissions=True)
-        frappe.clear_cache(doctype=doctype)  # Clear cache after permission update
+
+        frappe.clear_cache(doctype=doctype)
