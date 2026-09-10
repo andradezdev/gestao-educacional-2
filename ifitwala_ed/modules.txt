@@ -1,8 +1,8 @@
 Students
 School Settings
-Stock
+School Stock
 School Setup
-HR
+School HR
 Schedule
 Curriculum
 Assessment
