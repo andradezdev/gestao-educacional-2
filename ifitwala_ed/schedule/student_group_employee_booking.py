@@ -24,7 +24,7 @@ from frappe import _
 from frappe.utils import get_datetime, getdate
 
 from ifitwala_ed.schedule.schedule_utils import iter_student_group_room_slots
-from ifitwala_ed.stock.doctype.location_booking.location_booking import (
+from ifitwala_ed.school_stock.doctype.location_booking.location_booking import (
     build_slot_key_instance,
     build_source_key,
     delete_location_bookings_for_source_in_window,

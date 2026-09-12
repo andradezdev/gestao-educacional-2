@@ -18,7 +18,7 @@ from ifitwala_ed.routing.policy import canonical_path_for_section
 from ifitwala_ed.school_site.doctype.website_theme_profile.website_theme_profile import (
     ensure_theme_profile_presets,
 )
-from ifitwala_ed.setup.utils import insert_record
+from ifitwala_ed.school_setup.utils import insert_record
 from ifitwala_ed.website.block_registry import (
     get_website_block_definition_records as get_canonical_website_block_definition_records,
 )

@@ -8,7 +8,7 @@ from frappe import _
 from ifitwala_ed.api import file_access as file_access_api
 from ifitwala_ed.api.attachment_previews import extract_file_extension, preview_status_allows_preview
 from ifitwala_ed.api.attachment_rows import build_governed_attachment_row
-from ifitwala_ed.setup.doctype.org_communication.attachments import (
+from ifitwala_ed.school_setup.doctype.org_communication.attachments import (
     ORG_COMMUNICATION_ATTACHMENT_BINDING_ROLE,
     ORG_COMMUNICATION_ATTACHMENT_SLOT_PREFIX,
     assert_org_communication_attachment_upload_access,

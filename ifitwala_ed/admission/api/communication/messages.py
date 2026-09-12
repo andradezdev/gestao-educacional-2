@@ -16,7 +16,7 @@ from ifitwala_ed.api.org_communication_interactions import (
     create_interaction_entry,
     get_latest_org_communication_entry_for_user,
 )
-from ifitwala_ed.setup.doctype.communication_interaction_entry.communication_interaction_entry import (
+from ifitwala_ed.school_setup.doctype.communication_interaction_entry.communication_interaction_entry import (
     DOCTYPE as ENTRY_DOCTYPE,
 )
 

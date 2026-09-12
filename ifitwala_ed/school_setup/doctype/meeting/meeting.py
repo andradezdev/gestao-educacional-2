@@ -14,7 +14,7 @@ from frappe import _
 from frappe.model.document import Document
 from frappe.utils import format_date, format_datetime, get_datetime, getdate, today
 
-from ifitwala_ed.stock.doctype.location_booking.location_booking import (
+from ifitwala_ed.school_stock.doctype.location_booking.location_booking import (
     build_slot_key_single,
     build_source_key,
     delete_location_bookings_for_source,

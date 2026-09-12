@@ -174,7 +174,7 @@ function ensure_org_comm_context(frm) {
 	}
 
 	return frappe.call({
-		method: 'ifitwala_ed.setup.doctype.org_communication.org_communication.get_org_communication_context',
+		method: 'ifitwala_ed.school_setup.doctype.org_communication.org_communication.get_org_communication_context',
 		args: {},
 	}).then(r => {
 		frm._org_comm_ctx = r.message || {};

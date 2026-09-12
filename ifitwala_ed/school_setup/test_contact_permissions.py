@@ -7,7 +7,7 @@ from unittest.mock import patch
 import frappe
 from frappe.tests.utils import FrappeTestCase
 
-from ifitwala_ed.setup.setup import grant_core_crm_permissions
+from ifitwala_ed.school_setup.setup import grant_core_crm_permissions
 from ifitwala_ed.utilities import contact_utils
 
 CONTACT_ROLE_MATRIX = {

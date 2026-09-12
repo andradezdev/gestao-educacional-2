@@ -7,7 +7,7 @@ from frappe import _
 from frappe.model.document import Document
 from frappe.utils import cint
 
-from ifitwala_ed.stock.inventory.inventory_validations import validate_unit_custody
+from ifitwala_ed.school_stock.inventory.inventory_validations import validate_unit_custody
 
 
 class InventoryUnit(Document):

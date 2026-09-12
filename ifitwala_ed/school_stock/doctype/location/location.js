@@ -8,7 +8,7 @@ frappe.ui.form.on("Location", {
 		// Parent Location: only groups, and (if set) same organization
 		frm.set_query("parent_location", () => {
 			return {
-				query: "ifitwala_ed.stock.doctype.location.location.get_valid_parent_locations",
+				query: "ifitwala_ed.school_stock.doctype.location.location.get_valid_parent_locations",
 				filters: {
 					organization: frm.doc.organization || null,
 					school: frm.doc.school || null

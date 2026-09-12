@@ -11,10 +11,10 @@ from frappe import _
 from frappe.utils import cint, get_datetime, now_datetime
 
 from ifitwala_ed.api.org_comm_utils import check_audience_match, expand_employee_visibility_context
-from ifitwala_ed.setup.doctype.communication_interaction_entry.communication_interaction_entry import (
+from ifitwala_ed.school_setup.doctype.communication_interaction_entry.communication_interaction_entry import (
     DOCTYPE as ENTRY_DOCTYPE,
 )
-from ifitwala_ed.setup.doctype.communication_interaction_entry.communication_interaction_entry import (
+from ifitwala_ed.school_setup.doctype.communication_interaction_entry.communication_interaction_entry import (
     INTENT_REACTION_MAP,
     REACTION_INTENT_MAP,
 )

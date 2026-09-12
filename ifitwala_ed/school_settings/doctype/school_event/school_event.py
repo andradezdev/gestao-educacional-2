@@ -19,7 +19,7 @@ from frappe.utils import (
 )
 from frappe.utils.caching import redis_cache
 
-from ifitwala_ed.stock.doctype.location_booking.location_booking import (
+from ifitwala_ed.school_stock.doctype.location_booking.location_booking import (
     build_slot_key_single,
     build_source_key,
     delete_location_bookings_for_source,
@@ -134,7 +134,7 @@ def _resolve_school_event_organization(event_doc) -> str:
 
 
 def _pick_companion_portal_surface(audiences: list[dict], *, current_surface: str | None = None) -> str:
-    from ifitwala_ed.setup.doctype.org_communication.org_communication import (
+    from ifitwala_ed.school_setup.doctype.org_communication.org_communication import (
         get_org_communication_allowed_portal_surfaces,
         resolve_org_communication_delivery_profile,
     )

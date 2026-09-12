@@ -443,7 +443,7 @@ def get_meeting_team_attendees(*, team: str | None = None):
     if not team_value:
         frappe.throw(_("Team is required."))
 
-    from ifitwala_ed.setup.doctype.meeting.meeting import get_team_participants
+    from ifitwala_ed.school_setup.doctype.meeting.meeting import get_team_participants
 
     rows = get_team_participants(team_value) or []
     results = []

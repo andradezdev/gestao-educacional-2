@@ -8,13 +8,13 @@ from unittest.mock import Mock, patch
 
 import frappe
 
-from ifitwala_ed.stock.doctype.location.location import LOCATION_TREE_ROOT, Location, get_valid_parent_locations
+from ifitwala_ed.school_stock.doctype.location.location import LOCATION_TREE_ROOT, Location, get_valid_parent_locations
 from ifitwala_ed.utilities.location_utils import clear_location_visibility_caches, get_visible_location_rows_for_school
 
 
 class TestLocation(TestCase):
-    @patch("ifitwala_ed.stock.doctype.location.location.get_location_scope")
-    @patch("ifitwala_ed.stock.doctype.location.location.frappe.db.sql")
+    @patch("ifitwala_ed.school_stock.doctype.location.location.get_location_scope")
+    @patch("ifitwala_ed.school_stock.doctype.location.location.frappe.db.sql")
     def test_new_location_capacity_validation_does_not_expand_missing_tree_node(
         self,
         mock_sql,
@@ -38,9 +38,9 @@ class TestLocation(TestCase):
         self.assertIn("sgs.location IN %(locations)s", query)
         self.assertEqual(params["locations"], ("LOC-NEW",))
 
-    @patch("ifitwala_ed.stock.doctype.location.location.frappe.db.sql")
+    @patch("ifitwala_ed.school_stock.doctype.location.location.frappe.db.sql")
     @patch(
-        "ifitwala_ed.stock.doctype.location.location.get_location_scope",
+        "ifitwala_ed.school_stock.doctype.location.location.get_location_scope",
         return_value=["LOC-PARENT", "LOC-CHILD"],
     )
     def test_capacity_validation_uses_location_subtree(
@@ -62,9 +62,9 @@ class TestLocation(TestCase):
         self.assertIn("sgs.location IN %(locations)s", query)
         self.assertEqual(params["locations"], ("LOC-PARENT", "LOC-CHILD"))
 
-    @patch("ifitwala_ed.stock.doctype.location.location.frappe.get_all")
+    @patch("ifitwala_ed.school_stock.doctype.location.location.frappe.get_all")
     @patch(
-        "ifitwala_ed.stock.doctype.location.location.get_ancestor_schools",
+        "ifitwala_ed.school_stock.doctype.location.location.get_ancestor_schools",
         return_value=["Leaf School", "Parent School"],
     )
     def test_parent_location_query_uses_search_link_signature_and_scope_filters(
@@ -109,7 +109,7 @@ class TestLocation(TestCase):
         )
         self.assertEqual(results, [["Bathroom Wing"]])
 
-    @patch("ifitwala_ed.stock.doctype.location.location.frappe.get_all")
+    @patch("ifitwala_ed.school_stock.doctype.location.location.frappe.get_all")
     def test_parent_location_query_includes_global_root_for_organization_scope(self, mock_get_all):
         mock_get_all.side_effect = [
             [frappe._dict({"name": "Campus Building", "school": None})],
@@ -155,7 +155,7 @@ class TestLocation(TestCase):
         with self.assertRaises(frappe.ValidationError):
             Location._validate_shared_visibility_requires_school(doc)
 
-    @patch("ifitwala_ed.stock.doctype.location.location.clear_location_visibility_caches")
+    @patch("ifitwala_ed.school_stock.doctype.location.location.clear_location_visibility_caches")
     def test_location_update_invalidates_current_and_previous_scope_caches(self, mock_clear):
         previous = frappe._dict(
             {

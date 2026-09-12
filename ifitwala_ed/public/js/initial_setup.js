@@ -2,7 +2,7 @@
 // For license information, please see license.txt
 
 frappe.after_ajax(() => {
-	frappe.call('ifitwala_ed.setup.initial_setup.is_setup_done').then(r => {
+	frappe.call('ifitwala_ed.school_setup.initial_setup.is_setup_done').then(r => {
 		if (r.message) return; // already set up
 
 		// Prompt fields
@@ -38,7 +38,7 @@ frappe.after_ajax(() => {
 			fields,
 			values => {
 				frappe.call({
-					method: 'ifitwala_ed.setup.initial_setup.complete_initial_setup',
+					method: 'ifitwala_ed.school_setup.initial_setup.complete_initial_setup',
 					args: values,
 					callback: () => {
 						frappe.show_alert(__('Initial setup completed!'), 5);

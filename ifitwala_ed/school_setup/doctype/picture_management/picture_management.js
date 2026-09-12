@@ -10,7 +10,7 @@ frappe.ui.form.on('Picture Management', {
         __('⚠️ Are you sure? This will MOVE and DELETE files. Proceed?'),
         () => {
           frappe.call({
-            method: 'ifitwala_ed.setup.doctype.picture_management.picture_management.run_execute',
+            method: 'ifitwala_ed.school_setup.doctype.picture_management.picture_management.run_execute',
             freeze: true,
             freeze_message: __('Executing cleanup...'),
             callback: (r) => {

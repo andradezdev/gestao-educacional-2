@@ -67,7 +67,7 @@ def _resolve_meeting_participants(*, organizer_user: str, team: str | None, expl
     seen = set()
 
     if team:
-        from ifitwala_ed.setup.doctype.meeting.meeting import get_team_participants
+        from ifitwala_ed.school_setup.doctype.meeting.meeting import get_team_participants
 
         for row in get_team_participants(team) or []:
             user_id = _safe_text(row.get("user_id"))

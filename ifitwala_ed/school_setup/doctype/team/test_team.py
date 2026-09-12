@@ -6,7 +6,7 @@ from unittest.mock import Mock, patch
 import frappe
 from frappe.tests.utils import FrappeTestCase
 
-from ifitwala_ed.setup.doctype.team import team as team_controller
+from ifitwala_ed.school_setup.doctype.team import team as team_controller
 
 
 class TestTeam(FrappeTestCase):
@@ -20,14 +20,14 @@ class TestTeam(FrappeTestCase):
             ),
         ]
 
-        with patch("ifitwala_ed.setup.doctype.team.team.frappe.get_all", return_value=all_visible):
+        with patch("ifitwala_ed.school_setup.doctype.team.team.frappe.get_all", return_value=all_visible):
             rows = team_controller.get_children("Team", parent="", is_root=True)
 
         self.assertEqual([row.get("value") for row in rows], ["TEAM-CHILD"])
         self.assertEqual(rows[0].get("expandable"), 0)
 
     def test_get_children_applies_supported_tree_filters(self):
-        with patch("ifitwala_ed.setup.doctype.team.team.frappe.get_all", return_value=[]) as get_all:
+        with patch("ifitwala_ed.school_setup.doctype.team.team.frappe.get_all", return_value=[]) as get_all:
             team_controller.get_children(
                 "Team",
                 parent="",
@@ -51,7 +51,7 @@ class TestTeam(FrappeTestCase):
                 "frappe.desk.treeview.make_tree_args",
                 return_value=frappe._dict(team_name="Leadership", parent="All Teams"),
             ),
-            patch("ifitwala_ed.setup.doctype.team.team.frappe.get_doc", return_value=doc) as get_doc,
+            patch("ifitwala_ed.school_setup.doctype.team.team.frappe.get_doc", return_value=doc) as get_doc,
         ):
             result = team_controller.add_node()
 

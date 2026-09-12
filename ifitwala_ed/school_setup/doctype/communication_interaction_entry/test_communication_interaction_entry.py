@@ -6,7 +6,7 @@ from unittest.mock import patch
 import frappe
 from frappe.tests.utils import FrappeTestCase
 
-from ifitwala_ed.setup.doctype.communication_interaction_entry import communication_interaction_entry
+from ifitwala_ed.school_setup.doctype.communication_interaction_entry import communication_interaction_entry
 
 
 class TestCommunicationInteractionEntry(FrappeTestCase):
@@ -23,7 +23,7 @@ class TestCommunicationInteractionEntry(FrappeTestCase):
             with (
                 self.subTest(role=role),
                 patch(
-                    "ifitwala_ed.setup.doctype.communication_interaction_entry.communication_interaction_entry.frappe.get_roles",
+                    "ifitwala_ed.school_setup.doctype.communication_interaction_entry.communication_interaction_entry.frappe.get_roles",
                     return_value=[role],
                 ),
             ):

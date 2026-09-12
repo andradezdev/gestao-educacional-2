@@ -9,7 +9,7 @@ from unittest.mock import patch
 
 import frappe
 
-from ifitwala_ed.setup.doctype.meeting.meeting import (
+from ifitwala_ed.school_setup.doctype.meeting.meeting import (
     _combine_date_and_time,
     _invalidate_student_calendar_caches_for_participants,
     _participant_user_ids,
@@ -23,7 +23,7 @@ class TestMeeting(TestCase):
         self.assertIsNone(_combine_date_and_time(None, "08:00:00"))
         self.assertIsNone(_combine_date_and_time("2026-02-01", None))
 
-    @patch("ifitwala_ed.setup.doctype.meeting.meeting.get_datetime")
+    @patch("ifitwala_ed.school_setup.doctype.meeting.meeting.get_datetime")
     def test_combine_date_and_time_delegates_to_frappe_get_datetime(self, mock_get_datetime):
         expected = datetime(2026, 2, 1, 8, 0, 0)
         mock_get_datetime.return_value = expected
@@ -94,7 +94,7 @@ class TestMeeting(TestCase):
                 ]
             raise AssertionError(f"Unexpected get_all doctype: {doctype}")
 
-        with patch("ifitwala_ed.setup.doctype.meeting.meeting.frappe.get_all", side_effect=fake_get_all):
+        with patch("ifitwala_ed.school_setup.doctype.meeting.meeting.frappe.get_all", side_effect=fake_get_all):
             rows = get_team_participants("TEAM-1")
 
         self.assertEqual(

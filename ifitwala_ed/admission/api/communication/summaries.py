@@ -5,7 +5,7 @@ from frappe.utils import cint
 
 from ifitwala_ed.admission.api.communication.context import _safe_datetime, _to_text
 from ifitwala_ed.admission.api.communication.messages import _sender_direction, _truncate_preview
-from ifitwala_ed.setup.doctype.communication_interaction_entry.communication_interaction_entry import (
+from ifitwala_ed.school_setup.doctype.communication_interaction_entry.communication_interaction_entry import (
     DOCTYPE as ENTRY_DOCTYPE,
 )
 

@@ -125,7 +125,7 @@ role_home_page = {
 # ------------
 
 # before_install = "ifitwala.install.before_install"
-after_install = "ifitwala_ed.setup.setup.setup_education"
+after_install = "ifitwala_ed.school_setup.setup.setup_education"
 
 # Uninstallation
 # ------------
@@ -163,7 +163,7 @@ calendars = ["School Event", "School Calendar", "Leave Application"]
 
 permission_query_conditions = {
     "Account": "ifitwala_ed.accounting.doctype.account.account.get_permission_query_conditions",
-    "Organization": "ifitwala_ed.setup.doctype.organization.organization.get_permission_query_conditions",
+    "Organization": "ifitwala_ed.school_setup.doctype.organization.organization.get_permission_query_conditions",
     "Contact": "ifitwala_ed.utilities.contact_utils.contact_permission_query_conditions",
     "Program Enrollment": "ifitwala_ed.schedule.doctype.program_enrollment.program_enrollment.get_permission_query_conditions",
     "Instructor": "ifitwala_ed.schedule.doctype.instructor.instructor.get_permission_query_conditions",
@@ -179,7 +179,7 @@ permission_query_conditions = {
     "Program Offering Selection Window": "ifitwala_ed.schedule.doctype.program_offering_selection_window.program_offering_selection_window.get_permission_query_conditions",
     "Academic Load Policy": "ifitwala_ed.school_settings.doctype.academic_load_policy.academic_load_policy.get_permission_query_conditions",
     "Activity Booking": "ifitwala_ed.eca.doctype.activity_booking.activity_booking.get_permission_query_conditions",
-    "Org Communication": "ifitwala_ed.setup.doctype.org_communication.org_communication.get_permission_query_conditions",
+    "Org Communication": "ifitwala_ed.school_setup.doctype.org_communication.org_communication.get_permission_query_conditions",
     "Institutional Policy": "ifitwala_ed.governance.doctype.institutional_policy.institutional_policy.get_permission_query_conditions",
     "Policy Version": "ifitwala_ed.governance.doctype.policy_version.policy_version.get_permission_query_conditions",
     "Policy Acknowledgement": "ifitwala_ed.governance.doctype.policy_acknowledgement.policy_acknowledgement.get_permission_query_conditions",
@@ -227,7 +227,7 @@ permission_query_conditions = {
 
 has_permission = {
     "Account": "ifitwala_ed.accounting.doctype.account.account.has_permission",
-    "Organization": "ifitwala_ed.setup.doctype.organization.organization.has_permission",
+    "Organization": "ifitwala_ed.school_setup.doctype.organization.organization.has_permission",
     "Contact": "ifitwala_ed.utilities.contact_utils.contact_has_permission",
     "Program Enrollment": "ifitwala_ed.schedule.doctype.program_enrollment.program_enrollment.has_permission",
     "Instructor": "ifitwala_ed.schedule.doctype.instructor.instructor.has_permission",
@@ -242,7 +242,7 @@ has_permission = {
     "Program Offering Selection Window": "ifitwala_ed.schedule.doctype.program_offering_selection_window.program_offering_selection_window.has_permission",
     "Academic Load Policy": "ifitwala_ed.school_settings.doctype.academic_load_policy.academic_load_policy.has_permission",
     "Activity Booking": "ifitwala_ed.eca.doctype.activity_booking.activity_booking.has_permission",
-    "Org Communication": "ifitwala_ed.setup.doctype.org_communication.org_communication.has_permission",
+    "Org Communication": "ifitwala_ed.school_setup.doctype.org_communication.org_communication.has_permission",
     "Institutional Policy": "ifitwala_ed.governance.doctype.institutional_policy.institutional_policy.has_permission",
     "Policy Version": "ifitwala_ed.governance.doctype.policy_version.policy_version.has_permission",
     "Policy Acknowledgement": "ifitwala_ed.governance.doctype.policy_acknowledgement.policy_acknowledgement.has_permission",

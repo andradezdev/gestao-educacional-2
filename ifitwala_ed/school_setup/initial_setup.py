@@ -4,7 +4,7 @@
 import frappe
 from frappe import _
 
-from ifitwala_ed.setup.setup import create_designations
+from ifitwala_ed.school_setup.setup import create_designations
 
 # ─────────────────────────────────────────────────────────────────────────────
 

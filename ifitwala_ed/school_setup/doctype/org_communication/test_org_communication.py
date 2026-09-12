@@ -8,14 +8,14 @@ from unittest.mock import patch
 import frappe
 from frappe.tests.utils import FrappeTestCase
 
-from ifitwala_ed.setup.doctype.org_communication import attachments as org_communication_attachments
-from ifitwala_ed.setup.doctype.org_communication import org_communication as org_communication_controller
+from ifitwala_ed.school_setup.doctype.org_communication import attachments as org_communication_attachments
+from ifitwala_ed.school_setup.doctype.org_communication import org_communication as org_communication_controller
 
 
 class TestOrgCommunication(FrappeTestCase):
     def test_resolve_user_base_org_uses_user_default_first(self):
         with patch(
-            "ifitwala_ed.setup.doctype.org_communication.org_communication._get_user_default_from_db",
+            "ifitwala_ed.school_setup.doctype.org_communication.org_communication._get_user_default_from_db",
             return_value="ORG-ROOT",
         ):
             self.assertEqual(org_communication_controller._resolve_user_base_org("staff@example.com"), "ORG-ROOT")
@@ -23,11 +23,11 @@ class TestOrgCommunication(FrappeTestCase):
     def test_resolve_user_base_org_falls_back_to_employee_organization(self):
         with (
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._get_user_default_from_db",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._get_user_default_from_db",
                 return_value=None,
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._get_user_employee_organization",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._get_user_employee_organization",
                 return_value="ORG-EMP",
             ),
         ):
@@ -36,15 +36,15 @@ class TestOrgCommunication(FrappeTestCase):
     def test_get_allowed_schools_prefers_default_school_scope(self):
         with (
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._user_has_any_role",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._user_has_any_role",
                 return_value=False,
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._get_school_scope_tree",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._get_school_scope_tree",
                 return_value=("SCH-ROOT", ["SCH-ROOT", "SCH-CHILD"]),
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._get_org_scope_schools_for_user",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._get_org_scope_schools_for_user",
                 return_value=["SCH-ORG"],
             ) as org_scope_schools,
         ):
@@ -56,15 +56,15 @@ class TestOrgCommunication(FrappeTestCase):
     def test_get_allowed_schools_falls_back_to_org_scope_without_default_school(self):
         with (
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._user_has_any_role",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._user_has_any_role",
                 return_value=False,
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._get_school_scope_tree",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._get_school_scope_tree",
                 return_value=(None, []),
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._get_org_scope_schools_for_user",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._get_org_scope_schools_for_user",
                 return_value=["SCH-ORG-A", "SCH-ORG-B"],
             ),
         ):
@@ -77,15 +77,15 @@ class TestOrgCommunication(FrappeTestCase):
 
         with (
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._get_school_scope_tree",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._get_school_scope_tree",
                 return_value=(None, []),
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._user_has_any_role",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._user_has_any_role",
                 return_value=False,
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._get_allowed_schools_for_user",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._get_allowed_schools_for_user",
                 return_value=["SCH-ORG-A", "SCH-ORG-B"],
             ),
         ):
@@ -98,15 +98,15 @@ class TestOrgCommunication(FrappeTestCase):
 
         with (
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._get_school_scope_tree",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._get_school_scope_tree",
                 return_value=(None, []),
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._user_has_any_role",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._user_has_any_role",
                 return_value=False,
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._get_allowed_schools_for_user",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._get_allowed_schools_for_user",
                 return_value=["SCH-ORG-A", "SCH-ORG-B"],
             ),
         ):
@@ -135,15 +135,15 @@ class TestOrgCommunication(FrappeTestCase):
 
         with (
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._get_school_scope_tree",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._get_school_scope_tree",
                 return_value=("SCH-IMS", ["SCH-IMS"]),
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._user_has_any_role",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._user_has_any_role",
                 return_value=False,
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication.frappe.db.get_value",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication.frappe.db.get_value",
                 side_effect=fake_get_value,
             ),
         ):
@@ -175,19 +175,19 @@ class TestOrgCommunication(FrappeTestCase):
 
         with (
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._get_school_scope_tree",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._get_school_scope_tree",
                 return_value=("SCH-IMS", ["SCH-IMS"]),
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._user_has_any_role",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._user_has_any_role",
                 return_value=False,
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication.frappe.db.get_value",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication.frappe.db.get_value",
                 side_effect=fake_get_value,
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._get_allowed_organizations_for_user",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._get_allowed_organizations_for_user",
                 return_value=["ORG-ROOT"],
             ),
         ):
@@ -224,7 +224,7 @@ class TestOrgCommunication(FrappeTestCase):
             return None
 
         with patch(
-            "ifitwala_ed.setup.doctype.org_communication.attachments.frappe.db.get_value",
+            "ifitwala_ed.school_setup.doctype.org_communication.attachments.frappe.db.get_value",
             side_effect=fake_get_value,
         ):
             context = org_communication_attachments.resolve_org_communication_attachment_context(doc)
@@ -252,7 +252,7 @@ class TestOrgCommunication(FrappeTestCase):
             return None
 
         with patch(
-            "ifitwala_ed.setup.doctype.org_communication.attachments.frappe.db.get_value",
+            "ifitwala_ed.school_setup.doctype.org_communication.attachments.frappe.db.get_value",
             side_effect=fake_get_value,
         ):
             context = org_communication_attachments.resolve_org_communication_attachment_context(doc)
@@ -304,7 +304,7 @@ class TestOrgCommunication(FrappeTestCase):
             return None
 
         with patch(
-            "ifitwala_ed.setup.doctype.org_communication.attachments.frappe.db.get_value",
+            "ifitwala_ed.school_setup.doctype.org_communication.attachments.frappe.db.get_value",
             side_effect=fake_get_value,
         ):
             context = org_communication_attachments.resolve_org_communication_attachment_context(doc)
@@ -318,11 +318,11 @@ class TestOrgCommunication(FrappeTestCase):
 
         with (
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._get_school_scope_tree",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._get_school_scope_tree",
                 return_value=(None, []),
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._user_has_any_role",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._user_has_any_role",
                 return_value=False,
             ),
         ):
@@ -338,11 +338,11 @@ class TestOrgCommunication(FrappeTestCase):
 
         with (
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._get_school_scope_tree",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._get_school_scope_tree",
                 return_value=("SCH-ROOT", ["SCH-ROOT"]),
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._user_has_any_role",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._user_has_any_role",
                 return_value=False,
             ),
         ):
@@ -355,15 +355,15 @@ class TestOrgCommunication(FrappeTestCase):
 
         with (
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._resolve_user_base_org",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._resolve_user_base_org",
                 return_value="ORG-ROOT",
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._user_has_any_role",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._user_has_any_role",
                 return_value=False,
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._resolve_user_org_scope",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._resolve_user_org_scope",
                 return_value=["ORG-ROOT", "ORG-CHILD"],
             ),
         ):
@@ -376,11 +376,11 @@ class TestOrgCommunication(FrappeTestCase):
 
         with (
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._user_has_any_role",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._user_has_any_role",
                 return_value=False,
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._resolve_user_org_scope",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._resolve_user_org_scope",
                 return_value=["ORG-ROOT", "ORG-CHILD"],
             ),
         ):
@@ -392,11 +392,11 @@ class TestOrgCommunication(FrappeTestCase):
 
         with (
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication.frappe.db.get_value",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication.frappe.db.get_value",
                 return_value="ORG-CHILD",
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._get_descendant_organizations_uncached",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._get_descendant_organizations_uncached",
                 return_value=["ORG-PARENT", "ORG-CHILD"],
             ),
         ):
@@ -407,11 +407,11 @@ class TestOrgCommunication(FrappeTestCase):
 
         with (
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication.frappe.db.get_value",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication.frappe.db.get_value",
                 return_value="ORG-SIBLING",
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._get_descendant_organizations_uncached",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._get_descendant_organizations_uncached",
                 return_value=["ORG-PARENT", "ORG-CHILD"],
             ),
         ):
@@ -421,15 +421,15 @@ class TestOrgCommunication(FrappeTestCase):
     def test_permission_query_conditions_supports_org_level_records(self):
         with (
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._user_has_any_role",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._user_has_any_role",
                 return_value=False,
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._get_allowed_schools_for_user",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._get_allowed_schools_for_user",
                 return_value=[],
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._get_allowed_organizations_for_user",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._get_allowed_organizations_for_user",
                 return_value=["ORG-ROOT"],
             ),
         ):
@@ -443,15 +443,15 @@ class TestOrgCommunication(FrappeTestCase):
 
         with (
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._user_has_any_role",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._user_has_any_role",
                 return_value=False,
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._get_allowed_schools_for_user",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._get_allowed_schools_for_user",
                 return_value=[],
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._get_allowed_organizations_for_user",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._get_allowed_organizations_for_user",
                 return_value=["ORG-ROOT"],
             ),
         ):
@@ -475,11 +475,11 @@ class TestOrgCommunication(FrappeTestCase):
 
         with (
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._user_has_any_role",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._user_has_any_role",
                 return_value=False,
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._get_allowed_schools_for_user",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._get_allowed_schools_for_user",
                 return_value=[],
             ),
         ):
@@ -503,11 +503,11 @@ class TestOrgCommunication(FrappeTestCase):
 
         with (
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._user_has_any_role",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._user_has_any_role",
                 return_value=False,
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._get_allowed_schools_for_user",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._get_allowed_schools_for_user",
                 return_value=[],
             ),
         ):
@@ -531,11 +531,11 @@ class TestOrgCommunication(FrappeTestCase):
 
         with (
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._user_has_any_role",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._user_has_any_role",
                 return_value=False,
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._get_allowed_schools_for_user",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._get_allowed_schools_for_user",
                 return_value=[],
             ),
         ):
@@ -559,11 +559,11 @@ class TestOrgCommunication(FrappeTestCase):
 
         with (
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._user_has_any_role",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._user_has_any_role",
                 return_value=False,
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._get_allowed_schools_for_user",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._get_allowed_schools_for_user",
                 return_value=[],
             ),
         ):
@@ -587,11 +587,11 @@ class TestOrgCommunication(FrappeTestCase):
 
         with (
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._user_has_any_role",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._user_has_any_role",
                 return_value=False,
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._get_allowed_schools_for_user",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._get_allowed_schools_for_user",
                 return_value=[],
             ),
         ):
@@ -610,7 +610,7 @@ class TestOrgCommunication(FrappeTestCase):
         )
 
         with patch(
-            "ifitwala_ed.setup.doctype.org_communication.org_communication._user_has_any_role",
+            "ifitwala_ed.school_setup.doctype.org_communication.org_communication._user_has_any_role",
             return_value=False,
         ):
             with self.assertRaises(frappe.ValidationError):
@@ -630,7 +630,7 @@ class TestOrgCommunication(FrappeTestCase):
         )
 
         with patch(
-            "ifitwala_ed.setup.doctype.org_communication.org_communication._user_has_any_role",
+            "ifitwala_ed.school_setup.doctype.org_communication.org_communication._user_has_any_role",
             return_value=False,
         ):
             org_communication_controller.OrgCommunication._enforce_role_restrictions_on_audiences(doc)
@@ -638,23 +638,23 @@ class TestOrgCommunication(FrappeTestCase):
     def test_context_uses_org_scope_schools_when_default_school_missing(self):
         with (
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._get_school_scope_tree",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._get_school_scope_tree",
                 return_value=(None, []),
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._user_has_any_role",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._user_has_any_role",
                 return_value=False,
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._get_org_scope_schools_for_user",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._get_org_scope_schools_for_user",
                 return_value=["SCH-ORG-A"],
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._resolve_user_base_org",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._resolve_user_base_org",
                 return_value="ORG-ROOT",
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._resolve_user_org_scope",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._resolve_user_org_scope",
                 return_value=["ORG-ROOT", "ORG-CHILD"],
             ),
         ):
@@ -670,23 +670,23 @@ class TestOrgCommunication(FrappeTestCase):
     def test_privileged_context_uses_org_scope_schools_when_default_school_missing(self):
         with (
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._get_school_scope_tree",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._get_school_scope_tree",
                 return_value=(None, []),
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._user_has_any_role",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._user_has_any_role",
                 return_value=True,
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._get_org_scope_schools_for_user",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._get_org_scope_schools_for_user",
                 return_value=["SCH-ORG-A", "SCH-ORG-B"],
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._resolve_user_base_org",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._resolve_user_base_org",
                 return_value="ORG-ROOT",
             ),
             patch(
-                "ifitwala_ed.setup.doctype.org_communication.org_communication._resolve_user_org_scope",
+                "ifitwala_ed.school_setup.doctype.org_communication.org_communication._resolve_user_org_scope",
                 return_value=["ORG-ROOT", "ORG-CHILD"],
             ),
         ):

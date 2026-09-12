@@ -6,7 +6,7 @@ import frappe
 from frappe import _
 from frappe.utils import flt, now_datetime
 
-from ifitwala_ed.stock.inventory.inventory_utils import coerce_datetime
+from ifitwala_ed.school_stock.inventory.inventory_utils import coerce_datetime
 
 
 def make_ledger_entries(voucher_type, voucher_name, posting_datetime, rows):

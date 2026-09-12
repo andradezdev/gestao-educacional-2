@@ -5,8 +5,8 @@
 
 frappe.treeview_settings["Organization"] = {
 	root_label: __("All Organizations"),
-	get_tree_nodes: "ifitwala_ed.setup.doctype.organization.organization.get_children",
-	add_tree_node: "ifitwala_ed.setup.doctype.organization.organization.add_node",
+	get_tree_nodes: "ifitwala_ed.school_setup.doctype.organization.organization.get_children",
+	add_tree_node: "ifitwala_ed.school_setup.doctype.organization.organization.add_node",
 	get_tree_root: false,
 	breadcrumb: __("School Settings"),
 	disable_add_node: false,
@@ -36,7 +36,7 @@ frappe.treeview_settings["Organization"] = {
 					(values) => {
 						values.parent_organization = parent;
 						frappe.call({
-							method: "ifitwala_ed.setup.doctype.organization.organization.add_node",
+							method: "ifitwala_ed.school_setup.doctype.organization.organization.add_node",
 							args: values,
 							callback: () => tv && tv.make_tree(),
 						});

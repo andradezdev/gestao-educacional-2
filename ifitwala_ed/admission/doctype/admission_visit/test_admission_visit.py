@@ -13,7 +13,7 @@ from ifitwala_ed.admission.doctype.admission_visit.admission_visit import (
     schedule_admission_visit,
 )
 from ifitwala_ed.schedule.api.calendar.staff_feed import PARTICIPANT_ONLY_SCHOOL_EVENT_REFERENCE_TYPES
-from ifitwala_ed.stock.doctype.location_booking.location_booking import upsert_location_booking
+from ifitwala_ed.school_stock.doctype.location_booking.location_booking import upsert_location_booking
 from ifitwala_ed.tests.base import IfitwalaEdTestSuite
 from ifitwala_ed.tests.factories.users import make_user
 from ifitwala_ed.utilities.employee_booking import upsert_employee_booking

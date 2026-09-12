@@ -14,7 +14,7 @@ from ifitwala_ed.admission.api.communication.context import (
 )
 from ifitwala_ed.admission.api.communication.threads import _get_thread_name
 from ifitwala_ed.api.org_communication_interactions import upsert_org_communication_read_receipt
-from ifitwala_ed.setup.doctype.communication_interaction_entry.communication_interaction_entry import (
+from ifitwala_ed.school_setup.doctype.communication_interaction_entry.communication_interaction_entry import (
     DOCTYPE as ENTRY_DOCTYPE,
 )
 

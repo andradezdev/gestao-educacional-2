@@ -6,7 +6,7 @@ import frappe
 from frappe import _
 from frappe.utils import cint, flt
 
-from ifitwala_ed.stock.inventory.inventory_utils import CUSTODY_FIELDS, resolve_issued_to, resolve_returned_from
+from ifitwala_ed.school_stock.inventory.inventory_utils import CUSTODY_FIELDS, resolve_issued_to, resolve_returned_from
 
 
 def validate_issue(doc):

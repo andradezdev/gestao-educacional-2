@@ -2,6 +2,6 @@
 
 
 def execute():
-    from ifitwala_ed.setup.setup import grant_core_crm_permissions
+    from ifitwala_ed.school_setup.setup import grant_core_crm_permissions
 
     grant_core_crm_permissions()

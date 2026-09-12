@@ -68,7 +68,7 @@ class TestOrgCommunicationAttachmentsUnit(TestCase):
             frappe.db.get_value = fake_get_value
             frappe.get_doc = lambda doctype, name=None: org_doc
 
-            attachments = import_fresh("ifitwala_ed.setup.doctype.org_communication.attachments")
+            attachments = import_fresh("ifitwala_ed.school_setup.doctype.org_communication.attachments")
             upload_session_doc = SimpleNamespace(
                 owner_doctype="Org Communication",
                 owner_name="COMM-0001",
@@ -108,7 +108,7 @@ class TestOrgCommunicationAttachmentsUnit(TestCase):
             frappe.db.get_value = fake_get_value
             frappe.get_doc = lambda doctype, name=None: org_doc
 
-            attachments = import_fresh("ifitwala_ed.setup.doctype.org_communication.attachments")
+            attachments = import_fresh("ifitwala_ed.school_setup.doctype.org_communication.attachments")
             override = attachments.get_org_communication_context_override(
                 "COMM-0002", "communication_attachment__row-1"
             )
@@ -129,7 +129,7 @@ class TestOrgCommunicationAttachmentsUnit(TestCase):
             frappe.db.get_value = lambda *args, **kwargs: None
             frappe.get_doc = lambda doctype, name=None: org_doc
 
-            attachments = import_fresh("ifitwala_ed.setup.doctype.org_communication.attachments")
+            attachments = import_fresh("ifitwala_ed.school_setup.doctype.org_communication.attachments")
             override = attachments.get_org_communication_context_override(
                 "COMM-0003", "communication_attachment__row-1"
             )
@@ -146,7 +146,7 @@ class TestOrgCommunicationAttachmentsUnit(TestCase):
                 school="SCH-1",
                 audiences=[],
             )
-            attachments = import_fresh("ifitwala_ed.setup.doctype.org_communication.attachments")
+            attachments = import_fresh("ifitwala_ed.school_setup.doctype.org_communication.attachments")
             attachments.resolve_org_communication_attachment_context = lambda _doc: {
                 "context_kind": "student_group",
                 "organization": "ORG-1",
@@ -170,7 +170,7 @@ class TestOrgCommunicationAttachmentsUnit(TestCase):
             f"/preview/{org_communication}/{row_name}"
         )
 
-        attachments_bridge = ModuleType("ifitwala_ed.setup.doctype.org_communication.attachments")
+        attachments_bridge = ModuleType("ifitwala_ed.school_setup.doctype.org_communication.attachments")
         attachments_bridge.ORG_COMMUNICATION_ATTACHMENT_BINDING_ROLE = "communication_attachment"
         attachments_bridge.ORG_COMMUNICATION_ATTACHMENT_SLOT_PREFIX = "communication_attachment__"
 
@@ -205,7 +205,7 @@ class TestOrgCommunicationAttachmentsUnit(TestCase):
         with stubbed_frappe(
             extra_modules={
                 "ifitwala_ed.api.file_access": file_access,
-                "ifitwala_ed.setup.doctype.org_communication.attachments": attachments_bridge,
+                "ifitwala_ed.school_setup.doctype.org_communication.attachments": attachments_bridge,
                 "ifitwala_ed.utilities.governed_uploads": governed_uploads,
                 "ifitwala_drive": drive_root,
                 "ifitwala_drive.api": drive_api_pkg,
@@ -234,7 +234,7 @@ class TestOrgCommunicationAttachmentsUnit(TestCase):
             f"/preview/{org_communication}/{row_name}"
         )
 
-        attachments_bridge = ModuleType("ifitwala_ed.setup.doctype.org_communication.attachments")
+        attachments_bridge = ModuleType("ifitwala_ed.school_setup.doctype.org_communication.attachments")
         attachments_bridge.ORG_COMMUNICATION_ATTACHMENT_BINDING_ROLE = "communication_attachment"
         attachments_bridge.ORG_COMMUNICATION_ATTACHMENT_SLOT_PREFIX = "communication_attachment__"
         attachments_bridge.assert_org_communication_attachment_upload_access = lambda *_args, **_kwargs: None
@@ -248,7 +248,7 @@ class TestOrgCommunicationAttachmentsUnit(TestCase):
         with stubbed_frappe(
             extra_modules={
                 "ifitwala_ed.api.file_access": file_access,
-                "ifitwala_ed.setup.doctype.org_communication.attachments": attachments_bridge,
+                "ifitwala_ed.school_setup.doctype.org_communication.attachments": attachments_bridge,
                 "ifitwala_ed.utilities.governed_uploads": governed_uploads,
             }
         ) as frappe:
@@ -305,7 +305,7 @@ class TestOrgCommunicationAttachmentsUnit(TestCase):
             f"/preview/{org_communication}/{row_name}"
         )
 
-        attachments_bridge = ModuleType("ifitwala_ed.setup.doctype.org_communication.attachments")
+        attachments_bridge = ModuleType("ifitwala_ed.school_setup.doctype.org_communication.attachments")
         attachments_bridge.ORG_COMMUNICATION_ATTACHMENT_BINDING_ROLE = "communication_attachment"
         attachments_bridge.ORG_COMMUNICATION_ATTACHMENT_SLOT_PREFIX = "communication_attachment__"
         attachments_bridge.assert_org_communication_attachment_upload_access = lambda *_args, **_kwargs: None
@@ -319,7 +319,7 @@ class TestOrgCommunicationAttachmentsUnit(TestCase):
         with stubbed_frappe(
             extra_modules={
                 "ifitwala_ed.api.file_access": file_access,
-                "ifitwala_ed.setup.doctype.org_communication.attachments": attachments_bridge,
+                "ifitwala_ed.school_setup.doctype.org_communication.attachments": attachments_bridge,
                 "ifitwala_ed.utilities.governed_uploads": governed_uploads,
             }
         ) as frappe:
@@ -362,7 +362,7 @@ class TestOrgCommunicationAttachmentsUnit(TestCase):
 
     def test_attachment_context_lock_blocks_issuing_school_change_when_files_remain(self):
         with stubbed_frappe():
-            attachments = import_fresh("ifitwala_ed.setup.doctype.org_communication.attachments")
+            attachments = import_fresh("ifitwala_ed.school_setup.doctype.org_communication.attachments")
             before_doc = _FakeOrgCommunicationDoc(
                 name="COMM-LOCK-1",
                 organization="ORG-1",
@@ -384,7 +384,7 @@ class TestOrgCommunicationAttachmentsUnit(TestCase):
 
     def test_attachment_context_lock_blocks_invalid_scope_change_when_files_remain(self):
         with stubbed_frappe() as frappe:
-            attachments = import_fresh("ifitwala_ed.setup.doctype.org_communication.attachments")
+            attachments = import_fresh("ifitwala_ed.school_setup.doctype.org_communication.attachments")
             frappe.db.get_value = lambda *args, **kwargs: None
             before_doc = _FakeOrgCommunicationDoc(
                 name="COMM-LOCK-2",
@@ -407,7 +407,7 @@ class TestOrgCommunicationAttachmentsUnit(TestCase):
 
     def test_attachment_context_lock_allows_scope_change_after_governed_files_are_removed(self):
         with stubbed_frappe():
-            attachments = import_fresh("ifitwala_ed.setup.doctype.org_communication.attachments")
+            attachments = import_fresh("ifitwala_ed.school_setup.doctype.org_communication.attachments")
             before_doc = _FakeOrgCommunicationDoc(
                 name="COMM-LOCK-3",
                 organization="ORG-1",

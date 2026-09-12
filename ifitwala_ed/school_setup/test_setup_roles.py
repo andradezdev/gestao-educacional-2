@@ -7,8 +7,8 @@ from unittest.mock import patch
 import frappe
 from frappe.tests.utils import FrappeTestCase
 
-from ifitwala_ed.setup.initial_setup import complete_initial_setup
-from ifitwala_ed.setup.setup import (
+from ifitwala_ed.school_setup.initial_setup import complete_initial_setup
+from ifitwala_ed.school_setup.setup import (
     create_default_attendance_codes,
     create_default_leave_types,
     create_designations,
@@ -141,8 +141,8 @@ class TestSetupRoles(FrappeTestCase):
 
     def test_create_designations_skips_without_real_organization(self):
         with (
-            patch("ifitwala_ed.setup.setup._resolve_designation_seed_organization", return_value=None),
-            patch("ifitwala_ed.setup.setup.insert_record") as insert_record,
+            patch("ifitwala_ed.school_setup.setup._resolve_designation_seed_organization", return_value=None),
+            patch("ifitwala_ed.school_setup.setup.insert_record") as insert_record,
         ):
             create_designations()
 
@@ -150,8 +150,8 @@ class TestSetupRoles(FrappeTestCase):
 
     def test_create_designations_scopes_seed_rows_to_real_organization(self):
         with (
-            patch("ifitwala_ed.setup.setup._resolve_designation_seed_organization", return_value="ORG-ROOT"),
-            patch("ifitwala_ed.setup.setup.insert_record") as insert_record,
+            patch("ifitwala_ed.school_setup.setup._resolve_designation_seed_organization", return_value="ORG-ROOT"),
+            patch("ifitwala_ed.school_setup.setup.insert_record") as insert_record,
         ):
             create_designations()
 
@@ -161,7 +161,7 @@ class TestSetupRoles(FrappeTestCase):
         self.assertEqual(rows[0].get("designation_name"), "Director")
 
     def test_create_default_attendance_codes_seeds_canonical_codes(self):
-        with patch("ifitwala_ed.setup.setup.insert_record") as insert_record:
+        with patch("ifitwala_ed.school_setup.setup.insert_record") as insert_record:
             create_default_attendance_codes()
 
         rows = insert_record.call_args.args[0]
@@ -194,7 +194,7 @@ class TestSetupRoles(FrappeTestCase):
         self.assertEqual(defaults[0].get("attendance_code_name"), "Present")
 
     def test_create_default_leave_types_seeds_education_leave_catalog(self):
-        with patch("ifitwala_ed.setup.setup.insert_record") as insert_record:
+        with patch("ifitwala_ed.school_setup.setup.insert_record") as insert_record:
             create_default_leave_types()
 
         rows = insert_record.call_args.args[0]
@@ -216,7 +216,7 @@ class TestSetupRoles(FrappeTestCase):
         self.assertEqual([int(row.get("is_lwp") or 0) for row in rows], [0, 0, 0, 0, 0, 0, 0, 0, 0, 1])
 
     def test_ensure_setup_tree_roots_seeds_global_nestedset_roots(self):
-        with patch("ifitwala_ed.setup.setup.insert_record") as insert_record:
+        with patch("ifitwala_ed.school_setup.setup.insert_record") as insert_record:
             ensure_setup_tree_roots()
 
         rows = insert_record.call_args.args[0]
@@ -254,18 +254,18 @@ class TestSetupRoles(FrappeTestCase):
         org_setting = _DummyDoc("Org Setting")
 
         with (
-            patch("ifitwala_ed.setup.initial_setup.is_setup_done", return_value=False),
-            patch("ifitwala_ed.setup.initial_setup.frappe.db.exists", return_value=False),
+            patch("ifitwala_ed.school_setup.initial_setup.is_setup_done", return_value=False),
+            patch("ifitwala_ed.school_setup.initial_setup.frappe.db.exists", return_value=False),
             patch(
-                "ifitwala_ed.setup.initial_setup.frappe.get_doc",
+                "ifitwala_ed.school_setup.initial_setup.frappe.get_doc",
                 side_effect=[root_doc, org_doc],
             ),
             patch(
-                "ifitwala_ed.setup.initial_setup.frappe.get_single",
+                "ifitwala_ed.school_setup.initial_setup.frappe.get_single",
                 side_effect=[website_settings, org_setting],
             ),
-            patch("ifitwala_ed.setup.initial_setup.create_designations") as create_designations_mock,
-            patch("ifitwala_ed.setup.initial_setup.frappe.db.commit"),
+            patch("ifitwala_ed.school_setup.initial_setup.create_designations") as create_designations_mock,
+            patch("ifitwala_ed.school_setup.initial_setup.frappe.db.commit"),
         ):
             result = complete_initial_setup(org_name="Test Organization", org_abbr="TO")
 

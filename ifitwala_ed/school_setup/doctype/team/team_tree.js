@@ -5,8 +5,8 @@
 
 frappe.treeview_settings["Team"] = {
 	root_label: __("All Teams"),
-	get_tree_nodes: "ifitwala_ed.setup.doctype.team.team.get_children",
-	add_tree_node: "ifitwala_ed.setup.doctype.team.team.add_node",
+	get_tree_nodes: "ifitwala_ed.school_setup.doctype.team.team.get_children",
+	add_tree_node: "ifitwala_ed.school_setup.doctype.team.team.add_node",
 	get_tree_root: false,
 	breadcrumb: __("School Settings"),
 	show_expand_all: true,
@@ -66,7 +66,7 @@ frappe.treeview_settings["Team"] = {
 					(values) => {
 						values.parent_team = parent;
 						frappe.call({
-							method: "ifitwala_ed.setup.doctype.team.team.add_node",
+							method: "ifitwala_ed.school_setup.doctype.team.team.add_node",
 							args: values,
 							callback: () => tv && tv.make_tree(),
 						});

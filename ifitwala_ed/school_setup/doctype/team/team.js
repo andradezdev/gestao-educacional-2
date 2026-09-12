@@ -1,7 +1,7 @@
 // Copyright (c) 2025, François de Ryckel and contributors
 // For license information, please see license.txt
 
-// ifitwala_ed.setup.doctype.team.team.team.js
+// ifitwala_ed.school_setup.doctype.team.team.team.js
 
 frappe.ui.form.on('Team', {
 	refresh(frm) {
@@ -35,7 +35,7 @@ frappe.ui.form.on('Team', {
 
 				// Fetch eligible users by school/org hierarchy
 				frappe.call({
-					method: 'ifitwala_ed.setup.doctype.team.team.get_eligible_users',
+					method: 'ifitwala_ed.school_setup.doctype.team.team.get_eligible_users',
 					args: {
 						school: frm.doc.school,
 						organization: frm.doc.organization
@@ -528,7 +528,7 @@ function open_meeting_book_dialog(frm) {
 			}
 
 			frappe.call({
-				method: 'ifitwala_ed.setup.doctype.meeting.meeting.get_team_meeting_book',
+				method: 'ifitwala_ed.school_setup.doctype.meeting.meeting.get_team_meeting_book',
 				args: params
 			}).then(r => {
 				const html = r.message || `<p>${__('No content.')}</p>`;
@@ -696,7 +696,7 @@ function open_team_schedule_dialog(frm) {
 				dialog.disable_primary_action();
 
 				const request = frappe.call({
-					method: 'ifitwala_ed.setup.doctype.team.team.schedule_recurring_meetings',
+					method: 'ifitwala_ed.school_setup.doctype.team.team.schedule_recurring_meetings',
 					args: {
 						team: frm.doc.name,
 						academic_year: values.academic_year,
@@ -888,7 +888,7 @@ function open_team_schedule_dialog(frm) {
 		const loadAcademicYears = () => {
 			dialog.disable_primary_action();
 			const ayRequest = frappe.call({
-				method: 'ifitwala_ed.setup.doctype.team.team.get_schedulable_academic_years',
+				method: 'ifitwala_ed.school_setup.doctype.team.team.get_schedulable_academic_years',
 				args: { team: frm.doc.name }
 			});
 			ayRequest.then(r => {

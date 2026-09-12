@@ -9,7 +9,7 @@ import frappe
 from frappe import _
 from frappe.utils import cint
 
-from ifitwala_ed.setup.doctype.org_communication.org_communication import (
+from ifitwala_ed.school_setup.doctype.org_communication.org_communication import (
     AUDIENCE_TARGET_MODES,
     RECIPIENT_TOGGLE_FIELDS,
     RECIPIENT_TOGGLE_LABELS,

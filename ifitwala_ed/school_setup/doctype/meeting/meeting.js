@@ -87,7 +87,7 @@ frappe.ui.form.on('Meeting', {
 						dialog.disable_primary_action();
 
 						frappe.call({
-							method: 'ifitwala_ed.setup.doctype.meeting.meeting.create_next_meeting',
+							method: 'ifitwala_ed.school_setup.doctype.meeting.meeting.create_next_meeting',
 							args: {
 								source_meeting: frm.doc.name,
 								new_date: next_date,
@@ -300,7 +300,7 @@ function load_team_participants(frm, replace) {
 	}
 
 	frappe.call({
-		method: 'ifitwala_ed.setup.doctype.meeting.meeting.get_team_participants',
+		method: 'ifitwala_ed.school_setup.doctype.meeting.meeting.get_team_participants',
 		args: {
 			team: frm.doc.team,
 		},

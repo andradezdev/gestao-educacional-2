@@ -37,7 +37,7 @@ from ifitwala_ed.admission.doctype.applicant_interview.applicant_interview impor
     _to_datetime_or_throw,
     _to_positive_int,
 )
-from ifitwala_ed.stock.doctype.location_booking.location_booking import delete_location_bookings_for_source
+from ifitwala_ed.school_stock.doctype.location_booking.location_booking import delete_location_bookings_for_source
 from ifitwala_ed.utilities.employee_booking import delete_employee_bookings_for_source
 from ifitwala_ed.utilities.location_utils import get_visible_location_rows_for_school, is_schedulable_location
 

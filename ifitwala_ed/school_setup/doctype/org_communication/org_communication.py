@@ -11,7 +11,7 @@ from frappe.utils import get_datetime, now_datetime
 from frappe.utils.nestedset import get_descendants_of
 
 from ifitwala_ed.curriculum.materials import validate_reference_url
-from ifitwala_ed.setup.doctype.org_communication.attachments import (
+from ifitwala_ed.school_setup.doctype.org_communication.attachments import (
     ORG_COMMUNICATION_ATTACHMENT_BINDING_ROLE,
     ORG_COMMUNICATION_ATTACHMENT_SLOT_PREFIX,
     assert_org_communication_attachment_context_stable,

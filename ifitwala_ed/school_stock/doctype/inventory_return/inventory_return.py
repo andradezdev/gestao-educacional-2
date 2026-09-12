@@ -7,9 +7,9 @@ from frappe import _
 from frappe.model.document import Document
 from frappe.utils import flt
 
-from ifitwala_ed.stock.inventory.inventory_ledger import make_ledger_entries
-from ifitwala_ed.stock.inventory.inventory_utils import coerce_datetime, resolve_returned_from, set_unit_custody
-from ifitwala_ed.stock.inventory.inventory_validations import validate_return
+from ifitwala_ed.school_stock.inventory.inventory_ledger import make_ledger_entries
+from ifitwala_ed.school_stock.inventory.inventory_utils import coerce_datetime, resolve_returned_from, set_unit_custody
+from ifitwala_ed.school_stock.inventory.inventory_validations import validate_return
 
 
 class InventoryReturn(Document):

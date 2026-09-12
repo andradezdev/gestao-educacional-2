@@ -19,7 +19,7 @@ from ifitwala_ed.admission.doctype.applicant_interview.applicant_interview impor
 )
 from ifitwala_ed.api.file_access import download_admissions_file
 from ifitwala_ed.api.focus import get_focus_context, list_focus_items
-from ifitwala_ed.stock.doctype.location_booking.location_booking import (
+from ifitwala_ed.school_stock.doctype.location_booking.location_booking import (
     build_slot_key_single,
     build_source_key,
     upsert_location_booking,

@@ -9,7 +9,7 @@ from ifitwala_ed.api.file_access import (
     _require_org_communication_attachment_context,
     _resolve_org_communication_drive_file,
 )
-from ifitwala_ed.setup.doctype.org_communication.attachments import (
+from ifitwala_ed.school_setup.doctype.org_communication.attachments import (
     assert_org_communication_attachment_upload_access,
     build_org_communication_attachment_upload_contract,
     get_org_communication_context_override,

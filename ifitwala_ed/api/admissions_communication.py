@@ -49,7 +49,7 @@ _COMPAT_EXPORTS = {
     "create_interaction_entry": "ifitwala_ed.api.org_communication_interactions",
     "get_latest_org_communication_entry_for_user": "ifitwala_ed.api.org_communication_interactions",
     "upsert_org_communication_read_receipt": "ifitwala_ed.api.org_communication_interactions",
-    "ENTRY_DOCTYPE": "ifitwala_ed.setup.doctype.communication_interaction_entry.communication_interaction_entry",
+    "ENTRY_DOCTYPE": "ifitwala_ed.school_setup.doctype.communication_interaction_entry.communication_interaction_entry",
 }
 
 

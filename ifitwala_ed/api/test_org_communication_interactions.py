@@ -8,7 +8,7 @@ from frappe.tests.utils import FrappeTestCase
 from frappe.utils import now_datetime
 
 from ifitwala_ed.api import org_communication_interactions
-from ifitwala_ed.setup.doctype.communication_interaction_entry.communication_interaction_entry import (
+from ifitwala_ed.school_setup.doctype.communication_interaction_entry.communication_interaction_entry import (
     DOCTYPE as ENTRY_DOCTYPE,
 )
 
