@@ -195,7 +195,7 @@
  "links": [],
  "modified": "2026-04-29 11:28:31.948295",
  "modified_by": "Administrator",
- "module": "Setup",
+"module": "School Setup"
  "name": "Team",
  "naming_rule": "By fieldname",
  "nsm_parent_field": "parent_team",
