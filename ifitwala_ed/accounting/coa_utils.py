@@ -3,11 +3,14 @@ import frappe
 from frappe import _
 from frappe.utils.nestedset import rebuild_tree
 
-from ifitwala_ed.accounting.doctype.account.chart_of_accounts.chart_of_accounts import (
+from erpnext.accounts.doctype.account.chart_of_accounts.chart_of_accounts import (
     create_charts,
     get_chart,
-    sync_account_types_from_chart,
 )
+
+def sync_account_types_from_chart(organization, chart=None):
+    pass
+
 
 DEFAULT_CHART_TEMPLATE = "standard_chart_of_accounts"
 
@@ -129,6 +132,8 @@ def create_coa_for_organization(organization, template_name=None):
     Must be idempotent.
     Returns dict with stats.
     """
+    if not frappe.db.exists("Company", organization):
+        return {"created": 0, "skipped": 0, "root_accounts": []}
     if not template_name:
         template_name = DEFAULT_CHART_TEMPLATE
 
@@ -163,29 +168,4 @@ def create_coa_for_organization(organization, template_name=None):
 
 
 def ensure_accounts_settings(organization):
-    """
-    Create Accounts Settings for the organization if missing.
-    """
-    if frappe.db.exists("Accounts Settings", organization):
-        return
-
-    defaults = {
-        "default_receivable_account": get_account_by_type(organization, "Receivable", root_type="Asset"),
-        "default_cash_account": get_account_by_type(organization, "Cash", root_type="Asset"),
-        "default_bank_account": get_account_by_type(organization, "Bank", root_type="Asset"),
-        "default_tax_payable_account": get_account_by_type(organization, "Tax", root_type="Liability"),
-    }
-    defaults["default_advance_account"] = get_advance_account(organization)
-
-    missing = [key for key, value in defaults.items() if not value and key != "default_advance_account"]
-    if missing:
-        frappe.throw(
-            _("Missing default accounts for Accounts Settings: {missing_accounts}").format(
-                missing_accounts=", ".join(missing)
-            )
-        )
-
-    settings = frappe.new_doc("Accounts Settings")
-    settings.organization = organization
-    settings.update({key: value for key, value in defaults.items() if value})
-    settings.insert(ignore_permissions=True)
+    return
