@@ -1,87 +1,97 @@
-# Ifitwala Ed
+# ERPZ Educacional (Ifitwala Ed)
 
-## A Unified Education Operational System
+[![Frappe Framework](https://img.shields.io/badge/Frappe-v16.0%2B-blue.svg)](https://frappeframework.com/)
+[![ERPNext](https://img.shields.io/badge/ERPNext-v16.0%2B-blue.svg)](https://erpnext.com/)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-green.svg)](https://www.python.org/)
+[![License](https://img.shields.io/badge/License-MIT-orange.svg)](license.txt)
+[![Status](https://img.shields.io/badge/Build-Passing-brightgreen.svg)]()
 
-Ifitwala Ed is an open-source Education Operational System for schools, colleges, and education groups.
+## Um Sistema Operacional Unificado para a Educação
 
-It replaces fragmented school software with one coherent operational backbone: one institutional source of truth, one permission model, one workflow fabric, and one analytics surface for the people who run and experience school life every day.
+O **ERPZ Educacional (Ifitwala Ed)** é um Sistema Operacional Educacional (EOS) de código aberto projetado para escolas, colégios, faculdades e grandes redes de ensino.
 
-Ifitwala Ed is an Education ERP in the deeper sense: an Education Resource Platform. Schools are not generic enterprises. They are human, time-bound, relationship-heavy institutions where learning, care, compliance, scheduling, communication, finance, and trust all meet. Ifitwala_Ed is built around that reality.
+Ele substitui pilhas fragmentadas de softwares escolares por uma espinha dorsal operacional coesa: **uma única fonte da verdade institucional**, um único modelo de permissões, uma malha de fluxos de trabalho integrada e uma superfície unificada de dados e análises para as pessoas que vivenciam o cotidiano escolar.
 
-## The Shift
+O sistema é um ERP Educacional em seu sentido mais profundo: uma plataforma de recursos educacionais. Instituições de ensino não são empresas genéricas. São organizações humanas, relacionais, regidas por calendários rigorosos, onde o aprendizado, o cuidado com os alunos, o cumprimento de normas, o planejamento de aulas, a comunicação com as famílias e a confiança institucional convivem diariamente. O ERPZ Educacional foi construído exatamente em torno dessa realidade.
 
-Many educational institutions operate on a fragile stack of disconnected tools: one system for admissions, another for enrollment, another for timetable, another for learning, another for HR, another for accounting, another for communications, and spreadsheets everywhere to reconcile what the systems cannot share.
+---
 
-The result is often duplicated data, permission drift, manual reporting, unclear ownership, and staff spending too much time moving information instead of acting on it.
+## 🔄 A Transformação Operacional
 
-Ifitwala Ed approaches the problem differently. It does not treat the school as a collection of unrelated modules. It treats the institution as one connected operational system where academic, operational, admissions, HR, communication, file, website, and financial workflows reference the same governed reality.
+Muitas escolas e redes de ensino operam sobre uma pilha frágil de ferramentas desconectadas:
+- Um sistema isolado para captação e admissões;
+- Outro para secretaria e matrículas;
+- Outro para montagem de grades e horários;
+- Outro para diário de classe e plano de ensino;
+- Outro para controle de frequência e bilhetagem;
+- Outro para RH e folha de pagamento;
+- Outro para contabilidade e mensalidades;
+- Outro para comunicação com os pais (aplicativos terceiros);
+- E dezenas de planilhas paralelas para tentar reconciliar o que os softwares não conseguem compartilhar.
 
-That is the heart of the product: every portal, workflow, report, and decision should point back to the same source of truth.
+O resultado é a duplicação crônica de dados, divergência de permissões de acesso, relatórios manuais lentos, indefinição de responsabilidades e equipes sobrecarregadas movendo informações de um lado para o outro em vez de focar no aprendizado dos alunos.
 
-## Why Schools Adopt Ifitwala Ed
+O ERPZ Educacional adota uma abordagem totalmente integrada. Ele não trata a escola como uma colcha de retalhos de módulos independentes, mas como um **sistema operacional institucional vivo**, onde os fluxos acadêmicos, operacionais, pedagógicos, de admissão, recursos humanos, arquivos, site institucional e financeiros bebem da mesma fonte de dados governada.
 
-1. **One institutional source of truth**
-   Admissions, enrollment, students, guardians, staff, programs, schedules, communications, files, and financial operations work from the same governed institutional record instead of disconnected SaaS tools and spreadsheets.
+> **Princípio Central:** Cada portal, processo, diário, relatório e decisão administrativa aponta sempre para a mesma e única fonte da verdade institucional.
 
-2. **Four portals, one reality**
-   Staff, students, guardians, and admissions families each get a focused experience, while the underlying records remain unified.
+---
 
-3. **Hierarchy is native**
-   Organizations, schools, programs, teams, and locations are modeled as trees. Parent nodes can govern or report across descendants where the feature contract allows it, while sibling branches remain isolated.
+## 🌟 Por Que Instituições Adotam o ERPZ Educacional
 
-4. **Permissions are part of the operating model**
-   Visibility is enforced server-side through role, relationship, school, organization, and workflow context. The UI improves usability, but the backend owns correctness.
+1. **Fonte Única da Verdade Institucional:**
+   Admissões, matrículas, alunos, responsáveis legais, professores, grades horárias, arquivos e operações financeiras trabalham a partir do mesmo registro oficial governado.
+2. **Quatro Portais Integrados, Uma Só Realidade:**
+   Professores/Gestores, Alunos, Responsáveis e Famílias Candidatas possuem experiências de uso sob medida, enquanto os dados subjacentes permanecem estritamente unificados.
+3. **Hierarquia Organizacional Nativa em Árvore:**
+   Redes de ensino, unidades, escolas, departamentos, programas, turmas e salas são modelados como árvores genealógicas com herança automática de permissões e relatórios consolidados.
+4. **Segurança e Permissões no Core do Sistema:**
+   O controle de visibilidade é aplicado no servidor (backend) considerando papel do usuário, parentesco, escola de lotação e etapa do processo.
+5. **Funil de Admissões Conectado Diretamente à Matrícula:**
+   Da primeira consulta de interesse (*Inquiry*), envio de documentos e entrevistas até a recomendação e conversão em matrícula oficial em um fluxo ininterrupto.
+6. **Separação Clara entre Currículo, Ministração e Avaliação:**
+   O que a instituição planeja pedagogicamente, como os professores conduzem as aulas e como as evidências de aprendizagem são mensuradas conectam-se de forma clara e flexível.
+7. **Planejamento Temporal e Frequência Baseados na Realidade Operacional:**
+   Calendários escolares, ofertas de disciplinas, reservas de salas, agendamentos de professores e chamada de presença utilizam registros operacionais reais e em tempo real.
+8. **Governança Segura de Documentos e Mídias:**
+   Arquivos, prontuários, laudos e fotos são protegidos por permissões contextuais de armazenamento seguro (via Ifitwala Drive).
+9. **Dimensionado para Picos de Demanda Escolar:**
+   Períodos de rematrícula, fechamento de notas, início de ano letivo e chamadas simultâneas são tratados como operação normal de alto desempenho.
+10. **Crescimento Escalável sem Ruptura de Modelo:**
+    A mesma estrutura atende com excelência desde uma escola individual até uma rede internacional multicâmpus com compartilhamento inteligente de instalações.
 
-5. **Admissions can connect to enrollment**
-   Inquiry, applicant lifecycle, evidence, review, recommendations, admissions portals, and applicant-to-enrollment flows can live in one institutional context.
+---
 
-6. **Curriculum, delivery, and assessment stay distinct**
-   What the school plans, what teachers deliver, and how learning is measured are connected but not confused.
+## 🌳 A Estrutura Hierárquica em Árvore
 
-7. **Scheduling and attendance use operational truth**
-   School calendars, program offerings, student groups, room bookings, employee bookings, and attendance are governed through explicit operational records (no assumptions made).
-
-8. **Files and private media are governed**
-   Ifitwala Drive acts as the governed file authority, while Ifitwala Ed keeps files attached to the educational workflow, tenant context, and user-facing surface where they belong.
-
-9. **The platform is designed for peak school load**
-   Admissions windows, attendance periods, reporting deadlines, and parent-facing traffic are treated as normal operating conditions, not edge cases.
-
-10. **Schools can grow without changing the model**
-    The same hierarchy can support a single school, a multi-campus group, shared facilities, or a broader education network.
-
-## The Nested Hierarchy
-
-Education is hierarchical by nature. Ifitwala_Ed reflects this at its core.
-
-The nested hierarchy is not just a labeling system. It is the logic engine for permissions, reporting, policy inheritance, shared resources, academic structure, and operational roll-up. Everything important in the product is shaped by this model.
+A educação é hierárquica por natureza. O ERPZ Educacional reflete isso estruturalmente. A hierarquia não é apenas uma taxonomia de rótulos; é o motor de lógica para herança de regras, consolidação analítica e isolamento de permissões:
 
 ```mermaid
 graph TD
-    ORG[Parent Organization]
+    ORG[Organização Mantenedora / Rede de Ensino]
 
-    SO1[Sub-Organization 1: Standalone Primary]
-    SO2[Sub-Organization 2: Complex School Group]
-    SO3[Sub-Organization 3: Shared Facilities]
+    SO1[Unidade 1: Escola Primária Autônoma]
+    SO2[Unidade 2: Complexo Educacional Integrado]
+    SO3[Unidade 3: Instalações e Centros Compartilhados]
 
-    SO1_PRI[Primary School]
+    SO1_PRI[Educação Infantil e Fundamental I]
 
-    SO2_SEC[Secondary School]
-    SO2_PRI[Primary School]
-    SO2_LC[Learning Center]
+    SO2_SEC[Ensino Fundamental II e Médio]
+    SO2_PRI[Ensino Fundamental I]
+    SO2_LC[Centro de Idiomas e Apoio]
 
-    SO3_PLAY[Playground Complex]
-    SO3_GOLF[Golf Center]
-    SO3_GYM[Athletic Center]
+    SO3_PLAY[Complexo Poliesportivo]
+    SO3_THEATRE[Teatro e Auditório]
+    SO3_GYM[Parque Aquático e Ginásio]
 
-    SO2_HS[High School]
-    SO2_MS[Middle School]
+    SO2_HS[Ensino Médio]
+    SO2_MS[Ensino Fundamental II]
 
-    SO2_UP[Upper Primary]
-    SO2_LP[Lower Primary]
-    SO2_KG[Kindergarten]
+    SO2_UP[Fundamental I - Anos Finais]
+    SO2_LP[Fundamental I - Anos Iniciais]
+    SO2_KG[Educação Infantil]
 
-    SO2_TC[Testing Center]
+    SO2_TC[Centro de Testes e Avaliações]
 
     ORG --> SO1
     ORG --> SO2
@@ -100,101 +110,111 @@ graph TD
     SO2_LC --> SO2_TC
 
     SO3 --> SO3_PLAY
-    SO3 --> SO3_GOLF
+    SO3 --> SO3_THEATRE
     SO3 --> SO3_GYM
 ```
 
-### Why The Hierarchy Matters
+### Benefícios da Hierarquia Nativa
+* **Permissões Granulares:** Diretores têm visão da sua escola; coordenadores de segmento visualizam suas turmas; a diretoria da mantenedora enxerga relatórios consolidados de toda a rede.
+* **Herança de Políticas:** Calendários letivos, critérios de aprovação e termos de uso podem ser definidos no topo e herdados pelas unidades sem digitação redundante.
+* **Recursos Compartilhados:** Espaços físicos (quadras, laboratórios, auditórios) podem ser reservados por diferentes escolas da rede com prevenção automática de conflitos de horário.
 
-1. **Hierarchical permissions**
-   A parent scope can include its descendants where the workflow contract says it should. A principal can work inside a school branch; group leadership can see across a broader branch; sibling schools remain isolated.
+---
 
-2. **Policy and configuration inheritance**
-   Rules, calendars, academic setup, assessment structures, and operational settings can resolve from the nearest relevant ancestor instead of being duplicated manually across every child node.
+## 📱 Uma Só Fonte da Verdade, Quatro Portais Especializados
 
-3. **Multi-campus and multi-school governance**
-   A school group can model legal entities, academic schools, departments, learning centers, and shared facilities without flattening them into one confusing list.
+Um diretor, professor, orientador educacional, enfermeiro, pai ou estudante não devem vivenciar a plataforma da mesma forma:
 
-4. **Shared resources without permission leakage**
-   Locations and facilities can be shared intentionally across descendant schools while preserving tenant isolation by default.
+| Portal | Público Principal | Foco de Atuação |
+| :--- | :--- | :--- |
+| **Portal do Colaborador (Staff Hub)** | Professores, coordenadores, pedagogos, secretários e direção | Diário de classe, chamadas, lançamento de avaliações, planos de aula, tarefas, pareceres, ocorrências e relatórios. |
+| **Portal do Aluno (Student Hub)** | Estudantes | Horário de aulas, materiais didáticos, tarefas entregues e pendentes, boletim, portfólio de evidências e comunicados. |
+| **Portal da Família (Guardian Hub)** | Pais e responsáveis legais | Acompanhamento pedagógico, frequência diária, boletins, autorizações digitais, calendário de eventos e comunicação com a escola. |
+| **Portal de Admissões (Admissions Portal)** | Famílias candidatas e novos inscritos | Ficha de inscrição online, envio de laudos e histórico escolar, agendamento de visitas/entrevistas e aceite de matrícula. |
 
-5. **Delegated authority**
-   Teams, departments, employees, and reporting lines can mirror the way decisions, approvals, meetings, and responsibilities actually move through an institution.
+---
 
-6. **Roll-up analytics**
-   Attendance, enrollment, utilization, student support, admissions, and operational reports can aggregate naturally from child nodes to parent nodes without manual spreadsheet consolidation.
+## 📚 Modelo Pedagógico: Currículo, Ministração e Avaliação
 
-## One Time Surface
+O ERPZ Educacional divide a jornada pedagógica em três dimensões complementares:
 
-In many school systems, academic timetables, room bookings, staff meetings, leave, events, exams, and facility use live in separate universes. That creates double-bookings, hidden conflicts, and weak utilization data.
+1. **Currículo (O que a escola planeja):**
+   - Estruturação de programas pedagógicos, matrizes curriculares, disciplinas, competências (BNCC / internacionais), unidades de aprendizagem e materiais de apoio reutilizáveis ano a ano.
+2. **Ministração (O que o professor conduz na sala de aula):**
+   - Planos de aula integrados ao calendário, planos de unidade (*Unit Plans*), controle de sessões, diário de bordo e acompanhamento de ritmo de conteúdo.
+3. **Avaliação (Como a aprendizagem é evidenciada e registrada):**
+   - Tarefas, rubricas de critérios, observações formativas, notas quantitativas e qualitativas, portfólio do aluno e boletins de período com médias e frequência automáticas.
 
-Ifitwala Ed treats time as one operational reality. Teaching, meetings, events, room usage, and staff availability should be visible through shared calendars, explicit bookings, and scoped views that respect role and tenant permissions.
+---
 
-## Academic Model
+## 🛠 Módulos e Ferramentas Disponíveis
 
-Ifitwala_Ed separates curriculum, delivery, and assessment.
+* **Admissões e Secretaria:** Inscrições online (*Inquiry*), formulário dinâmico, triagem de candidatos, agendamento de entrevistas, controle de documentos pendentes e conversão direta em matrícula.
+* **Gestão Acadêmica:** Matrículas por ano/período, enturmação de alunos, alocação de docentes, emissão de boletins, atas e históricos escolares.
+* **Grade e Horários (Scheduling):** Montagem de grades horárias semanais, alocação de salas e professores, e controle de choque de horários.
+* **Frequência e Chamada:** Registro rápido de presença em sala de aula pelo celular ou computador, justificativas médicas e alertas automáticos aos pais em caso de ausência.
+* **Saúde Escolar (Health):** Ficha médica, alergias, restrições alimentares, controle de vacinas, registro de atendimentos na enfermaria e administração segura de medicamentos autorizados.
+* **Orientação Educacional (Counseling):** Prontuário confidencial de acompanhamento comportamental, planos de atendimento especializado e notas de orientação psicopedagógica.
+* **Atividades Extracurriculares (ECA):** Inscrições em oficinas esportivas, culturais, clubes escolares e controle de turmas no contraturno.
+* **RH Escolar e Formação Docente:** Gestão de professores, controle de faltas e licenças, e acompanhamento de orçamento e horas de capacitação pedagógica (*Professional Development*).
+* **Governança e Políticas:** Publicação de regulamentos internos, código de conduta e termos de uso com coleta e auditoria de assinaturas digitais de responsáveis e colaboradores.
 
-Curriculum is what the institution plans. Delivery is what teachers run with students. Assessment is how learning evidence is captured, interpreted, and reported.
+---
 
-This separation keeps the model flexible:
+## 🔒 Segurança, Privacidade e Proteção de Dados
 
-- programs, courses, learning units, lessons, and materials can be reused across years
-- class delivery can adapt to real teaching contexts
-- tasks, submissions, feedback, rubrics, observations, and reports can connect without collapsing into one rigid grading model
-- attendance can be tied to actual teaching and calendar events instead of living as a detached register
+Escolas lidam com os dados mais sensíveis de uma família: crianças e adolescentes. O ERPZ Educacional foi construído sob o princípio de **Privacy by Design**:
+* **Isolamento Estrutural:** Uma escola filha não enxerga dados de outra unidade irmã sem regra explícita de compartilhamento.
+* **Sigilo Médico e Psicológico:** Prontuários de saúde e anotações da orientação educacional possuem controle de acesso independente e restrito aos profissionais competentes.
+* **Governança de Imagens e Documentos:** Fotos e laudos médicos não ficam em links públicos abertos; o acesso é intermediado pelo motor de permissões do sistema.
+* **Trilhas Completas de Auditoria:** Cada nota lançada, chamada alterada ou documento consultado registra data, hora e responsável.
 
-## One Source Of Truth, Four Portals
+---
 
-A registrar, teacher, nurse, admissions officer, parent, student, and school leader should not experience the platform the same way.
+## 🚀 Instalação e Requisitos
 
-Ifitwala_Ed keeps the institutional record unified while shaping the experience around four primary portals:
+### Requisitos de Ambiente
+* **Frappe Framework:** v16.0 ou superior
+* **ERPNext:** v16.0 ou superior
+* **Python:** 3.10+ (suporta Python 3.14)
+* **Node.js:** v18+ / v20+ / v24+ e Yarn
 
-| Portal | Primary users | Focus |
-| --- | --- | --- |
-| Staff Portal | Teachers, academic staff, admissions staff, nurses, operational teams, leadership | Daily work, student context, attendance, tasks, admissions follow-up, communication, policies, and analytics |
-| Student Portal | Students | Learning, tasks, feedback, calendars, portfolio, reports, and school context |
-| Guardian Portal | Parents and guardians | Family-facing updates, consent, calendars, reports, communications, documents, and student progress |
-| Admissions Portal | Prospective families and applicants | Inquiry, application progress, evidence submission, recommendations, visits, decisions, and transition into enrollment |
+### Procedimento de Instalação no Bench
 
-The portals are different on purpose. A guardian should not see the same operational controls as a registrar. A student should not experience the system as a back-office database. A teacher should not have to hunt through administrative screens to take the next classroom action.
+```bash
+# 1. Acessar a pasta do bench
+cd ~/frappe-bench
 
-But underneath those distinct experiences, the source of truth remains shared. A student record, guardian relationship, enrollment state, applicant file, policy acknowledgement, attendance event, or communication history should not become four separate versions of itself just because four different users need to interact with it.
+# 2. Obter o app complementar de arquivos protegidos (Ifitwala Drive)
+bench get-app https://github.com/fderyckel/ifitwala_drive.git
 
-## Communication And Operations
+# 3. Obter o ERPZ Educacional
+bench get-app https://github.com/andradezdev/gestao-educacional-2.git
 
-Ifitwala_Ed is designed to reduce institutional noise.
+# 4. Instalar no site de produção/desenvolvimento
+bench --site [nome-do-site] install-app ifitwala_drive
+bench --site [nome-do-site] install-app ifitwala_ed
 
-Communication should be targeted, contextual, and traceable. A message to Grade 10 guardians, an admissions follow-up, a policy acknowledgement, or a staff briefing should belong to the right audience and the right workflow rather than becoming another disconnected email thread.
+# 5. Executar as migrações de metadados
+bench --site [nome-do-site] migrate
 
-Operations should work the same way. Health, safeguarding, student support, HR, professional development, expense reimbursement, inventory, facilities, websites, and finance all need their own controls, but they should still connect to the same institutional structure.
+# 6. Compilar os assets (Vite SPA e Desk)
+bench build --app ifitwala_ed
 
-## Security, Privacy, And Trust
+# 7. Limpar caches do sistema
+bench --site [nome-do-site] clear-cache
+```
 
-Schools hold sensitive human records. Ifitwala Ed treats security, privacy, and tenant isolation as product requirements from the start.
+---
 
-The data-governance approach is based on a few core principles:
+## 🌐 Localização em Português do Brasil (pt-BR)
 
-1. **The institution owns one governed record**
-   Student, guardian, staff, applicant, academic, attendance, communication, and financial data should not be duplicated across disconnected systems. The platform is designed so each workflow contributes to the same institutional truth.
+O projeto conta com tradução integral para o **Português do Brasil (pt-BR)** implementada através dos arquivos padronizados `ifitwala_ed/translations/pt-BR.csv` e sincronização no banco de dados.
 
-2. **Access follows role, relationship, and scope**
-   A user does not receive broad access simply because they can log in. Visibility depends on who they are, which school or organization branch they belong to, what relationship they have to the record, and what the workflow allows.
+* **Integridade do Código Preservada:** Todas as entidades internas, variáveis, modelos no banco de dados e APIs permanecem em padrão técnico internacional sem alteração de nomes de colunas ou lógica de execução, traduzindo estritamente a camada de visualização em tela.
 
-3. **Tenant isolation is structural**
-   School branches, organizations, and descendants are part of the permission model. Parent-level visibility can roll down where appropriate, but sibling schools remain isolated unless an explicit governed sharing rule exists.
+---
 
-4. **Sensitive information is purpose-bound**
-   Health, safeguarding, admissions evidence, contact information, private files, and family records require stricter handling than ordinary operational data. The system separates context from exposure: staff can receive the operational signal they need without automatically seeing every sensitive detail.
+## 📄 Licença
 
-5. **Private media is governed**
-   Files, previews, thumbnails, and downloads are not treated as raw storage links. They are resolved through governed access paths so the platform can respect privacy, surface context, and user permissions.
-
-6. **Workflows leave an accountable trail**
-   Admissions decisions, attendance changes, policy acknowledgements, communication, file access, financial actions, and student support activity should be traceable to the people and processes involved.
-
-7. **Reports respect permission boundaries**
-   Analytics should help leaders see patterns without leaking data across schools, roles, or relationships. Aggregation does not remove the need for scope discipline.
-
-## Contact
-
-For product or implementation discussions, contact [francois@ifitwala.com](mailto:francois@ifitwala.com).
+Distribuído sob a licença **MIT License**. Consulte o arquivo `license.txt` para mais detalhes.

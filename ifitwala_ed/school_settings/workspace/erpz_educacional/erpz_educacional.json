@@ -1,0 +1,246 @@
+{
+ "app": "ifitwala_ed",
+ "charts": [],
+ "content": "[{\"id\": \"h_top\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h3\\\"><b>ERPZ Educacional \\u2014 Gest\\u00e3o Escolar Integrada</b></span>\", \"col\": 12}}, {\"id\": \"sc_student\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Alunos Cadastrados\", \"col\": 3}}, {\"id\": \"sc_enroll\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Matr\\u00edculas de Alunos\", \"col\": 3}}, {\"id\": \"sc_applicant\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Candidatos e Inscri\\u00e7\\u00f5es\", \"col\": 3}}, {\"id\": \"sc_schedule\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Grade e Hor\\u00e1rios\", \"col\": 3}}, {\"id\": \"sp_1\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"h_mod\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>M\\u00f3dulos e Opera\\u00e7\\u00f5es Educacionais</b></span>\", \"col\": 12}}, {\"id\": \"c_academic\", \"type\": \"card\", \"data\": {\"card_name\": \"Vida Acad\\u00eamica e Curr\\u00edculo\", \"col\": 4}}, {\"id\": \"c_admission\", \"type\": \"card\", \"data\": {\"card_name\": \"Admiss\\u00f5es e Alunos\", \"col\": 4}}, {\"id\": \"c_support\", \"type\": \"card\", \"data\": {\"card_name\": \"Corpo Docente e Gest\\u00e3o\", \"col\": 4}}]",
+ "creation": "2026-09-23 19:01:52.341922",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "education",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "ERPZ Educacional",
+ "link_type": "DocType",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Vida Acad\u00eamica e Curr\u00edculo",
+   "link_count": 0,
+   "link_to": "",
+   "link_type": "",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Cursos e Disciplinas",
+   "link_count": 0,
+   "link_to": "Course",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Programas Educacionais",
+   "link_count": 0,
+   "link_to": "Program",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Turmas e Grupos de Alunos",
+   "link_count": 0,
+   "link_to": "Student Group",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Quadro de Hor\u00e1rios Escolares",
+   "link_count": 0,
+   "link_to": "School Schedule",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Anos Letivos",
+   "link_count": 0,
+   "link_to": "Academic Year",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Admiss\u00f5es e Alunos",
+   "link_count": 0,
+   "link_to": "",
+   "link_type": "",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Interesses e Inquiries",
+   "link_count": 0,
+   "link_to": "Inquiry",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Candidatos Inscritos",
+   "link_count": 0,
+   "link_to": "Student Applicant",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Cadastro de Alunos",
+   "link_count": 0,
+   "link_to": "Student",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Pais e Respons\u00e1veis (Guardians)",
+   "link_count": 0,
+   "link_to": "Guardian",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Matr\u00edculas em Programas",
+   "link_count": 0,
+   "link_to": "Program Enrollment",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Corpo Docente e Gest\u00e3o",
+   "link_count": 0,
+   "link_to": "",
+   "link_type": "",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Professores e Instrutores",
+   "link_count": 0,
+   "link_to": "Instructor",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Colaboradores Escolares",
+   "link_count": 0,
+   "link_to": "Employee",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Organiza\u00e7\u00f5es e Unidades",
+   "link_count": 0,
+   "link_to": "Organization",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Escolas e Campi",
+   "link_count": 0,
+   "link_to": "School",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Calend\u00e1rios Escolares",
+   "link_count": 0,
+   "link_to": "School Calendar",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-09-23 19:01:52.341922",
+ "modified_by": "Administrator",
+ "module": "School Settings",
+ "name": "ERPZ Educacional",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 0.0,
+ "shortcuts": [
+  {
+   "color": "Blue",
+   "doc_view": "List",
+   "label": "Alunos Cadastrados",
+   "link_to": "Student",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Green",
+   "doc_view": "List",
+   "label": "Matr\u00edculas de Alunos",
+   "link_to": "Program Enrollment",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Orange",
+   "doc_view": "List",
+   "label": "Candidatos e Inscri\u00e7\u00f5es",
+   "link_to": "Student Applicant",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Purple",
+   "doc_view": "List",
+   "label": "Grade e Hor\u00e1rios",
+   "link_to": "School Schedule",
+   "stats_filter": "[]",
+   "type": "DocType"
+  }
+ ],
+ "title": "ERPZ Educacional",
+ "type": "Workspace"
+}

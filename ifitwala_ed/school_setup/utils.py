@@ -24,14 +24,13 @@ def get_ancestors_of(doctype, name):
 
 def insert_record(records):
     for r in records:
-        doc = frappe.new_doc(r.get("doctype"))
+        dt = r.get("doctype")
+        dn = r.get("name")
+        if dn and frappe.db.exists(dt, dn):
+            continue
+        doc = frappe.new_doc(dt)
         doc.update(r)
         try:
-            doc.insert(ignore_permissions=True)
-        except frappe.DuplicateEntryError as e:
-            # pass DuplicateEntryError and continue
-            if e.args and e.args[0] == doc.doctype and e.args[1] == doc.name:
-                # make sure DuplicateEntryError is for the exact same doc and not a related doc
-                pass
-            else:
-                raise
+            doc.insert(ignore_permissions=True, ignore_if_duplicate=True)
+        except (frappe.DuplicateEntryError, frappe.UniqueValidationError):
+            pass
