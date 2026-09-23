@@ -41,7 +41,7 @@ app_include_js = [
 # include js, css files in header of web template
 # web_include_css = "/assets/ifitwala/css/ifitwala.css"
 # web_include_js = "/assets/ifitwala/js/ifitwala.js"
-update_website_context = ["ifitwala_ed.website.context.update_website_context"]
+# update_website_context = ["ifitwala_ed.website.context.update_website_context"]
 
 # include custom scss in every website theme (without file extension ".scss")
 # website_theme_scss = "ifitwala/public/scss/website"
@@ -84,28 +84,23 @@ website_redirects = WEBSITE_REDIRECTS
 
 # Home Pages
 # ----------
-# Neutralize sticky login redirect-to=/desk (and legacy /app) before login page/scripts execute.
-before_request = [
-    "ifitwala_ed.api.users.ensure_guest_public_home_page_cache",
-    "ifitwala_ed.api.users.sanitize_login_redirect_param",
-    "ifitwala_ed.api.users.redirect_non_staff_away_from_desk",
-]
-# Force role-based entry path immediately after successful login.
-on_login = "ifitwala_ed.api.users.redirect_user_to_entry_portal_on_login"
-# Re-apply redirect target after session creation so Desk default path cannot override it.
-on_session_creation = "ifitwala_ed.api.users.redirect_user_to_entry_portal_on_session_creation"
-# Resolve website home directly from the same canonical role policy.
-get_website_user_home_page = "ifitwala_ed.api.users.get_website_user_home_page"
-# application home page (Frappe expects the page route name, not "/")
-home_page = "index"
+# Mantem o acesso padrao ao Desk (/desk) sem sequestrar rotas ou login
+# before_request = [
+#     "ifitwala_ed.api.users.ensure_guest_public_home_page_cache",
+#     "ifitwala_ed.api.users.sanitize_login_redirect_param",
+#     "ifitwala_ed.api.users.redirect_non_staff_away_from_desk",
+# ]
+# on_login = "ifitwala_ed.api.users.redirect_user_to_entry_portal_on_login"
+# on_session_creation = "ifitwala_ed.api.users.redirect_user_to_entry_portal_on_session_creation"
+# get_website_user_home_page = "ifitwala_ed.api.users.get_website_user_home_page"
+# home_page = "index"
 
-# website user home page (by Role)
-role_home_page = {
-    "Desk User": "/hub/staff",
-    "Employee": "/hub/staff",
-    "Student": "/hub/student",
-    "Guardian": "/hub/guardian",
-}
+# role_home_page = {
+#     "Desk User": "/hub/staff",
+#     "Employee": "/hub/staff",
+#     "Student": "/hub/student",
+#     "Guardian": "/hub/guardian",
+# }
 
 # Generators
 # ----------

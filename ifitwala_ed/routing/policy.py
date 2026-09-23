@@ -42,8 +42,8 @@ STAFF_PORTAL_ROLES = frozenset(
 )
 
 WEBSITE_ROUTE_RULES = [
-    {"from_route": "/", "to_route": "index"},
-    {"from_route": "/logout", "to_route": "logout"},
+    # {"from_route": "/", "to_route": "index"},
+    # {"from_route": "/logout", "to_route": "logout"},
     {"from_route": "/admissions", "to_route": "admissions"},
     {"from_route": "/admissions/recommendation", "to_route": "admissions/recommendation"},
     {"from_route": "/admissions/recommendation/<path:token>", "to_route": "admissions/recommendation"},
@@ -53,10 +53,10 @@ WEBSITE_ROUTE_RULES = [
     {"from_route": "/hub/<path:subpath>", "to_route": "hub"},
     {"from_route": "/calendar/subscriptions/staff/<path:token>", "to_route": "calendar/subscriptions/staff"},
     {"from_route": "/portfolio/share/<path:token>", "to_route": "portfolio/share"},
-    {"from_route": "/schools", "to_route": "index"},
+    # {"from_route": "/schools", "to_route": "index"},
     {"from_route": "/schools/<path:route>", "to_route": "website"},
-    {"from_route": "/home", "to_route": "index"},
-    {"from_route": "/index.html", "to_route": "index"},
+    # {"from_route": "/home", "to_route": "index"},
+    # {"from_route": "/index.html", "to_route": "index"},
 ]
 
 WEBSITE_REDIRECTS = [

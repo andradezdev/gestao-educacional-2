@@ -115,6 +115,7 @@ def get_public_brand_identity() -> dict:
 
 
 def sync_public_brand_website_settings() -> dict:
+    return {}  # Nao sobrecarregar Website Settings do ERP
     brand = get_public_brand_identity()
     organization = brand.get("organization") or {}
     organization_name = (organization.get("organization_name") or organization.get("name") or "").strip()
