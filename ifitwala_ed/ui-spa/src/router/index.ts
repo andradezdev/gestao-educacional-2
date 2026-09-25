@@ -194,6 +194,7 @@ const routes: RouteRecordRaw[] = [
 	{path: '/staff/morning-brief', name: 'MorningBriefing', component: () => import('@/pages/staff/morning_brief/MorningBriefing.vue'), meta: { layout: 'staff' } },
   { path: '/staff/student-groups', name: 'staff-student-groups', component: () => import('@/pages/staff/schedule/student-groups/StudentGroups.vue'), meta: { layout: 'staff' } },
   { path: '/staff/attendance', name: 'staff-attendance', component: () => import('@/pages/staff/schedule/StudentAttendanceTool.vue'), meta: { layout: 'staff' } },
+  { path: '/staff/schedule/student-attendance-tool', redirect: '/staff/attendance' },
   { path: '/staff/gradebook', name: 'staff-gradebook', component: () => import('@/pages/staff/gradebook/Gradebook.vue'), meta: { layout: 'staff' } },
   { path: '/staff/term-reporting', name: 'staff-term-reporting', component: () => import('@/pages/staff/TermReportingReview.vue'), meta: { layout: 'staff' } },
 	{ path: '/staff/analytics/student-logs', name: 'staff-student-log-analytics', component: () => import('@/pages/staff/analytics/StudentLogAnalytics.vue'), meta: { layout: 'staff' } },
