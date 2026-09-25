@@ -1,3 +1,4 @@
+from frappe.translate import get_full_dict
 # Copyright (c) 2025, François de Ryckel and contributors
 # For license information, please see license.txt
 
@@ -44,13 +45,19 @@ def _redirect(to: str):
 
 def _request_path(default: str) -> str:
     try:
-        request = getattr(frappe, "request", None)
-    except RuntimeError:
-        return default
-    return str(getattr(request, "path", default) or default)
+        request = getattr(frappe.local, "request", None)
+        if request is not None and hasattr(request, "path"):
+            return str(request.path or default)
+    except Exception:
+        pass
+    return default
 
 
 def get_context(context):
+    from frappe.translate import get_full_dict
+    lang = getattr(frappe.local, "lang", None) or "pt-BR"
+    context.translations_json = frappe.as_json(get_full_dict(lang))
+
     user = frappe.session.user
     path = _request_path(canonical_path_for_section("student"))
 
@@ -80,8 +87,13 @@ def get_context(context):
 
     js_entry, css_files, preload_files = _load_assets()
 
-    context.csrf_token = frappe.sessions.get_csrf_token()
+    try:
+        context.csrf_token = frappe.sessions.get_csrf_token()
+    except Exception:
+        context.csrf_token = getattr(frappe.session, 'csrf_token', '') or ''
     context.vite_js = js_entry
     context.vite_css = css_files
     context.vite_preload = preload_files
+    lang = getattr(frappe.local, "lang", None) or "pt-BR"
+    context.translations_json = frappe.as_json(get_full_dict(lang))
     return context

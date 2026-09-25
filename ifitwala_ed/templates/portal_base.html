@@ -1,6 +1,6 @@
-{% set page_title = (title or 'Student Portal') %}
+{% set page_title = (title or 'ERPZ Educacional') %}
 <!DOCTYPE html>
-<html lang="{{ frappe.local.lang or 'en' }}">
+<html lang="{{ frappe.local.lang or 'pt-BR' }}">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -13,23 +13,32 @@
 	</script>
 	{% endif %}
 
-	
 	<script>
 		window.frappe = window.frappe || {};
-		window.frappe.boot = window.frappe.boot || {};
-		window.frappe.boot.lang = "{{ frappe.local.lang or 'pt-BR' }}";
-		window.frappe._messages = {{ frappe.get_all_translations(frappe.local.lang or 'pt-BR') | tojson }};
-		window.frappe.__ = function(msg, args) {
+		window.frappe["_messages"] = {};
+		window.frappe["__"] = function(msg, args) {
 			if (!msg) return "";
-			let translated = (window.frappe._messages && window.frappe._messages[msg]) || msg;
+			var m = (window.frappe["_messages"] && window.frappe["_messages"][msg]) || msg;
 			if (args && args.length) {
-				args.forEach((val, i) => {
-					translated = translated.replace(new RegExp("\\{" + i + "\\}", "g"), val);
-				});
+				for (var i = 0; i < args.length; i++) {
+					m = m.replace(new RegExp("\\{" + i + "\\}", "g"), args[i]);
+				}
 			}
-			return translated;
+			return m;
 		};
-		window.__ = window.frappe.__;
+		window["__"] = window.frappe["__"];
+
+		try {
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET", "/api/method/ifitwala_ed.api.users.get_portal_translations?lang=" + (document.documentElement.lang || "pt-BR"), false);
+			xhr.send();
+			if (xhr.status === 200) {
+				var res = JSON.parse(xhr.responseText);
+				window.frappe["_messages"] = res.message || {};
+			}
+		} catch(e) {
+			console.warn("Could not load portal translations", e);
+		}
 	</script>
 
 	{# Optional head hook if you ever extend this template #}

@@ -417,3 +417,10 @@ def get_users_with_role(doctype, txt, searchfield, start, page_len, filters):
         limit=int(page_len or 20),
     )
     return [(row.get("name"), row.get("full_name")) for row in rows]
+
+
+@frappe.whitelist(allow_guest=True)
+def get_portal_translations(lang=None):
+    from frappe.translate import get_full_dict
+    lang = lang or getattr(frappe.local, "lang", None) or "pt-BR"
+    return get_full_dict(lang)
