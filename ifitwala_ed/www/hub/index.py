@@ -96,4 +96,6 @@ def get_context(context):
     context.vite_preload = preload_files
     lang = getattr(frappe.local, "lang", None) or "pt-BR"
     context.translations_json = frappe.as_json(get_full_dict(lang))
+    context.current_user = user
+    context.current_user_fullname = frappe.utils.get_fullname(user) if user else ""
     return context

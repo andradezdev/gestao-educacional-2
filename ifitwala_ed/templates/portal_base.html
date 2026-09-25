@@ -15,6 +15,15 @@
 
 	<script>
 		window.frappe = window.frappe || {};
+		window.frappe.session = {
+			user: "{{ current_user or frappe.session.user or '' }}",
+			user_info: {
+				name: "{{ current_user or frappe.session.user or '' }}",
+				email: "{{ current_user or frappe.session.user or '' }}",
+				fullname: "{{ current_user_fullname or current_user or frappe.session.user or '' }}"
+			}
+		};
+		window.frappe.user = window.frappe.session.user;
 		window.frappe["_messages"] = {};
 		window.frappe["__"] = function(msg, args) {
 			if (!msg) return "";
