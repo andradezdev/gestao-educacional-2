@@ -1,38 +1,68 @@
-Absent,Ausente
+ACCOUNT,CONTA
+Absent,Falta
+Academic Load,Carga Horária Acadêmica
 Academic Load Policy,Política de Carga Horária Acadêmica
+Academic Performance,Desempenho Acadêmico
 Academic Term,Período Letivo
 Academic Year,Ano Letivo
 Academic Years,Anos Letivos
 Academics,Acadêmico
+Account,Conta
 Accounts Settings,Configurações de Accounts
 Active,Ativo
+Activities,Atividades Extracurriculares
 Activity Booking,Reserva de Atividade
 Activity Booking Settings,Configurações de Reserva de Atividade
 Admin,Administração Escolar
 Administração,Administração
 Admission,Admissões
+Admission & Engagement,Admissões e Captação
 Admission Settings,Configurações de Admissões
+Admissions Cockpit,Painel de Admissões
+Admissions Hub,Central de Admissões
+Admissions Inbox,Caixa de Entrada de Inscrições
+Admissions Portal,Portal de Admissões
 Admissões e Alunos,Admissões e Alunos
 Admissões e Matrículas,Admissões e Matrículas
 Admitted,Admitido
+All Courses,Todas as Disciplinas
+Announcement,Comunicados
+Announcement Archive,Arquivo de Comunicados
 Apoio e Bem-Estar,Apoio e Bem-Estar
 Application Date,Data da Inscrição
 Application Status,Status da Candidatura
+Apply Default,Preencher com Padrão (Presente)
+Archive,Arquivo
+Assign work to a class in seconds,Passe tarefas para a turma em segundos
 Attachment,Anexo
 Attachments,Anexos
+Attendance Analytics,Análise de Frequência
+Attendance Ledger,Livro de Chamadas
+"Availability, development, and evaluations.","Disponibilidade, capacitação e avaliações."
+Avoid sensitive medical details; use the health note workflow instead.,Evite detalhes médicos confidenciais; use o prontuário da enfermaria.
 Blood Group,Tipo Sanguíneo
+"Capture evidence, notes, and marks","Lance notas, critérios e evidências"
 Central Educacional,Central Educacional
 Class Session,Aula / Sessão de Aula
 Class Teaching Plan,Plano de Ensino de Aula
 Classroom,Sala de Aula
+Close,Fechar
 Code,Código
+Collapse,Recolher
+Communications,Comunicados e Mensagens
+Compliance & Risk,Conformidade e Riscos
 Corpo Docente e Gestão,Corpo Docente e Gestão
 Counseling,Orientação Educacional
 Counseling Session,Sessão de Orientação / Psicologia
 Course,Curso / Disciplina
 Course Plan,Plano da Disciplina
-Courses,Cursos e Disciplinas
+Course Plans,Planos de Ensino
+Course list and year filter,Lista de disciplinas e filtro por ano letivo
+Courses,Disciplinas
+"Coverage, punctuality, and daily health of the timetable.","Cobertura, pontualidade e assiduidade diária."
+Create task,Criar Tarefa / Atividade
 Created By,Criado Por
+Current Course,Disciplina Atual
 Current Holiday List,Lista de Current Holiday
 Curriculum,Currículo e Ensino
 Currículo e Aulas,Currículo e Aulas
@@ -40,6 +70,8 @@ Currículo e Planos de Aula,Currículo e Planos de Aula
 Dashboard,Painel de Controle
 Date,Data
 Date of Birth,Data de Nascimento
+Default Code,Código Padrão
+Demographics Overview,Visão Demográfica
 Department,Departamento Escolar
 Description,Descrição
 Designation,Cargo / Função Escolar
@@ -55,56 +87,96 @@ Employee,Colaborador / Funcionário
 Enabled,Habilitado
 End Time,Horário de Término
 Enrolled,Matriculado
+Enrollment & Census,Matrículas e Censo Escolar
+Enrollment Analytics,Análise de Matrículas
 Enrollment Date,Data da Matrícula
 Enrollment Gaps Report,Relatório de Enrollment Gaps
 Enrollment Report,Relatório de Enrollment
 Enrollment Trend Report,Relatório de Enrollment Trend
 Exclude from Report,Relatório de Exclude from
 Excused,Falta Justificada
+Expand,Expandir
+Expenses,Reembolsos e Despesas
+"Family engagement, events, and surveys.","Engajamento familiar, visitas e pesquisas."
 Father,Pai
 File Management Settings,Configurações de File Management
 Filter List,Lista de Filter
 First Name,Primeiro Nome
+Forms & Signatures,Formulários e Assinaturas
 Full Name,Nome Completo
 Gender,Gênero
+Go to Guardian Portal,Ir para o Portal da Família
+Go to Staff Portal,Ir para o Portal do Colaborador
+Go to Student Portal,Ir para o Portal do Aluno
 Governance,Governança e Políticas
+"Grades, assessments, and intervention impact.","Notas, avaliações e suporte pedagógico."
 Graduation Date,Data de Conclusão / Formatura
 Guardian,Pai / Responsável Legal
 Guardian Email,E-mail do Responsável
+Guardian Home,Início da Família
+Guardian Hub,Portal da Família
+Guardian Portal,Portal da Família
 Guardians,Pais e Responsáveis
 HR Settings,Configurações de HR
 Health,Saúde Escolar e Enfermaria
 Health Incident,Atendimento / Incidente de Saúde
+Hide tips,Ocultar dicas
 Hub,Portal do Aluno e Professor
+Ifitwala,ERPZ Educacional
 Immunization Record,Carteira de Vacinação
 Include in Term Report,Relatório de Include in Term
 Inquiries,Interesses e Consultas
 Inquiry,Interesse / Pré-Inscrição
+Insights & Dashboards,Indicadores e Painéis
 Institutional Policy,Política Institucional
 Instructor,Professor / Instrutor
 Instructors,Professores e Instrutores
+Keep remarks factual and short.,Mantenha as observações curtas e objetivas.
 Last Name,Sobrenome
+Late,Atraso
+Learning Workspace,Espaço de Aprendizagem
 Leave Block List,Lista de Leave Block
 Legal Guardian,Responsável Legal
+Loading roster…,Carregando lista de alunos…
+Loading…,Carregando…
+Logout,Sair
 Logs & Referrals Settings,Configurações de Logs & Referrals
+MENU,MENU
 Maximum Load,Carga Horária Máxima
 Medication Administration,Administração de Medicamentos
+Meeting Date,Data da Aula
 Middle Name,Nome do Meio
 Minimum Load,Carga Horária Mínima
 Mobile Number,Telefone / Celular
 Mother,Mãe
+Move between course overview and active class work without losing context.,Navegue entre a visão geral das disciplinas e as atividades sem perder o contexto.
+My Courses,Minhas Disciplinas
+My Growth,Meu Desenvolvimento Profissional
 Nationality,Nacionalidade
+No student profile linked to this login yet.,Nenhum perfil de aluno vinculado a este login ainda.
+No students found for this group.,Nenhum aluno encontrado nesta turma.
 Notes,Observações
+Open selected course,Abrir disciplina selecionada
+Open the class spaces that are ready and see what is still waiting on release.,Acesse as salas de aula virtuais disponíveis e veja as que aguardam liberação.
+Open the governed curriculum backb...,Acesse a grade curricular aprovada...
+Operations & Attendance,Operações e Frequência
 Organization,Organização / Rede de Ensino
+Organizational Chart,Organograma da Escola
 Overview,Visão Geral
 Painel Acadêmico,Painel Acadêmico
 Painel de Admissões,Painel de Admissões
 Passing Grade,Nota de Aprovação
+"Pick a group and a meeting day, then record attendance.",Selecione a turma e o dia da aula para registrar a presença dos alunos.
+Policies,Políticas e Regulamentos
 Policy Acknowledgement,Termo de Aceite de Política
+Policy Acknowledgments,Termos de Ciência de Políticas
+Policy Library,Biblioteca de Regulamentos
 Policy Version,Versão da Política
 Portal Settings,Configurações de Portal
+Portfolio & Journal,Portfólio e Diário
 Portfolio Journal Settings,Configurações de Portfolio Journal
 Present,Presente
+Profile,Meu Perfil
 Program,Programa Educacional
 Program Enrollment,Matrícula no Programa
 Program Enrollment Request,Solicitação de Matrícula
@@ -114,12 +186,26 @@ Programs,Programas Educacionais
 Public Site,Portal Público
 Referral Case,Encaminhamento Pedagógico / Apoio
 Referral Settings,Configurações de Referral
+"Referrals, caseloads, incidents, and follow-ups.","Encaminhamentos, orientações e atendimentos."
 Rejected,Não Aprovado
 Relation,Parentesco / Relação
+Reload,Recarregar
+Remark guidelines,Diretrizes para observações
+Remark tips,Dicas de observação
 Remarks,Comentários
 Report Card,Boletim Escolar
 Reports,Relatórios
-School,Escola / Unidade Escolar
+Return to daily routing,Retornar à rotina diária
+Review frozen results and calculation ...,Revise boletins e médias calculadas...
+Room Occupancy,Ocupação de Ambientes
+Room Utilization,Ocupação de Salas
+Roster,Lista de Alunos da Turma
+Roster for {0},Lista de Alunos para {0}
+SWITCH PORTAL,MUDAR DE PORTAL
+Safeguarding signals and audit readiness.,"Sinais de proteção, segurança e auditoria."
+Saved,Salvo
+Scheduling & Capacity,Horários e Capacidade
+School,Escola / Unidade
 School Calendar,Calendário Escolar
 School Event,Evento Escolar
 School HR,Recursos Humanos Escolar
@@ -127,9 +213,17 @@ School Schedule,Grade e Quadro de Horários
 School Settings,Parâmetros Pedagógicos
 School Setup,Estrutura e Instalações
 School Site,Portal e Site Institucional
+Select a meeting day from the calendar.,Selecione um dia de aula no calendário.
+Select a student group to begin.,Selecione uma turma para iniciar a chamada.
 Settings,Configurações
+Something went wrong,Ocorreu um erro
+Staff & HR,Equipe e RH Escolar
+Staff Home,Início do Colaborador
+Staff Hub,Portal do Colaborador
+Staff Portal,Portal do Colaborador
 Start Time,Horário de Início
 Status,Status
+Stick to today's context (date + block).,Foque no contexto da aula e do horário de hoje.
 Student,Aluno
 Student Applicant,Candidato / Inscrição
 Student Applicants,Candidatos Inscritos
@@ -137,29 +231,44 @@ Student Attendance,Frequência Escolar / Chamada
 Student Attendance Code,Código de Presença / Falta
 Student Attendance Summary,Resumo de Frequência do Aluno
 Student Email,E-mail Institucional do Aluno
-Student Group,Turma / Grupo de Alunos
+Student Group,Turma / Grupo
 Student Group Instructor,Professor da Turma
 Student Group Student,Aluno na Turma
 Student Groups,Turmas e Grupos
 Student Guardian,Vínculo Aluno-Responsável
-Student Log,Ocorrência / Registro do Aluno
+Student Home,Início do Aluno
+Student Hub,Portal do Aluno
+Student Log,Ocorrências do Aluno
+Student Log Analytics,Análise de Ocorrências
 Student Log Report,Relatório de Ocorrência / Registro do Aluno
 Student Log Type,Tipo de Ocorrência Escolar
 Student Logs Report,Relatório de Student Logs
 Student Medical Record,Prontuário Médico do Aluno
+Student Overview,Visão Geral do Aluno
+Student Portal,Portal do Aluno
 Student Portfolio,Portfólio do Aluno
 Student Term Report,Boletim Escolar / Avaliação Periódica
+Student Wellbeing,Bem-Estar do Aluno
+"Student body profile, admissions, and retention.","Perfil discente, admissões e retenção."
 Students,Alunos
 Subject,Matéria / Disciplina
+Suspended,Suspenso
+Switch Portal,Mudar de Portal
 Tardy,Atraso
 Term,Período Letivo (Bimestre/Semestre)
+Term Reporting,Fechamento de Período
 Terms,Períodos Letivos
 Time,Hora
+"Timetable load, rooms, and transport fill.","Carga horária, salas e ocupação."
+Today,Hoje
 Total Credits,Total de Créditos
 Transcript,Histórico Escolar
 Type,Tipo
 Under Review,Em Análise
 Unit Plan,Plano de Unidade
+Update Gradebook,Lançar Notas / Diário
 Vida Acadêmica,Vida Acadêmica
 Vida Acadêmica e Currículo,Vida Acadêmica e Currículo
 Website - Settings,Configurações de Website -
+"Which rooms are free, over or under-...",Consulte salas livres e ocupadas...
+Zero Lost Lead,Captação sem Perdas (Leads)

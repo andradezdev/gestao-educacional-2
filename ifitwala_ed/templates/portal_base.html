@@ -13,6 +13,25 @@
 	</script>
 	{% endif %}
 
+	
+	<script>
+		window.frappe = window.frappe || {};
+		window.frappe.boot = window.frappe.boot || {};
+		window.frappe.boot.lang = "{{ frappe.local.lang or 'pt-BR' }}";
+		window.frappe._messages = {{ frappe.get_all_translations(frappe.local.lang or 'pt-BR') | tojson }};
+		window.frappe.__ = function(msg, args) {
+			if (!msg) return "";
+			let translated = (window.frappe._messages && window.frappe._messages[msg]) || msg;
+			if (args && args.length) {
+				args.forEach((val, i) => {
+					translated = translated.replace(new RegExp("\\{" + i + "\\}", "g"), val);
+				});
+			}
+			return translated;
+		};
+		window.__ = window.frappe.__;
+	</script>
+
 	{# Optional head hook if you ever extend this template #}
 	{% block head_extra %}{% endblock %}
 
