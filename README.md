@@ -171,39 +171,7 @@ Escolas lidam com os dados mais sensíveis de uma família: crianças e adolesce
 
 ---
 
-## 🚀 Instalação e Requisitos
-
-### Requisitos de Ambiente
-* **Frappe Framework:** v16.0 ou superior
-* **ERPNext:** v16.0 ou superior
-* **Python:** 3.10+ (suporta Python 3.14)
-* **Node.js:** v18+ / v20+ / v24+ e Yarn
-
-### Procedimento de Instalação no Bench
-
-```bash
-# 1. Acessar a pasta do bench
-cd ~/frappe-bench
-
-# 2. Obter o app complementar de arquivos protegidos (Ifitwala Drive)
-bench get-app https://github.com/fderyckel/ifitwala_drive.git
-
-# 3. Obter o ERPZ Educacional
-bench get-app https://github.com/andradezdev/gestao-educacional-2.git
-
-# 4. Instalar no site de produção/desenvolvimento
-bench --site [nome-do-site] install-app ifitwala_drive
-bench --site [nome-do-site] install-app ifitwala_ed
-
-# 5. Executar as migrações de metadados
-bench --site [nome-do-site] migrate
-
-# 6. Compilar os assets (Vite SPA e Desk)
-bench build --app ifitwala_ed
-
-# 7. Limpar caches do sistema
-bench --site [nome-do-site] clear-cache
-```
+> **Instalação e Implantação:** Para detalhes de requisitos de ambiente, dependências e comandos de instalação no Frappe Bench, consulte o arquivo [LEIAME.md](LEIAME.md).
 
 ---
 
