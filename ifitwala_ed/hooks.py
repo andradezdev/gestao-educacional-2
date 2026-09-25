@@ -11,7 +11,7 @@ app_license = "MIT"
 # Apps
 # ------------------
 
-required_apps = ["ifitwala_drive"]
+# required_apps = []  # ifitwala_drive is now directly integrated
 
 # Each item in the list will be shown as an app in the apps page
 # add_to_apps_screen = [
@@ -475,6 +475,7 @@ scheduler_events = {
         "ifitwala_ed.admission.scheduled_jobs.run_hourly_sla_sweep",
         "ifitwala_ed.schedule.attendance_jobs.prewarm_meeting_dates_hourly_guard",
         "ifitwala_ed.website.publication.run_hourly_website_publication_sync",
+        "ifitwala_ed.tasks.drive_hourly",
     ],
     "daily": [
         "ifitwala_ed.curriculum.scheduled_jobs.run_daily_course_plan_activation",

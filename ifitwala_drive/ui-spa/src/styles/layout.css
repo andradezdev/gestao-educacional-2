@@ -1,0 +1,40 @@
+@layer components {
+	.drive-app {
+		min-height: 100vh;
+		color: rgb(var(--ink-rgb) / 1);
+		font-family: var(--font-sans);
+	}
+
+	.drive-shell {
+		width: min(1400px, calc(100% - 1.25rem));
+		margin: 0 auto;
+		padding: 1rem 0 1.75rem;
+	}
+
+	.drive-shell--browser {
+		display: grid;
+		gap: 1rem;
+	}
+
+	.drive-main {
+		display: grid;
+		gap: 0.9rem;
+		align-content: start;
+	}
+
+	.drive-table {
+		display: grid;
+	}
+
+	@media (min-width: 960px) {
+		.drive-shell {
+			width: min(1500px, calc(100% - 2rem));
+			padding-top: 1.15rem;
+		}
+
+		.drive-shell--browser {
+			grid-template-columns: minmax(240px, 280px) minmax(0, 1fr);
+			align-items: start;
+		}
+	}
+}
